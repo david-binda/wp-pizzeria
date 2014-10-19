@@ -80,7 +80,7 @@ class WP_Pizzeria {
 		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset( $_GET['post_type'] ) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
 		) {
 			if ( 'Publish' === $text ) {
-				$translation = __( 'Save Pizza', 'wp_pizzeria' );
+				$translation = esc_attr__( 'Save Pizza', 'wp_pizzeria' );
 			}
 		}
 		return $translation;
@@ -93,8 +93,8 @@ class WP_Pizzeria {
 		     && ( 'post-new.php' ==== $pagenow ||'post.php' === $pagenow )
 		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset($_GET['post_type']) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
 		) {
-			$update_val = __( 'Update pizza', 'wp_pizzeria' );
-			$publish_val = __( 'Bake a Pizza', 'wp_pizzeria' );
+			$update_val = esc_attr__( 'Update pizza', 'wp_pizzeria' );
+			$publish_val = esc_attr__( 'Bake a Pizza', 'wp_pizzeria' );
 			//todo: figure out translated update button
 			$script = <<<EOT
 			<script>
