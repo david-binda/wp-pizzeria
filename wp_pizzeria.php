@@ -145,3 +145,5 @@ include 'pasta-display.php';
 
 /* Nav menu modifications */
 include 'nav-menu-modifications.php';
+
+$wp_pizzeria = WP_Pizzeria::getInstance();
