@@ -94,7 +94,7 @@ class WP_Pizzeria {
 		//check if this is pizza add or edit page in administration
 		global $pagenow, $typenow;
 		if ( true === is_admin()
-		     && ( 'post-new.php' ==== $pagenow || 'post.php' === $pagenow )
+		     && ( 'post-new.php' === $pagenow || 'post.php' === $pagenow )
 		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset( $_GET['post_type'] ) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
 		) {
 			$update_val  = esc_attr__( 'Update pizza', 'wp_pizzeria' );
