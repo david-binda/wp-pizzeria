@@ -59,21 +59,26 @@ or
 
 # Changelog
 
-= 1.1 =
+1.1
 New Dessert post type to you in your pizzeria
 Shortcodes suport category filter
 Can use decimals in price
 Added French translation
-= 1.0.4 =
+
+1.0.4
 Prevent prices being saved when using quick edit
 Reflect menu order on both shorcode and the loop display
 Translation ready
 Added Czech translation
-= 1.0.3 =
+
+1.0.3
 Fix lorem ipsum message in shortcode mode
-= 1.0.2 =
+
+1.0.2
 Fix array_key_exists() in pizza-display.php on line 14
-= 1.0.1 =
+
+1.0.1
 Fix Warning: in_array() [function.in-array]: Wrong datatype for second argument in ...\wp-content\plugins\wp-pizzeria\nav-menu-modifications.php on line 8
-= 1.0 =
+
+1.0
 * Inital release
