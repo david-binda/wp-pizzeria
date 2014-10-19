@@ -62,6 +62,8 @@ class WP_Pizzeria {
 		add_image_size( 'wp_pizzeria_thumbnail', 100, 100, false );
 
 		//add_action( 'template_redirect', array( $this, 'template_redirect' ) );
+
+		$this->load_cpts();
 	}
 
 	private function __clone() {
@@ -72,6 +74,13 @@ class WP_Pizzeria {
 
 	public function init() {
 		load_plugin_textdomain( 'wp_pizzeria', false, basename( dirname( __FILE__ ) ) . '/languages' );
+	}
+
+	private function load_cpts() {
+		include 'custom-post-type-beverage.php';
+		$bevarage = WP_Pizzeria_Bevarage::getInstance();
+		include 'beverage-display.php';
+		$bevarage_display = WP_Pizzeria_Bevarage_Display::getInstance();
 	}
 
 	/* Rename save button */
@@ -90,7 +99,7 @@ class WP_Pizzeria {
 		return $translation;
 	}
 
-	public function wp_pizzeria_rename_save_button() {
+	public function rename_save_button() {
 		//check if this is pizza add or edit page in administration
 		global $pagenow, $typenow;
 		if ( true === is_admin()
@@ -142,7 +151,6 @@ EOT;
 
 /* Load custom post types */
 include 'custom-post-type-pizza.php';
-include 'custom-post-type-beverage.php';
 include 'custom-post-type-pasta.php';
 include 'custom-post-type-dessert.php';
 
@@ -158,7 +166,6 @@ include 'pizza-settings-page.php';
 
 /* Load wp_pizzeria display functions */
 include 'pizza-display.php';
-include 'beverage-display.php';
 include 'pasta-display.php';
 
 /* Nav menu modifications */
