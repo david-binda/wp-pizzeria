@@ -1,4 +1,4 @@
-=== WP Pizzeria ===
+# WP Pizzeria
 Contributors: david.binda	
 Tags: pizza, pizzeria, wordpress pizzeria, restaurant, menu, restaurant menu, carte, carte du jour
 Requires at least: 3.4
@@ -9,35 +9,35 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Turns WordPress instalation into powerful pizzeria site backend with ability to add pizzas, beverages and pasta. 
 
-== Description ==
+## Description
 
 Turns WordPress instalation into powerful pizzeria site backend with ability to add pizzas, beverages and pasta.
 
-= Attract your customer =
+## Attract your customer
 
 Plugin displays pizzas in clean menu table with all your customer needs to know - menu number, title, ingrediences, price for various sizes.
 
 But that's not all. Your site visitor is able to filter pizzas by ingrediences and thus he/she is able to find her favorite pizza in few seconds!
 
-= Multiple pizza sizes and prices =
+## Multiple pizza sizes and prices
 
 You get an ability to manage your pizzas in clean, fast and primarily WordPress style. Via plugin's settings page you can add multiple pizza sizes and for each size, you can set custom price.
 
-= Works in any theme =
+## Works in any theme
 
 This plugin provides both template_functions and shortcodes - thus works in any theme you'd like to use.
 
-= Translations =
+## Translations
 
 Czech - David Biňovec - david.binda
 French - Stephane CRASNIER
 
-== Installation ==
+# Installation
 
 1. Upload plugin's directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
-== Screenshots ==
+# Screenshots
 
 1. Clean and useful pizza overview for administrators
 2. Frontend pizza filtering for easy choose
@@ -48,11 +48,11 @@ French - Stephane CRASNIER
 7. Ability to add ingredient image
 8. Extended dashboard Right now widget
 
-== Do you want more functionality? ==
+# Do you want more functionality?
 
 Do not hesitate to ask for it. I'm open to any suggestions. Use the plugin's [support forum](http://wordpress.org/support/plugin/wp-pizzeria "WP Pizzeria support forum on wordpress.org")!
 
-== Usage ==
+# Usage
 
 To add content, it's easy as adding post. In your administration, you can see another post types except default post and pages. These are called Pizzas, Beverages and Pasta.
 
@@ -79,7 +79,7 @@ or
 1. Place `[pasta cat="term-slug"]` shortcode into a page where you'd like to display pasta only of selected term.
 1. Place `[desserts cat="term-slug"]` shortcode into a page where you'd like to display desserts only of selected term.
 
-== Changelog ==
+# Changelog
 
 = 1.1 =
 New Dessert post type to you in your pizzeria
