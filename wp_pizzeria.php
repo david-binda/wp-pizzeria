@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/david-binda/wp-pizzeria
  * Description: Turns WordPress instalation into powerful pizzeria site backend with ability to add pizzas, pizza ingredients and custom categorization of pizzas. Allows pizza restaurant owner to take his business website on higher level and increase his revenue from online presentation.
  * Author: David Biňovec
- * Author URI: http://david.binda.cz 
+ * Author URI: http://david.binda.cz
  * Version: 1.2
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Licence: GPLv2 or later
@@ -26,15 +26,15 @@
 */
 
 /* Define plugin name */
-if ( false === defined('WP_PIZZERIA_PLUGIN_NAME') ) {
+if ( false === defined( 'WP_PIZZERIA_PLUGIN_NAME' ) ) {
 	define( 'WP_PIZZERIA_PLUGIN_NAME', trim( dirname( plugin_basename( __FILE__ ) ), '/' ) );
 }
 /* Define plugin directory */
-if ( false === defined('WP_PIZZERIA_PLUGIN_DIR') ) {
+if ( false === defined( 'WP_PIZZERIA_PLUGIN_DIR' ) ) {
 	define( 'WP_PIZZERIA_PLUGIN_DIR', constant( 'WP_PLUGIN_DIR' ) . '/' . constant( 'WP_PIZZERIA_PLUGIN_NAME' ) );
 }
 /* Define plugin url */
-if ( false === defined('WP_PIZZERIA_PLUGIN_URL' ) ) {
+if ( false === defined( 'WP_PIZZERIA_PLUGIN_URL' ) ) {
 	define( 'WP_PIZZERIA_PLUGIN_URL', constant( 'WP_PLUGIN_URL' ) . '/' . constant( 'WP_PIZZERIA_PLUGIN_NAME' ) );
 }
 
@@ -45,7 +45,7 @@ class WP_Pizzeria {
 
 	public static function getInstance() {
 		static $instance = null;
-		if (null === $instance) {
+		if ( null === $instance ) {
 			$instance = new static();
 		}
 
@@ -53,10 +53,10 @@ class WP_Pizzeria {
 	}
 
 	protected function __construct() {
-		add_action('plugins_loaded', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
 		add_filter( 'gettext', array( $this, 'change_publish_button' ), 10, 2 );
 		add_action( 'admin_print_footer_scripts', array( $this, 'rename_save_button' ) );
-		add_action('admin_head', array( $this,'admin_register_head' ) );
+		add_action( 'admin_head', array( $this, 'admin_register_head' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'add_stylesheet' ) );
 
 		add_image_size( 'wp_pizzeria_thumbnail', 100, 100, false );
@@ -71,7 +71,7 @@ class WP_Pizzeria {
 	}
 
 	public function init() {
-		load_plugin_textdomain('wp_pizzeria', false, basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'wp_pizzeria', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
 	/* Rename save button */
@@ -86,6 +86,7 @@ class WP_Pizzeria {
 				$translation = esc_attr__( 'Save Pizza', 'wp_pizzeria' );
 			}
 		}
+
 		return $translation;
 	}
 
@@ -93,10 +94,10 @@ class WP_Pizzeria {
 		//check if this is pizza add or edit page in administration
 		global $pagenow, $typenow;
 		if ( true === is_admin()
-		     && ( 'post-new.php' ==== $pagenow ||'post.php' === $pagenow )
-		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset($_GET['post_type']) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
+		     && ( 'post-new.php' ==== $pagenow || 'post.php' === $pagenow )
+		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset( $_GET['post_type'] ) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
 		) {
-			$update_val = esc_attr__( 'Update pizza', 'wp_pizzeria' );
+			$update_val  = esc_attr__( 'Update pizza', 'wp_pizzeria' );
 			$publish_val = esc_attr__( 'Bake a Pizza', 'wp_pizzeria' );
 			//todo: figure out translated update button
 			$script = <<<EOT
@@ -116,22 +117,22 @@ EOT;
 
 	/* Load plugin's stylesheet for administration */
 	public function admin_register_head() {
-		wp_enqueue_style('wp-pizzeria-admin-style', plugins_url('/css/admin-style.css', __FILE__) );
-		if ( true === isset($_GET['taxonomy'])
-		     && ( 'wp_pizzeria_category' === $_GET['taxonomy'] ||  'wp_pizzeria_ingredient' === $_GET['taxonomy'] )
-		){
-			wp_enqueue_style('thickbox');
-			wp_enqueue_script('wp_pizzeria_upload_image_admin_script', constant( 'WP_PIZZERIA_PLUGIN_URL' ) . '/js/upload-image.js', array('thickbox') );
+		wp_enqueue_style( 'wp-pizzeria-admin-style', plugins_url( '/css/admin-style.css', __FILE__ ) );
+		if ( true === isset( $_GET['taxonomy'] )
+		     && ( 'wp_pizzeria_category' === $_GET['taxonomy'] || 'wp_pizzeria_ingredient' === $_GET['taxonomy'] )
+		) {
+			wp_enqueue_style( 'thickbox' );
+			wp_enqueue_script( 'wp_pizzeria_upload_image_admin_script', constant( 'WP_PIZZERIA_PLUGIN_URL' ) . '/js/upload-image.js', array( 'thickbox' ) );
 		}
 	}
 
 	public function add_stylesheet() {
-		wp_register_style( 'wp-pizzeria-style', plugins_url('/css/style.css', __FILE__) );
+		wp_register_style( 'wp-pizzeria-style', plugins_url( '/css/style.css', __FILE__ ) );
 		wp_enqueue_style( 'wp-pizzeria-style' );
 	}
 
 	public function template_redirect() {
-		if ( true === is_post_type_archive('wp_pizzeria_pizza') ) {
+		if ( true === is_post_type_archive( 'wp_pizzeria_pizza' ) ) {
 			include( WP_PIZZERIA_PLUGIN_DIR . '/templates/archive-wp_pizzeria_pizza.php' );
 			exit;
 		}
