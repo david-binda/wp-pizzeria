@@ -31,11 +31,11 @@ if ( false === defined('WP_PIZZERIA_PLUGIN_NAME') ) {
 }
 /* Define plugin directory */
 if ( false === defined('WP_PIZZERIA_PLUGIN_DIR') ) {
-	define( 'WP_PIZZERIA_PLUGIN_DIR', constat( 'WP_PLUGIN_DIR' ) . '/' . constant( 'WP_PIZZERIA_PLUGIN_NAME' ) );
+	define( 'WP_PIZZERIA_PLUGIN_DIR', constant( 'WP_PLUGIN_DIR' ) . '/' . constant( 'WP_PIZZERIA_PLUGIN_NAME' ) );
 }
 /* Define plugin url */
 if ( false === defined('WP_PIZZERIA_PLUGIN_URL' ) ) {
-	define( 'WP_PIZZERIA_PLUGIN_URL', constant( 'WP_PLUGIN_URL' ) . '/' . consntat( 'WP_PIZZERIA_PLUGIN_NAME' ) );
+	define( 'WP_PIZZERIA_PLUGIN_URL', constant( 'WP_PLUGIN_URL' ) . '/' . constant( 'WP_PIZZERIA_PLUGIN_NAME' ) );
 }
 
 /* Internationalize this plugin */
