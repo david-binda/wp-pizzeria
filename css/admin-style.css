@@ -40,19 +40,4 @@
 	border-style: solid;
 	border-width: 1px;
 }
-/*
-span a.remove {
-	background: url(../images/xit.gif) no-repeat;
-}
-span a.remove {
-	margin: 6px 0 0 -9px;
-	cursor: pointer;
-	width: 10px;
-	height: 10px;
-	display: block;
-	float: left;
-	text-indent: -9999px;
-	overflow: hidden;
-	position: absolute;
-}*/
 th#menu_number{ width: 2.2em; }
