@@ -50,8 +50,8 @@ class WP_Pizzeria {
 	}
 
 	protected function __construct() {
-		add_action('plugins_loaded', array( $this, 'init' );
-		add_filter( 'gettext', array( $this, 'change_publish_button', 10, 2 );
+		add_action('plugins_loaded', array( $this, 'init' ) );
+		add_filter( 'gettext', array( $this, 'change_publish_button' ), 10, 2 );
 		add_action( 'admin_print_footer_scripts', array( $this, 'rename_save_button' ) );
 		add_action('admin_head', array( $this,'admin_register_head' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'add_stylesheet' ) );
@@ -75,9 +75,13 @@ class WP_Pizzeria {
 	public function change_publish_button( $translation, $text ) {
 		//check if this is pizza add or edit page in administration
 		global $pagenow, $typenow;
-		if ( is_admin() && ( $pagenow == 'post-new.php' or $pagenow == 'post.php' ) && ( $typenow == 'wp_pizzeria_pizza' or ( isset($_GET['post_type']) && $_GET['post_type'] == 'wp_pizzeria_pizza') ) ) {
-			if ( $text == 'Publish' )
-				return 'Save Pizza';
+		if ( true === is_admin() &&
+		     ( 'post-new.php' === $pagenow || 'post.php' === $pagenow )
+		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset( $_GET['post_type'] ) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
+		) {
+			if ( 'Publish' === $text ) {
+				$translation = __( 'Save Pizza', 'wp_pizzeria' );
+			}
 		}
 		return $translation;
 	}
@@ -85,26 +89,36 @@ class WP_Pizzeria {
 	public function wp_pizzeria_rename_save_button() {
 		//check if this is pizza add or edit page in administration
 		global $pagenow, $typenow;
-		if ( is_admin() && ( $pagenow == 'post-new.php' or $pagenow == 'post.php' ) && ( $typenow == 'wp_pizzeria_pizza' or ( isset($_GET['post_type']) && $_GET['post_type'] == 'wp_pizzeria_pizza') ) ) { ?>
+		if ( true === is_admin()
+		     && ( 'post-new.php' ==== $pagenow ||'post.php' === $pagenow )
+		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset($_GET['post_type']) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
+		) {
+			$update_val = __( 'Update pizza', 'wp_pizzeria' );
+			$publish_val = __( 'Bake a Pizza', 'wp_pizzeria' );
+			//todo: figure out translated update button
+			$script = <<<EOT
 			<script>
 				jQuery(document).ready(function($){
 					if ( $('#publish').val() == 'Update' ){
-						$('#publish').val('Update pizza');
-					}else{
-						$('#publish').val('Bake a pizza');
+						$('#publish').val( {$update_val} );
+					} else {
+						$('#publish').val( {$publish_val} );
 					}
 				});
 			</script>
-		<?php }
+EOT;
+			echo $script;
+		}
 	}
 
 	/* Load plugin's stylesheet for administration */
 	public function admin_register_head() {
 		wp_enqueue_style('wp-pizzeria-admin-style', plugins_url('/css/admin-style.css', __FILE__) );
-		if ( isset($_GET['taxonomy']) && ( $_GET['taxonomy'] == 'wp_pizzeria_category' || $_GET['taxonomy'] == 'wp_pizzeria_ingredient' ) ){
+		if ( true === isset($_GET['taxonomy'])
+		     && ( 'wp_pizzeria_category' === $_GET['taxonomy'] ||  'wp_pizzeria_ingredient' === $_GET['taxonomy'] )
+		){
 			wp_enqueue_style('thickbox');
-			//wp_enqueue_script('thickbox');
-			wp_enqueue_script('wp_pizzeria_upload_image_admin_script', WP_PIZZERIA_PLUGIN_URL . '/js/upload-image.js', array('thickbox') );
+			wp_enqueue_script('wp_pizzeria_upload_image_admin_script', constant( 'WP_PIZZERIA_PLUGIN_URL' ) . '/js/upload-image.js', array('thickbox') );
 		}
 	}
 
@@ -114,10 +128,10 @@ class WP_Pizzeria {
 	}
 
 	public function template_redirect() {
-		if ( is_post_type_archive('wp_pizzeria_pizza') ) :
-			include (WP_PIZZERIA_PLUGIN_DIR . '/templates/archive-wp_pizzeria_pizza.php');
+		if ( true === is_post_type_archive('wp_pizzeria_pizza') ) {
+			include( WP_PIZZERIA_PLUGIN_DIR . '/templates/archive-wp_pizzeria_pizza.php' );
 			exit;
-		endif;
+		}
 	}
 }
 
