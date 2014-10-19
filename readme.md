@@ -1,17 +1,6 @@
 # WP Pizzeria
-Contributors: david.binda	
-Tags: pizza, pizzeria, wordpress pizzeria, restaurant, menu, restaurant menu, carte, carte du jour
-Requires at least: 3.4
-Tested up to: 3.5.1
-Stable tag: 1.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Turns WordPress instalation into powerful pizzeria site backend with ability to add pizzas, beverages and pasta. 
-
-## Description
-
-Turns WordPress instalation into powerful pizzeria site backend with ability to add pizzas, beverages and pasta.
 
 ## Attract your customer
 
@@ -37,20 +26,9 @@ French - Stephane CRASNIER
 1. Upload plugin's directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
-# Screenshots
-
-1. Clean and useful pizza overview for administrators
-2. Frontend pizza filtering for easy choose
-3. Handy extended description for your pizzas
-4. Easy to use settins page
-5. Simple and Quick admin menu
-6. Edit your pizza's fast right from the overview
-7. Ability to add ingredient image
-8. Extended dashboard Right now widget
-
 # Do you want more functionality?
 
-Do not hesitate to ask for it. I'm open to any suggestions. Use the plugin's [support forum](http://wordpress.org/support/plugin/wp-pizzeria "WP Pizzeria support forum on wordpress.org")!
+Do not hesitate to ask for it. I'm open to any suggestions. Simply create a [new ticket on github](https://github.com/david-binda/wp-pizzeria/issues/new) or use the plugin's [support forum on wordpress.org](http://wordpress.org/support/plugin/wp-pizzeria "WP Pizzeria support forum on wordpress.org")!
 
 # Usage
 
@@ -81,21 +59,26 @@ or
 
 # Changelog
 
-= 1.1 =
+1.1
 New Dessert post type to you in your pizzeria
 Shortcodes suport category filter
 Can use decimals in price
 Added French translation
-= 1.0.4 =
+
+1.0.4
 Prevent prices being saved when using quick edit
 Reflect menu order on both shorcode and the loop display
 Translation ready
 Added Czech translation
-= 1.0.3 =
+
+1.0.3
 Fix lorem ipsum message in shortcode mode
-= 1.0.2 =
+
+1.0.2
 Fix array_key_exists() in pizza-display.php on line 14
-= 1.0.1 =
+
+1.0.1
 Fix Warning: in_array() [function.in-array]: Wrong datatype for second argument in ...\wp-content\plugins\wp-pizzeria\nav-menu-modifications.php on line 8
-= 1.0 =
+
+1.0
 * Inital release
