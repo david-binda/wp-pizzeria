@@ -1,0 +1,47 @@
+.wp-pizzeria{ width: 100%; }
+.wp-pizzeria thead tr th{ border-bottom: 1px solid #ccc; }
+.wp-pizzeria tfoot tr th{ border-top: 1px solid #ccc; }
+.wp-pizzeria th{	
+	vertical-align: middle;
+	text-align: center;	
+}
+.wp-pizzeria th.title{
+	text-align: left;	
+}
+.wp-pizzeria .description.hidden{
+	display: none;
+}
+	.wp-pizzeria .description.active div{
+		position: absolute;
+		left: 0;
+		right: 0;	
+	}
+.wp-pizzeria tr td{ padding-top: 1em; }
+.wp-pizzeria :first-child td{ padding-top: 0; }
+.wp-pizzeria .appended-description,
+.wp-pizzeria .appended-description td{
+	border: none;	
+}
+.wp-pizzeria td.price{
+	width: 3.5em;	
+	text-align: center;
+}
+	.wp-pizzeria td.price input{
+		display: block;
+		width: 100%; 	
+	}
+.wp-pizzeria td.title a,
+.wp-pizzeria td.title img{
+	display: block;	
+}
+.wp-pizzeria td.ingrediences li{
+	display: block;
+	float: left;
+	margin-left: .5em;	
+}
+.wp-pizzeria td.ingrediences ul :first-child{
+	margin-left: 0;	
+}
+.filter-ingrediences li{
+	list-style-type: none;
+}

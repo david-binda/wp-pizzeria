@@ -1,0 +1,58 @@
+#menu-posts-wp_pizzeria_pizza .wp-menu-image{
+	background: transparent url(../img/menu.png) no-repeat -2px -32px !important;
+}
+#menu-posts-wp_pizzeria_pizza:hover .wp-menu-image,
+#menu-posts-wp_pizzeria_pizza .wp-has-current-submenu .wp-menu-image{
+	background-position: -2px 0 !important;	
+}
+.icon32-posts-wp_pizzeria_pizza{
+	background: transparent url(../img/icon32.png) no-repeat 0 50% !important;	
+}
+#menu-posts-wp_pizzeria_beverage .wp-menu-image{
+	background: transparent url(../img/menu.png) no-repeat -34px -32px !important;
+}
+#menu-posts-wp_pizzeria_beverage:hover .wp-menu-image,
+#menu-posts-wp_pizzeria_beverage .wp-has-current-submenu .wp-menu-image{
+	background-position: -34px -32px !important;
+}
+.icon32-posts-wp_pizzeria_beverage{
+	background: transparent url(../img/beverage-icon32.png) no-repeat 0 50% !important;	
+}
+#menu-posts-wp_pizzeria_pasta .wp-menu-image{
+	background: transparent url(../img/menu.png) no-repeat -65px -30px !important;
+}
+#menu-posts-wp_pizzeria_pasta:hover .wp-menu-image,
+#menu-posts-wp_pizzeria_pasta .wp-has-current-submenu .wp-menu-image{
+	background-position: -65px 0px !important;
+}
+.icon32-posts-wp_pizzeria_pasta{
+	background: transparent url(../img/pasta-icon32.png) no-repeat 0 50% !important;	
+}
+.tag-ingredient a{
+	top: 2px;
+	position: relative;
+	margin-right: 3px;	
+}
+.ingredientdiv .tabs-panel {
+	height: 200px;
+	overflow: auto;
+	padding: .5em .9em;
+	border-style: solid;
+	border-width: 1px;
+}
+/*
+span a.remove {
+	background: url(../images/xit.gif) no-repeat;
+}
+span a.remove {
+	margin: 6px 0 0 -9px;
+	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	display: block;
+	float: left;
+	text-indent: -9999px;
+	overflow: hidden;
+	position: absolute;
+}*/
+th#menu_number{ width: 2.2em; }

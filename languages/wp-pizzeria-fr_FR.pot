@@ -1,0 +1,557 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-pizzeria\n"
+"POT-Creation-Date: 2013-02-11 17:01:33+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-02-12 21:15+0100\n"
+"Last-Translator: david.binda.cz <david.binovec@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: beverage-display.php:17
+#: custom-post-type-beverage.php:155
+#: custom-post-type-pasta.php:155
+#: custom-post-type-pizza.php:307
+#: pasta-display.php:17
+#: pizza-display.php:35
+msgid "#"
+msgstr "Id"
+
+#: beverage-display.php:18
+#: beverage-display.php:88
+#: beverage-display.php:96
+#: custom-post-type-beverage.php:156
+#: custom-post-type-pasta.php:156
+#: custom-post-type-pizza.php:308
+#: pasta-display.php:18
+#: pasta-display.php:88
+#: pasta-display.php:96
+#: pizza-display.php:36
+#: pizza-display.php:161
+#: pizza-display.php:179
+msgid "Title"
+msgstr "Nom"
+
+#: beverage-display.php:19
+#: beverage-display.php:89
+#: beverage-display.php:97
+#: pasta-display.php:19
+#: pasta-display.php:89
+#: pasta-display.php:97
+#: pizza-display.php:37
+#: pizza-display.php:162
+#: pizza-display.php:180
+msgid "Description"
+msgstr "Description"
+
+#: beverage-display.php:21
+#: beverage-display.php:90
+#: beverage-display.php:98
+#: custom-post-type-beverage.php:81
+#: custom-post-type-beverage.php:158
+#: custom-post-type-pasta.php:81
+#: custom-post-type-pasta.php:158
+#: pasta-display.php:21
+#: pasta-display.php:90
+#: pasta-display.php:98
+msgid "Price"
+msgstr "Prix"
+
+#: custom-post-type-beverage.php:10
+#: custom-post-type-beverage.php:16
+msgid "Beverages"
+msgstr "Boissons"
+
+#: custom-post-type-beverage.php:11
+#: custom-post-type-beverage.php:125
+msgid "Beverage"
+msgstr "Boisson"
+
+#: custom-post-type-beverage.php:12
+#: custom-post-type-beverage.php:13
+msgid "Add Beverage"
+msgstr "Ajouter Boisson"
+
+#: custom-post-type-beverage.php:14
+msgid "Edit Beverage"
+msgstr "Modifier Boisson"
+
+#: custom-post-type-beverage.php:15
+msgid "New Beverage"
+msgstr "Nouvelle Boisson"
+
+#: custom-post-type-beverage.php:17
+msgid "View Beverages"
+msgstr "Voir Boissons"
+
+#: custom-post-type-beverage.php:18
+msgid "Search Beverages"
+msgstr "Chercher Boissons"
+
+#: custom-post-type-beverage.php:19
+msgid "No beverages found"
+msgstr "Aucunes boissons trouvées"
+
+#: custom-post-type-beverage.php:20
+msgid "No beverages in the trash"
+msgstr "Aucunes boissons dans la corbeille"
+
+#: custom-post-type-beverage.php:56
+msgid "Beverage price"
+msgstr "Prix boisson"
+
+#: custom-post-type-beverage.php:64
+#: custom-post-type-pizza.php:187
+msgid "Beverage menu number"
+msgstr "Numéro menu boisson"
+
+#: custom-post-type-beverage.php:157
+#: custom-post-type-pasta.php:157
+#: custom-post-type-pizza.php:309
+msgid "Category"
+msgstr "Catégorie"
+
+#: custom-post-type-beverage.php:159
+#: custom-post-type-pasta.php:159
+#: custom-post-type-pizza.php:323
+msgid "Date"
+msgstr "Date"
+
+#: custom-post-type-beverage.php:188
+#: custom-post-type-pasta.php:188
+#: custom-post-type-pizza.php:351
+msgid "No Categories"
+msgstr "Aucunes catégories"
+
+#: custom-post-type-pasta.php:10
+#: custom-post-type-pasta.php:11
+#: custom-post-type-pasta.php:16
+#: custom-post-type-pasta.php:125
+msgid "Pasta"
+msgstr "Pâte"
+
+#: custom-post-type-pasta.php:12
+#: custom-post-type-pasta.php:13
+msgid "Add Pasta"
+msgstr "Ajouter pâte"
+
+#: custom-post-type-pasta.php:14
+msgid "Edit Pasta"
+msgstr "Modifier Pâte"
+
+#: custom-post-type-pasta.php:15
+msgid "New Pasta"
+msgstr "Nouvelle Pâte"
+
+#: custom-post-type-pasta.php:17
+msgid "View Pasta"
+msgstr "Voir Pâte"
+
+#: custom-post-type-pasta.php:18
+msgid "Search Pasta"
+msgstr "Chercher Pâte"
+
+#: custom-post-type-pasta.php:19
+msgid "No pasta found"
+msgstr "Aucune pâte trouvée"
+
+#: custom-post-type-pasta.php:20
+msgid "No pasta in the trash"
+msgstr "Aucune pâte dans la corbeille"
+
+#: custom-post-type-pasta.php:56
+msgid "Pasta price"
+msgstr "Prix pâte"
+
+#: custom-post-type-pasta.php:64
+msgid "Pasta menu number"
+msgstr "Numéro menu Pâte"
+
+#: custom-post-type-pizza.php:10
+#: custom-post-type-pizza.php:16
+msgid "Pizzas"
+msgstr "Pizzas"
+
+#: custom-post-type-pizza.php:11
+#: custom-post-type-pizza.php:247
+msgid "Pizza"
+msgstr "Pizza"
+
+#: custom-post-type-pizza.php:12
+#: custom-post-type-pizza.php:13
+msgid "Add pizza"
+msgstr "Ajouter pizza"
+
+#: custom-post-type-pizza.php:14
+msgid "Edit pizza"
+msgstr "Modifier pizza"
+
+#: custom-post-type-pizza.php:15
+msgid "New pizza"
+msgstr "Nouvelle pizza"
+
+#: custom-post-type-pizza.php:17
+msgid "View pizza"
+msgstr "Voir pizza"
+
+#: custom-post-type-pizza.php:18
+msgid "Search pizza"
+msgstr "Chercher pizza"
+
+#: custom-post-type-pizza.php:19
+msgid "No pizzas found"
+msgstr "Aucunes pizzas trouvées"
+
+#: custom-post-type-pizza.php:20
+msgid "No pizzas in the trash"
+msgstr "Aucunes pizzas dans la corbeille"
+
+#: custom-post-type-pizza.php:57
+#: custom-post-type-pizza.php:133
+#: taxonomy-pizza-ingredients.php:21
+msgid "Pizza ingredients"
+msgstr "Ingrédients pizza"
+
+#: custom-post-type-pizza.php:65
+msgid "Pizza price"
+msgstr "Prix pizza"
+
+#: custom-post-type-pizza.php:73
+#: custom-post-type-pizza.php:185
+msgid "Pizza menu number"
+msgstr "Numéro menu Pizza"
+
+#: custom-post-type-pizza.php:105
+msgid "Edit"
+msgstr "Modifier"
+
+#: custom-post-type-pizza.php:107
+msgid "Add image"
+msgstr "Ajouter image"
+
+#: custom-post-type-pizza.php:134
+#: taxonomy-pizza-ingredients.php:19
+msgid "Add new pizza ingredient"
+msgstr "Ajouter nouvel ingrédient pizza"
+
+#: custom-post-type-pizza.php:136
+msgid "Add"
+msgstr "Ajouter"
+
+#: custom-post-type-pizza.php:138
+msgid "Separate ingredients with commas"
+msgstr "Séparer ingrédients avec des virgules"
+
+#: custom-post-type-pizza.php:159
+msgid "Price for"
+msgstr "Prix pour"
+
+#: custom-post-type-pizza.php:310
+msgid "Ingredients"
+msgstr "Ingrédients"
+
+#: custom-post-type-pizza.php:368
+msgid "No Ingredients"
+msgstr "Aucuns ingrédients"
+
+#: nav-menu-modifications.php:65
+msgid "No items."
+msgstr "Aucuns objets."
+
+#: nav-menu-modifications.php:83
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: nav-menu-modifications.php:84
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: nav-menu-modifications.php:120
+msgid "Most Recent"
+msgstr "Plus récent"
+
+#: nav-menu-modifications.php:121
+msgid "View All"
+msgstr "Tout voir"
+
+#: nav-menu-modifications.php:122
+#: nav-menu-modifications.php:167
+#: nav-menu-modifications.php:169
+msgid "Search"
+msgstr "Chercher"
+
+#: nav-menu-modifications.php:136
+#: nav-menu-modifications.php:137
+msgid "Archive"
+msgstr "Archive"
+
+#: nav-menu-modifications.php:181
+msgid "No results found."
+msgstr "Aucun résultat trouvé."
+
+#: nav-menu-modifications.php:214
+msgctxt "nav menu home label"
+msgid "Home"
+msgstr "Accueil"
+
+#: nav-menu-modifications.php:250
+msgid "Select All"
+msgstr "Tout sélectionner"
+
+#: nav-menu-modifications.php:254
+msgid "Add to Menu"
+msgstr "Ajouter au menu"
+
+#: pizza-display.php:39
+#: pizza-display.php:163
+#: pizza-display.php:181
+msgid "Ingrediences"
+msgstr "Ingrédients"
+
+#: pizza-settings-page.php:10
+msgid "WP Pizzeria Settings"
+msgstr "Réglages WP Pizzeria"
+
+#: pizza-settings-page.php:10
+msgid "WP Pizzeria"
+msgstr "WP Pizzeria"
+
+#: pizza-settings-page.php:17
+msgid "You don't have permission to access this page."
+msgstr "Vous n'avez pas les droits pour accéder ŕ cette page."
+
+#: pizza-settings-page.php:65
+msgid "WP Pizzeria plugin settings"
+msgstr "Réglages WP Pizzeria plugin"
+
+#: pizza-settings-page.php:99
+msgid "Pizza sizes"
+msgstr "Tailles des pizzas"
+
+#: pizza-settings-page.php:118
+#: pizza-settings-page.php:162
+msgid "Remove"
+msgstr "Supprimer"
+
+#: pizza-settings-page.php:123
+msgid "Add pizza size"
+msgstr "ajouter taille pizza"
+
+#: pizza-settings-page.php:128
+msgid "Currency"
+msgstr "Devise"
+
+#: pizza-settings-page.php:139
+msgid "Currency position"
+msgstr "Position devise"
+
+#: pizza-settings-page.php:146
+msgid "Before"
+msgstr "Avant"
+
+#: pizza-settings-page.php:147
+msgid "After"
+msgstr "Aprčs"
+
+#: pizza-settings-page.php:154
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: taxonomy-beverage-categories.php:10
+msgctxt "taxonomy general name"
+msgid "Beverage categories"
+msgstr "Catégories Boisson"
+
+#: taxonomy-beverage-categories.php:11
+msgctxt "taxonomy singular name"
+msgid "Beverage categories"
+msgstr "Catégorie Boisson"
+
+#: taxonomy-beverage-categories.php:12
+msgid "Search Beverage categories"
+msgstr "Catégories chercher Boisson"
+
+#: taxonomy-beverage-categories.php:13
+msgid "All Beverage categories"
+msgstr "Toutes les catégories Boisson"
+
+#: taxonomy-beverage-categories.php:14
+msgid "Parent Beverage category"
+msgstr "Catégorie parent Boisson"
+
+#: taxonomy-beverage-categories.php:15
+msgid "Parent Beverage category:"
+msgstr "Catégorie parent Boisson"
+
+#: taxonomy-beverage-categories.php:16
+msgid "Edit Beverage category"
+msgstr "Modifier catégorie Boisson"
+
+#: taxonomy-beverage-categories.php:17
+msgid "Update Beverage category"
+msgstr "Mettre ŕ jour catégorie Boisson"
+
+#: taxonomy-beverage-categories.php:18
+msgid "Add New Beverage category"
+msgstr "Ajouter nouvelle catégorie Boisson"
+
+#: taxonomy-beverage-categories.php:19
+msgid "New Beverage category name"
+msgstr "Nouveau nom catégorie Boisson"
+
+#: taxonomy-beverage-categories.php:20
+msgid "Beverage categories"
+msgstr "Catégories Boisson"
+
+#: taxonomy-beverage-categories.php:40
+#: taxonomy-pasta-categories.php:40
+#: taxonomy-pizza-categories.php:40
+#: taxonomy-pizza-ingredients.php:42
+msgid "Image"
+msgstr "Image"
+
+#: taxonomy-beverage-categories.php:42
+#: taxonomy-beverage-categories.php:57
+#: taxonomy-pasta-categories.php:42
+#: taxonomy-pasta-categories.php:57
+#: taxonomy-pizza-categories.php:42
+#: taxonomy-pizza-categories.php:57
+#: taxonomy-pizza-ingredients.php:44
+#: taxonomy-pizza-ingredients.php:63
+msgid "The image is not prominent by default; however themes modified for use with WP Pizzeria plugin will use it."
+msgstr "L'image n'a pas d'importance par défaut; Cependant des thčmes modifiés pour utilisation avec le plugin WP Pizzeria l'utilisera"
+
+#: taxonomy-pasta-categories.php:10
+msgctxt "taxonomy general name"
+msgid "Pasta categories"
+msgstr "Catégories Pâte"
+
+#: taxonomy-pasta-categories.php:11
+msgctxt "taxonomy singular name"
+msgid "Pasta categories"
+msgstr "Catégorie Pâte"
+
+#: taxonomy-pasta-categories.php:12
+msgid "Search Pasta categories"
+msgstr "Chercher Catégories Pâte"
+
+#: taxonomy-pasta-categories.php:13
+msgid "All Pasta categories"
+msgstr "Toutes les catégories Pâte"
+
+#: taxonomy-pasta-categories.php:14
+msgid "Parent Pasta category"
+msgstr "Catégorie parent Pâte"
+
+#: taxonomy-pasta-categories.php:15
+msgid "Parent Pasta category:"
+msgstr "Catégorie parent Pâte"
+
+#: taxonomy-pasta-categories.php:16
+msgid "Edit Pasta category"
+msgstr "Modifier catégorie Pâte"
+
+#: taxonomy-pasta-categories.php:17
+msgid "Update Pasta category"
+msgstr "Mettre ŕ jour catégorie Pâte"
+
+#: taxonomy-pasta-categories.php:18
+msgid "Add New Pasta category"
+msgstr "Ajouter nouvelle catégorie Pâte"
+
+#: taxonomy-pasta-categories.php:19
+msgid "New Pasta category name"
+msgstr "Nouveau nom catégorie Pâte"
+
+#: taxonomy-pasta-categories.php:20
+msgid "Pasta categories"
+msgstr "Catégories Pâte"
+
+#: taxonomy-pizza-categories.php:10
+msgctxt "taxonomy general name"
+msgid "Pizza categories"
+msgstr "Catégories Pizza"
+
+#: taxonomy-pizza-categories.php:11
+msgctxt "taxonomy singular name"
+msgid "Pizza categories"
+msgstr "Catégorie Pizza"
+
+#: taxonomy-pizza-categories.php:12
+msgid "Search pizza categories"
+msgstr "Chercher catégories Pizza"
+
+#: taxonomy-pizza-categories.php:13
+msgid "All pizza categories"
+msgstr "Toutes les catégories Pizza"
+
+#: taxonomy-pizza-categories.php:14
+msgid "Parent pizza category"
+msgstr "Catégorie parent Pizza"
+
+#: taxonomy-pizza-categories.php:15
+msgid "Parent pizza category:"
+msgstr "Catégorie parent Pizza"
+
+#: taxonomy-pizza-categories.php:16
+msgid "Edit pizza category"
+msgstr "Modifier catégorie Pizza"
+
+#: taxonomy-pizza-categories.php:17
+msgid "Update pizza category"
+msgstr "Mettre ŕ jour catégorie Pizza"
+
+#: taxonomy-pizza-categories.php:18
+msgid "Add new pizza category"
+msgstr "Ajouter nouvelle catégorie Pizza"
+
+#: taxonomy-pizza-categories.php:19
+msgid "New pizza category name"
+msgstr "Nouveau nom catégorie Pizza"
+
+#: taxonomy-pizza-categories.php:20
+msgid "Pizza categories"
+msgstr "Catégories Pizza"
+
+#: taxonomy-pizza-ingredients.php:11
+msgctxt "taxonomy general name"
+msgid "Pizza ingredients"
+msgstr "Ingrédients Pizza"
+
+#: taxonomy-pizza-ingredients.php:12
+msgctxt "taxonomy singular name"
+msgid "Pizza ingredient"
+msgstr "Ingrédient Pizza"
+
+#: taxonomy-pizza-ingredients.php:13
+msgid "Search pizza ingredients"
+msgstr "Chercher ingrédients Pizza"
+
+#: taxonomy-pizza-ingredients.php:14
+msgid "All pizza ingredients"
+msgstr "Tous les ingrédients Pizza"
+
+#: taxonomy-pizza-ingredients.php:15
+msgid "Parent pizza ingredient"
+msgstr "Ingrédient Pizza parent"
+
+#: taxonomy-pizza-ingredients.php:16
+msgid "Parent pizza ingredient:"
+msgstr "Ingrédient Pizza parent"
+
+#: taxonomy-pizza-ingredients.php:17
+msgid "Edit pizza ingredient"
+msgstr "Modifier ingrédient Pizza"
+
+#: taxonomy-pizza-ingredients.php:18
+msgid "Update pizza ingredient"
+msgstr "Mettre ŕ jour ingrédient Pizza"
+
+#: taxonomy-pizza-ingredients.php:20
+msgid "New pizza ingredient name"
+msgstr "Nouveau nom ingrédient Pizza"
+

@@ -1,0 +1,558 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-pizzeria\n"
+"POT-Creation-Date: 2013-02-11 17:01:33+00:00\n"
+"PO-Revision-Date: 2013-02-11 18:33+0100\n"
+"Last-Translator: david.binda.cz <david.binovec@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: beverage-display.php:17
+#: custom-post-type-beverage.php:155
+#: custom-post-type-pasta.php:155
+#: custom-post-type-pizza.php:307
+#: pasta-display.php:17
+#: pizza-display.php:35
+msgid "#"
+msgstr "#"
+
+#: beverage-display.php:18
+#: beverage-display.php:88
+#: beverage-display.php:96
+#: custom-post-type-beverage.php:156
+#: custom-post-type-pasta.php:156
+#: custom-post-type-pizza.php:308
+#: pasta-display.php:18
+#: pasta-display.php:88
+#: pasta-display.php:96
+#: pizza-display.php:36
+#: pizza-display.php:161
+#: pizza-display.php:179
+msgid "Title"
+msgstr "Název"
+
+#: beverage-display.php:19
+#: beverage-display.php:89
+#: beverage-display.php:97
+#: pasta-display.php:19
+#: pasta-display.php:89
+#: pasta-display.php:97
+#: pizza-display.php:37
+#: pizza-display.php:162
+#: pizza-display.php:180
+msgid "Description"
+msgstr "Popis"
+
+#: beverage-display.php:21
+#: beverage-display.php:90
+#: beverage-display.php:98
+#: custom-post-type-beverage.php:81
+#: custom-post-type-beverage.php:158
+#: custom-post-type-pasta.php:81
+#: custom-post-type-pasta.php:158
+#: pasta-display.php:21
+#: pasta-display.php:90
+#: pasta-display.php:98
+msgid "Price"
+msgstr "Cena"
+
+#: custom-post-type-beverage.php:10
+#: custom-post-type-beverage.php:16
+msgid "Beverages"
+msgstr "Nápoje"
+
+#: custom-post-type-beverage.php:11
+#: custom-post-type-beverage.php:125
+msgid "Beverage"
+msgstr "Nápoj"
+
+#: custom-post-type-beverage.php:12
+#: custom-post-type-beverage.php:13
+msgid "Add Beverage"
+msgstr "Přidat nápoj"
+
+#: custom-post-type-beverage.php:14
+msgid "Edit Beverage"
+msgstr "Upravit nápoj"
+
+#: custom-post-type-beverage.php:15
+msgid "New Beverage"
+msgstr "Nový nápoj"
+
+#: custom-post-type-beverage.php:17
+msgid "View Beverages"
+msgstr "Zobrazit nápoje"
+
+#: custom-post-type-beverage.php:18
+msgid "Search Beverages"
+msgstr "Hledat nápoje"
+
+#: custom-post-type-beverage.php:19
+msgid "No beverages found"
+msgstr "Žádné nápoje nebyly nalezeny"
+
+#: custom-post-type-beverage.php:20
+msgid "No beverages in the trash"
+msgstr "V koši nejsou žádné nápoje"
+
+#: custom-post-type-beverage.php:56
+msgid "Beverage price"
+msgstr "Cena nápoje"
+
+#: custom-post-type-beverage.php:64
+#: custom-post-type-pizza.php:187
+msgid "Beverage menu number"
+msgstr "Číslo nápoje v menu"
+
+#: custom-post-type-beverage.php:157
+#: custom-post-type-pasta.php:157
+#: custom-post-type-pizza.php:309
+msgid "Category"
+msgstr "Rubrika"
+
+#: custom-post-type-beverage.php:159
+#: custom-post-type-pasta.php:159
+#: custom-post-type-pizza.php:323
+msgid "Date"
+msgstr "Datum"
+
+#: custom-post-type-beverage.php:188
+#: custom-post-type-pasta.php:188
+#: custom-post-type-pizza.php:351
+msgid "No Categories"
+msgstr "Žádné rubriky"
+
+#: custom-post-type-pasta.php:10
+#: custom-post-type-pasta.php:11
+#: custom-post-type-pasta.php:16
+#: custom-post-type-pasta.php:125
+msgid "Pasta"
+msgstr "Těstoviny"
+
+#: custom-post-type-pasta.php:12
+#: custom-post-type-pasta.php:13
+msgid "Add Pasta"
+msgstr "Přidat těstoviny"
+
+#: custom-post-type-pasta.php:14
+msgid "Edit Pasta"
+msgstr "Upravit těstoviny"
+
+#: custom-post-type-pasta.php:15
+msgid "New Pasta"
+msgstr "Nové těstoviny"
+
+#: custom-post-type-pasta.php:17
+msgid "View Pasta"
+msgstr "Zobrazit těstoviny"
+
+#: custom-post-type-pasta.php:18
+msgid "Search Pasta"
+msgstr "Hledat těstoviny"
+
+#: custom-post-type-pasta.php:19
+msgid "No pasta found"
+msgstr "Žádné těstoviny nebyly nalezeny"
+
+#: custom-post-type-pasta.php:20
+msgid "No pasta in the trash"
+msgstr "V koši nejsou žádné těstoviny"
+
+#: custom-post-type-pasta.php:56
+msgid "Pasta price"
+msgstr "Cena těstovin"
+
+#: custom-post-type-pasta.php:64
+msgid "Pasta menu number"
+msgstr "Číslo těstovin v menu"
+
+#: custom-post-type-pizza.php:10
+#: custom-post-type-pizza.php:16
+msgid "Pizzas"
+msgstr "Pizza"
+
+#: custom-post-type-pizza.php:11
+#: custom-post-type-pizza.php:247
+msgid "Pizza"
+msgstr "Pizza"
+
+#: custom-post-type-pizza.php:12
+#: custom-post-type-pizza.php:13
+msgid "Add pizza"
+msgstr "Přidat pizzu"
+
+#: custom-post-type-pizza.php:14
+msgid "Edit pizza"
+msgstr "Upravit pizzu"
+
+#: custom-post-type-pizza.php:15
+msgid "New pizza"
+msgstr "Nová pizza"
+
+#: custom-post-type-pizza.php:17
+msgid "View pizza"
+msgstr "Zobrazit pizzu"
+
+#: custom-post-type-pizza.php:18
+msgid "Search pizza"
+msgstr "Hledat pizzu"
+
+#: custom-post-type-pizza.php:19
+msgid "No pizzas found"
+msgstr "Žádné pizzy nebyly nalezeny"
+
+#: custom-post-type-pizza.php:20
+msgid "No pizzas in the trash"
+msgstr "V koši nejsou žádné pizzy"
+
+#: custom-post-type-pizza.php:57
+#: custom-post-type-pizza.php:133
+#: taxonomy-pizza-ingredients.php:21
+msgid "Pizza ingredients"
+msgstr "Ingredience"
+
+#: custom-post-type-pizza.php:65
+msgid "Pizza price"
+msgstr "Cena pizzy"
+
+#: custom-post-type-pizza.php:73
+#: custom-post-type-pizza.php:185
+msgid "Pizza menu number"
+msgstr "Číslo pizzy v menu"
+
+#: custom-post-type-pizza.php:105
+msgid "Edit"
+msgstr "Upravit"
+
+#: custom-post-type-pizza.php:107
+msgid "Add image"
+msgstr "Přidat obrázek"
+
+#: custom-post-type-pizza.php:134
+#: taxonomy-pizza-ingredients.php:19
+msgid "Add new pizza ingredient"
+msgstr "Přidat novou ingredienci"
+
+#: custom-post-type-pizza.php:136
+msgid "Add"
+msgstr "Přidat"
+
+#: custom-post-type-pizza.php:138
+msgid "Separate ingredients with commas"
+msgstr "Oddělujte ingredience čárkou"
+
+#: custom-post-type-pizza.php:159
+msgid "Price for"
+msgstr "Cena za"
+
+#: custom-post-type-pizza.php:310
+msgid "Ingredients"
+msgstr "Ingredience"
+
+#: custom-post-type-pizza.php:368
+msgid "No Ingredients"
+msgstr "Žádné ingredience"
+
+#: nav-menu-modifications.php:65
+msgid "No items."
+msgstr "žádné položky"
+
+#: nav-menu-modifications.php:83
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: nav-menu-modifications.php:84
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: nav-menu-modifications.php:120
+msgid "Most Recent"
+msgstr "Nejnovější"
+
+#: nav-menu-modifications.php:121
+msgid "View All"
+msgstr "Zobrazit vše"
+
+#: nav-menu-modifications.php:122
+#: nav-menu-modifications.php:167
+#: nav-menu-modifications.php:169
+msgid "Search"
+msgstr "Hledat"
+
+#: nav-menu-modifications.php:136
+#: nav-menu-modifications.php:137
+msgid "Archive"
+msgstr "Archiv"
+
+#: nav-menu-modifications.php:181
+msgid "No results found."
+msgstr "Žádné výsledky nebyly nalezeny"
+
+#: nav-menu-modifications.php:214
+msgctxt "nav menu home label"
+msgid "Home"
+msgstr "Úvod"
+
+#: nav-menu-modifications.php:250
+msgid "Select All"
+msgstr "Vybrat vše"
+
+#: nav-menu-modifications.php:254
+msgid "Add to Menu"
+msgstr "Přidat do menu"
+
+#: pizza-display.php:39
+#: pizza-display.php:163
+#: pizza-display.php:181
+msgid "Ingrediences"
+msgstr "Ingredience"
+
+#: pizza-settings-page.php:10
+msgid "WP Pizzeria Settings"
+msgstr "WP Pizzeria Nastavení"
+
+#: pizza-settings-page.php:10
+msgid "WP Pizzeria"
+msgstr "WP Pizzeria"
+
+#: pizza-settings-page.php:17
+msgid "You don't have permission to access this page."
+msgstr "Nemáte oprávnění zobrazit si tuto stránku."
+
+#: pizza-settings-page.php:65
+msgid "WP Pizzeria plugin settings"
+msgstr "WP Pizzeria nastavení pluginu"
+
+#: pizza-settings-page.php:99
+msgid "Pizza sizes"
+msgstr "Velikosti pizzy"
+
+#: pizza-settings-page.php:118
+#: pizza-settings-page.php:162
+msgid "Remove"
+msgstr "Odstranit"
+
+#: pizza-settings-page.php:123
+msgid "Add pizza size"
+msgstr "Přidat velikost pizzy"
+
+#: pizza-settings-page.php:128
+msgid "Currency"
+msgstr "Měna"
+
+#: pizza-settings-page.php:139
+msgid "Currency position"
+msgstr "Pozice měny"
+
+#: pizza-settings-page.php:146
+msgid "Before"
+msgstr "Před"
+
+#: pizza-settings-page.php:147
+msgid "After"
+msgstr "Za"
+
+#: pizza-settings-page.php:154
+msgid "Save"
+msgstr "Uložit"
+
+#: taxonomy-beverage-categories.php:10
+msgctxt "taxonomy general name"
+msgid "Beverage categories"
+msgstr "Rubriky nápojů"
+
+#: taxonomy-beverage-categories.php:11
+msgctxt "taxonomy singular name"
+msgid "Beverage categories"
+msgstr "Rubriky nápojů"
+
+#: taxonomy-beverage-categories.php:12
+msgid "Search Beverage categories"
+msgstr "Hledat rubriky nápojů"
+
+#: taxonomy-beverage-categories.php:13
+msgid "All Beverage categories"
+msgstr "Všechny rubriky nápojů"
+
+#: taxonomy-beverage-categories.php:14
+msgid "Parent Beverage category"
+msgstr "Nadřazená rubrika nápojů"
+
+#: taxonomy-beverage-categories.php:15
+msgid "Parent Beverage category:"
+msgstr "Nadřazená rubrika nápojů:"
+
+#: taxonomy-beverage-categories.php:16
+msgid "Edit Beverage category"
+msgstr "Upravit rubriku nápojů"
+
+#: taxonomy-beverage-categories.php:17
+msgid "Update Beverage category"
+msgstr "Aktualizovat rubriku nápojů"
+
+#: taxonomy-beverage-categories.php:18
+msgid "Add New Beverage category"
+msgstr "Přidat novou rubriku nápojů"
+
+#: taxonomy-beverage-categories.php:19
+msgid "New Beverage category name"
+msgstr "Název nové rubriky nápojů"
+
+#: taxonomy-beverage-categories.php:20
+msgid "Beverage categories"
+msgstr "Rubriky nápojů"
+
+#: taxonomy-beverage-categories.php:40
+#: taxonomy-pasta-categories.php:40
+#: taxonomy-pizza-categories.php:40
+#: taxonomy-pizza-ingredients.php:42
+msgid "Image"
+msgstr "Obrázek"
+
+#: taxonomy-beverage-categories.php:42
+#: taxonomy-beverage-categories.php:57
+#: taxonomy-pasta-categories.php:42
+#: taxonomy-pasta-categories.php:57
+#: taxonomy-pizza-categories.php:42
+#: taxonomy-pizza-categories.php:57
+#: taxonomy-pizza-ingredients.php:44
+#: taxonomy-pizza-ingredients.php:63
+msgid "The image is not prominent by default; however themes modified for use with WP Pizzeria plugin will use it."
+msgstr "Tento obrázek se defaultně nezobrazuje, šablony upravená pro práci s WP Pizzeria pluginem jej ale využívají."
+
+#: taxonomy-pasta-categories.php:10
+msgctxt "taxonomy general name"
+msgid "Pasta categories"
+msgstr "Rubriky těstovin"
+
+#: taxonomy-pasta-categories.php:11
+msgctxt "taxonomy singular name"
+msgid "Pasta categories"
+msgstr "Rubriky těstovin"
+
+#: taxonomy-pasta-categories.php:12
+msgid "Search Pasta categories"
+msgstr "Hledat rubriky těstovin"
+
+#: taxonomy-pasta-categories.php:13
+msgid "All Pasta categories"
+msgstr "Všechny rubriky těstovin"
+
+#: taxonomy-pasta-categories.php:14
+msgid "Parent Pasta category"
+msgstr "Nadřazená rubrika těstovin"
+
+#: taxonomy-pasta-categories.php:15
+msgid "Parent Pasta category:"
+msgstr "Nadřazená rubrika těstovin:"
+
+#: taxonomy-pasta-categories.php:16
+msgid "Edit Pasta category"
+msgstr "Upravit rubriku těstovin"
+
+#: taxonomy-pasta-categories.php:17
+msgid "Update Pasta category"
+msgstr "Aktualizovat rubriku těstovin"
+
+#: taxonomy-pasta-categories.php:18
+msgid "Add New Pasta category"
+msgstr "Přidat novou rubriku těstovin"
+
+#: taxonomy-pasta-categories.php:19
+msgid "New Pasta category name"
+msgstr "Název nové rubriky těstovin"
+
+#: taxonomy-pasta-categories.php:20
+msgid "Pasta categories"
+msgstr "Rubriky těstovin"
+
+#: taxonomy-pizza-categories.php:10
+msgctxt "taxonomy general name"
+msgid "Pizza categories"
+msgstr "Rubriky pizzy"
+
+#: taxonomy-pizza-categories.php:11
+msgctxt "taxonomy singular name"
+msgid "Pizza categories"
+msgstr "Rubriky pizzy"
+
+#: taxonomy-pizza-categories.php:12
+msgid "Search pizza categories"
+msgstr "Hledat rubriky pizzy"
+
+#: taxonomy-pizza-categories.php:13
+msgid "All pizza categories"
+msgstr "Všechny rubriky pizzy"
+
+#: taxonomy-pizza-categories.php:14
+msgid "Parent pizza category"
+msgstr "Nadřazená rubrika pizzy"
+
+#: taxonomy-pizza-categories.php:15
+msgid "Parent pizza category:"
+msgstr "Nadřazená rubrika pizzy:"
+
+#: taxonomy-pizza-categories.php:16
+msgid "Edit pizza category"
+msgstr "Upravit rubriku pizzy"
+
+#: taxonomy-pizza-categories.php:17
+msgid "Update pizza category"
+msgstr "Aktualizovat rubriku pizzy"
+
+#: taxonomy-pizza-categories.php:18
+msgid "Add new pizza category"
+msgstr "Přidat novou rubriku pizzy"
+
+#: taxonomy-pizza-categories.php:19
+msgid "New pizza category name"
+msgstr "Název nové rubriky pizzy"
+
+#: taxonomy-pizza-categories.php:20
+msgid "Pizza categories"
+msgstr "Rubriky pizzy"
+
+#: taxonomy-pizza-ingredients.php:11
+msgctxt "taxonomy general name"
+msgid "Pizza ingredients"
+msgstr "Ingredience"
+
+#: taxonomy-pizza-ingredients.php:12
+msgctxt "taxonomy singular name"
+msgid "Pizza ingredient"
+msgstr "Ingredience"
+
+#: taxonomy-pizza-ingredients.php:13
+msgid "Search pizza ingredients"
+msgstr "Hledat ingredience"
+
+#: taxonomy-pizza-ingredients.php:14
+msgid "All pizza ingredients"
+msgstr "Všechny ingredience"
+
+#: taxonomy-pizza-ingredients.php:15
+msgid "Parent pizza ingredient"
+msgstr "Nadřazená ingredience"
+
+#: taxonomy-pizza-ingredients.php:16
+msgid "Parent pizza ingredient:"
+msgstr "Nadřazená ingredience"
+
+#: taxonomy-pizza-ingredients.php:17
+msgid "Edit pizza ingredient"
+msgstr "Upravit ingredienci"
+
+#: taxonomy-pizza-ingredients.php:18
+msgid "Update pizza ingredient"
+msgstr "Aktualizovat ingredienci"
+
+#: taxonomy-pizza-ingredients.php:20
+msgid "New pizza ingredient name"
+msgstr "Název nové ingredience"
+
