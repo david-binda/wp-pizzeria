@@ -5,6 +5,8 @@
 
 Class WP_Pizzeria_Bevarage {
 
+	protected $post_type = 'wp_pizzeria_beverage';
+
 	public static function getInstance() {
 		static $instance = null;
 		if ( null === $instance ) {
@@ -19,8 +21,8 @@ Class WP_Pizzeria_Bevarage {
 
 		add_action( 'save_post', array( $this, 'save_postdata' ), 10, 1 );
 		add_action( 'right_now_content_table_end', array( $this, 'add_counts' ), 10, 0 );
-		add_filter( 'manage_edit-wp_pizzeria_beverage_columns', array( $this, 'edit_columns' ), 10, 1 );
-		add_action( 'manage_wp_pizzeria_beverage_posts_custom_column', array( $this, 'columns' ), 10, 2 );
+		add_filter( "manage_edit-{$this->post_type}_columns", array( $this, 'edit_columns' ), 10, 1 );
+		add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_columns' ), 10, 2 );
 	}
 
 	private function __clone() {
@@ -47,7 +49,7 @@ Class WP_Pizzeria_Bevarage {
 			'menu_name'          => esc_html__( 'Beverages', 'wp_pizzeria' )
 		);
 		//register custom post type using before declared labels
-		register_post_type( 'wp_pizzeria_beverage', array(
+		register_post_type( $this->post_type, array(
 			'labels'               => $labels,
 			'public'               => true,
 			'show_in_nav_menus'    => true,
@@ -65,15 +67,14 @@ Class WP_Pizzeria_Bevarage {
 	/* Custom Meta boxes */
 
 	public function custom_box() {
-		$post_type = 'wp_pizzeria_beverage';
 		if ( true === isset( $_GET['post'] ) ) {
 			$post_id = absint( $_GET['post'] );
 		} elseif ( true === isset( $_POST['post_ID'] ) ) {
 			$post_id = absint( $_POST['post_ID'] );
 		}
 		if (
-			( true === isset( $post_id ) && $post_type === get_post_type( $post_id ) ) ||
-			( true === isset( $_GET['post_type'] ) && $post_type === $_GET['post_type'] )
+			( true === isset( $post_id ) && $this->post_type === get_post_type( $post_id ) ) ||
+			( true === isset( $_GET['post_type'] ) && $this->post_type === $_GET['post_type'] )
 		) {
 			remove_meta_box( 'pageparentdiv', 'wp_pizzeria_beverage', 'side' );
 			add_meta_box(
@@ -128,7 +129,7 @@ Class WP_Pizzeria_Bevarage {
 		if ( true === defined( 'DOING_AUTOSAVE' ) && true === constant( 'DOING_AUTOSAVE' ) ) {
 			return;
 		}
-		if ( 'wp_pizzeria_beverage' !== get_post_type( $post_id ) ) {
+		if ( $this->post_type !== get_post_type( $post_id ) ) {
 			return;
 		}
 		if ( false === current_user_can( 'edit_post', $post_id ) ) {
@@ -143,7 +144,7 @@ Class WP_Pizzeria_Bevarage {
 	/* Show beverage counts in dashboard overview widget */
 
 	public function add_counts() {
-		if ( false === post_type_exists( 'wp_pizzeria_beverage' ) ) {
+		if ( false === post_type_exists( $this->post_type ) ) {
 			return;
 		}
 
@@ -178,17 +179,17 @@ Class WP_Pizzeria_Bevarage {
 
 		$columns = array(
 			'cb'          => '<input type="checkbox" />',
-			'menu_number' => esc_html__( '#', 'wp_pizzeria' ),
-			'title'       => esc_html__( 'Title' ), //default WordPress Title translation
-			'category'    => esc_html__( 'Category', 'wp_pizzeria' ),
-			'price'       => esc_html__( 'Price', 'wp_pizzeria' ),
-			'date'        => esc_html__( 'Date' ) //default WordPpress Date translation
+			'menu_number' => strip_tags( __( '#', 'wp_pizzeria' ) ),
+			'title'       => strip_tags( __( 'Title' ) ), //default WordPress Title translation
+			'category'    => strip_tags( __( 'Category', 'wp_pizzeria' ) ),
+			'price'       => strip_tags( __( 'Price', 'wp_pizzeria' ) ),
+			'date'        => strip_tags( __( 'Date' ) ) //default WordPpress Date translation
 		);
 
 		return $columns;
 	}
 
-	public function columns( $column, $post_id ) {
+	public function manage_columns( $column, $post_id ) {
 		global $post;
 		switch ( $column ) {
 			case 'menu_number' :
@@ -229,6 +230,8 @@ Class WP_Pizzeria_Bevarage {
 					) {
 						echo esc_html( $pizzeria_settings['currency'] );
 					}
+				} else {
+					echo '';
 				}
 				break;
 			default :

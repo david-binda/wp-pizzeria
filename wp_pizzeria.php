@@ -77,10 +77,18 @@ class WP_Pizzeria {
 	}
 
 	private function load_cpts() {
+
 		include 'custom-post-type-beverage.php';
 		$bevarage = WP_Pizzeria_Bevarage::getInstance();
 		include 'beverage-display.php';
 		$bevarage_display = WP_Pizzeria_Bevarage_Display::getInstance();
+
+		/* Load custom post types */
+		include 'custom-post-type-pizza.php';
+		include 'custom-post-type-pasta.php';
+
+		include 'custom-post-type-dessert.php';
+		$desert = WP_Pizzeria_Desert::getInstance();
 	}
 
 	/* Rename save button */
@@ -147,12 +155,6 @@ EOT;
 		}
 	}
 }
-
-
-/* Load custom post types */
-include 'custom-post-type-pizza.php';
-include 'custom-post-type-pasta.php';
-include 'custom-post-type-dessert.php';
 
 /* Load custom taxonomies */
 include 'taxonomy-pizza-categories.php';
