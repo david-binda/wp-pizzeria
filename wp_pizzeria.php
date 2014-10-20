@@ -85,7 +85,10 @@ class WP_Pizzeria {
 
 		/* Load custom post types */
 		include 'custom-post-type-pizza.php';
+		$pizza = WP_Pizzeria_Pizza::getInstance();
+
 		include 'custom-post-type-pasta.php';
+		$pasta = WP_Pizzeria_Pasta::getInstance();
 
 		include 'custom-post-type-dessert.php';
 		$desert = WP_Pizzeria_Desert::getInstance();
