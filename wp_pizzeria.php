@@ -80,20 +80,23 @@ class WP_Pizzeria {
 		require_once( 'cpt_factory.php' );
 
 		include 'custom-post-type-beverage.php';
-		$bevarage = WP_Pizzeria_Beverage::getInstance();
+		WP_Pizzeria_Beverage::getInstance();
 
 		include 'beverage-display.php';
-		$beverage_display = WP_Pizzeria_Beverage_Display::getInstance();
+		WP_Pizzeria_Beverage_Display::getInstance();
 
 		/* Load custom post types */
 		include 'custom-post-type-pizza.php';
-		$pizza = WP_Pizzeria_Pizza::getInstance();
+		WP_Pizzeria_Pizza::getInstance();
 
 		include 'custom-post-type-pasta.php';
-		$pasta = WP_Pizzeria_Pasta::getInstance();
+		WP_Pizzeria_Pasta::getInstance();
 
 		include 'custom-post-type-dessert.php';
-		$desert = WP_Pizzeria_Desert::getInstance();
+		WP_Pizzeria_Dessert::getInstance();
+
+		include 'dessert-display.php';
+		WP_Pizzeria_Dessert_Display::getInstance();
 	}
 
 	/* Rename save button */
