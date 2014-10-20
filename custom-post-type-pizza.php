@@ -81,7 +81,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			add_meta_box(
 				'wp_pizzeria_number_custom_box',
 				__( 'Pizza menu number', 'wp_pizzeria' ),
-				'wp_pizzeria_number_inner_custom_box',
+				array( $this, 'number_inner_custom_box' ),
 				$this->post_type,
 				'side',
 				'core'
@@ -204,22 +204,17 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 	}
 
 	function save_postdata( $post_id ) {
-		if ( true === defined( 'DOING_AUTOSAVE' ) && true === constant( 'DOING_AUTOSAVE' ) ) {
-			return;
+
+		if ( false === $this->can_save( $post_id ) ) {
+			return false;
 		}
+
 		if ( true === defined( 'DOING_AJAX' ) && true === constant( 'DOING_AJAX' ) ) {
 			return;
 		}
-		if ( $this->post_type === get_post_type( $post_id ) ) {
-			return;
-		}
-		if ( false === current_user_can( 'edit_post', $post_id ) ) {
-			return;
-		}
-		$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
-		if ( false === is_array( $pizzeria_settings ) ) {
-			$pizzeria_settings = array();
-		}
+
+		$pizzeria_settings = $this::get_pizzeria_settings();
+
 		$prices = array();
 		if ( true === array_key_exists( 'sizes', $pizzeria_settings ) ) {
 			foreach ( $pizzeria_settings['sizes'] as $key => $size ):
@@ -367,22 +362,3 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 		}
 	}
 }
-
-function wp_pizzeria_number_inner_custom_box($post) {
-	$number = $post->menu_order;
-	if( isset( $_GET['post_type'] ) ){
-		$post_type = $_GET['post_type'];
-	}else{
-		$post_type = $post->post_type;
-	}
-	if ( $post_type == 'wp_pizzeria_pizza' ){
-		$label = __('Pizza menu number', 'wp_pizzeria');
-	} else if ( $post_type == 'wp_pizzeria_dessert' ){
-		$label = __('Dessert menu number', 'wp_pizzeria');
-	} else {
-		$label = __('Beverage menu number', 'wp_pizzeria');
-	}
-	?>
-	<label for="wp_pizzeria_number"><?php echo $label; ?>:</label>
-	<input type="text" name="wp_pizzeria_number" value="<?php echo $number; ?>" />
-<?php }

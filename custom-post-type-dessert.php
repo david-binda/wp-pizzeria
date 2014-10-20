@@ -55,7 +55,7 @@ Class WP_Pizzeria_Desert extends CPT_Factory {
 			( true === isset( $post_id ) && $this->post_type === get_post_type( $post_id ) ) ||
 			( true === isset( $_GET['post_type'] ) && $this->post_type === $_GET['post_type'] )
 		) {
-			remove_meta_box( 'pageparentdiv', 'wp_pizzeria_dessert', 'side' );
+			remove_meta_box( 'pageparentdiv', $this->post_type, 'side' );
 			add_meta_box(
 				'wp_pizzeria_dessert_price_custom_box',
 				__( 'Dessert price', 'wp_pizzeria' ),
@@ -67,7 +67,7 @@ Class WP_Pizzeria_Desert extends CPT_Factory {
 			add_meta_box(
 				'wp_pizzeria_number_custom_box',
 				__( 'Dessert menu number', 'wp_pizzeria' ),
-				'wp_pizzeria_number_inner_custom_box',
+				array( $this, 'number_inner_custom_box' ),
 				$this->post_type,
 				'side',
 				'core'
@@ -81,7 +81,7 @@ Class WP_Pizzeria_Desert extends CPT_Factory {
 		if ( $price === false ) {
 			$price = '';
 		}
-		$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
+		$pizzeria_settings = $this::get_pizzeria_settings();
 		?>
 		<p>
 			<label for="dessert_price"><?php _e( 'Price', 'wp_pizzeria' ); ?></label>
@@ -102,18 +102,13 @@ Class WP_Pizzeria_Desert extends CPT_Factory {
 
 
 	public function save_postdata( $post_id ) {
-		if ( true === defined( 'DOING_AUTOSAVE' ) && true ===  constant( 'DOING_AUTOSAVE' ) ) {
-			return;
-		}
-		if ( $this->post_type !== get_post_type( $post_id ) ) {
-			return;
-		}
-		if ( false === current_user_can( 'edit_post', $post_id ) ) {
-			return;
+
+		if ( false === $this->can_save( $post_id ) ) {
+			return false;
 		}
 
 		if ( true === isset( $_POST['dessert_price'] ) ) {
-			update_post_meta( $post_id, '_wp_pizzeria_price', $_POST['dessert_price'] );
+			update_post_meta( $post_id, '_wp_pizzeria_price', intval( $_POST['dessert_price'] ) );
 		}
 	}
 }

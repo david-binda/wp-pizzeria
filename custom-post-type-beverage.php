@@ -56,7 +56,7 @@ Class WP_Pizzeria_Bevarage extends CPT_Factory {
 			( true === isset( $post_id ) && $this->post_type === get_post_type( $post_id ) ) ||
 			( true === isset( $_GET['post_type'] ) && $this->post_type === $_GET['post_type'] )
 		) {
-			remove_meta_box( 'pageparentdiv', 'wp_pizzeria_beverage', 'side' );
+			remove_meta_box( 'pageparentdiv', $this->post_type, 'side' );
 			add_meta_box(
 				'wp_pizzeria_beverage_price_custom_box',
 				esc_html__( 'Beverage price', 'wp_pizzeria' ),
@@ -68,7 +68,7 @@ Class WP_Pizzeria_Bevarage extends CPT_Factory {
 			add_meta_box(
 				'wp_pizzeria_number_custom_box',
 				esc_html__( 'Beverage menu number', 'wp_pizzeria' ),
-				'wp_pizzeria_number_inner_custom_box',
+				array( $this, 'number_inner_custom_box' ),
 				$this->post_type,
 				'side',
 				'core'
@@ -82,7 +82,7 @@ Class WP_Pizzeria_Bevarage extends CPT_Factory {
 		if ( false === $price ) {
 			$price = '';
 		}
-		$pizzeria_settings = (array) maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
+		$pizzeria_settings = $this::get_pizzeria_settings();
 		?>
 		<p>
 			<label for="beverage_price"><?php _e( 'Price', 'wp_pizzeria' ); ?></label>
@@ -106,18 +106,12 @@ Class WP_Pizzeria_Bevarage extends CPT_Factory {
 	/* Save custom meta boxes content */
 
 	public function save_postdata( $post_id ) {
-		if ( true === defined( 'DOING_AUTOSAVE' ) && true === constant( 'DOING_AUTOSAVE' ) ) {
-			return;
-		}
-		if ( $this->post_type !== get_post_type( $post_id ) ) {
-			return;
-		}
-		if ( false === current_user_can( 'edit_post', $post_id ) ) {
-			return;
+		if ( false === $this->can_save( $post_id ) ) {
+			return false;
 		}
 
 		if ( true === isset( $_POST['beverage_price'] ) ) {
-			update_post_meta( $post_id, '_wp_pizzeria_price', $_POST['beverage_price'] );
+			update_post_meta( $post_id, '_wp_pizzeria_price', intval( $_POST['beverage_price'] ) );
 		}
 	}
 

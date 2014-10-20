@@ -14,6 +14,7 @@ abstract class CPT_Factory {
 		add_action( 'init', array( $obj, 'register_post_type' ), 10, 0 );
 
 		add_action( 'save_post', array( $obj, 'save_postdata' ), 10, 1 );
+		add_action( 'wp_insert_post_data', array( $obj, 'save_menu_number' ), 99, 2 );
 		add_action( 'dashboard_glance_items', array( $obj, 'add_counts' ), 10, 0 );
 		add_filter( "manage_edit-{$obj->post_type}_columns", array( $obj, 'edit_columns' ), 10, 1 );
 		add_action( "manage_{$obj->post_type}_posts_custom_column", array( $obj, 'manage_columns' ), 10, 2 );
@@ -35,7 +36,8 @@ abstract class CPT_Factory {
 		$num       = number_format_i18n( $num_posts->publish );
 		$text      = _n( $post_type_obj->labels->singular_name, $post_type_obj->labels->name, intval( $num_posts->publish ) );
 		if ( current_user_can( 'edit_posts' ) ) {
-			$text = sprintf( '<a href="edit.php?post_type=%s">%d %s</a>', $this->post_type, $num, $text );
+			$edit_url = add_query_arg( array( 'post_type' => $this->post_type ), admin_url( 'edit.php' ) );
+			$text = sprintf( '<a href="%s">%d %s</a>', $edit_url, $num, $text );
 		}
 		echo sprintf( '<li class="t %s">%s</li>', $this->post_type, $text );
 
@@ -108,5 +110,39 @@ abstract class CPT_Factory {
 			default :
 				break;
 		}
+	}
+
+	protected function can_save( $post_id ) {
+		if ( true === defined( 'DOING_AUTOSAVE' ) && true ===  constant( 'DOING_AUTOSAVE' ) ) {
+			return false;
+		}
+		if ( $this->post_type !== get_post_type( $post_id ) ) {
+			return false;
+		}
+		if ( false === current_user_can( 'edit_post', $post_id ) ) {
+			return false;
+		}
+		return true;
+	}
+
+	public static function get_pizzeria_settings() {
+		return (array) maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
+	}
+
+	public function number_inner_custom_box( $post ) {
+		$number = $post->menu_order;
+		$post_type_obj = get_post_type_object( $this->post_type );
+		$label = sprintf( __( '%s menu number' ), $post_type_obj->labels->singular_name );
+		echo sprintf( '<label for="wp_pizzeria_number">%s</label><input type="text" name="wp_pizzeria_number" value="%d"/>', esc_html( $label ), intval( $number ) );
+	}
+
+
+	function save_menu_number( $data, $postarr ) {
+		if ( false !== $this->can_save( $postarr['ID'] ) ) {
+			if ( true === isset( $_POST['wp_pizzeria_number'] ) ) {
+				$data['menu_order'] = intval( $_POST['wp_pizzeria_number'] );
+			}
+		}
+		return $data;
 	}
 }
