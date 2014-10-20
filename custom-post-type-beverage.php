@@ -3,32 +3,12 @@
 * Register custom taxonomy wp_pizzeria_pizza for pizzas
 */
 
-Class WP_Pizzeria_Bevarage {
+Class WP_Pizzeria_Bevarage extends CPT_Factory {
 
 	protected $post_type = 'wp_pizzeria_beverage';
 
-	public static function getInstance() {
-		static $instance = null;
-		if ( null === $instance ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
 	protected function __construct() {
-		add_action( 'init', array( $this, 'register_post_type' ), 10, 0 );
-
-		add_action( 'save_post', array( $this, 'save_postdata' ), 10, 1 );
-		add_action( 'right_now_content_table_end', array( $this, 'add_counts' ), 10, 0 );
-		add_filter( "manage_edit-{$this->post_type}_columns", array( $this, 'edit_columns' ), 10, 1 );
-		add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_columns' ), 10, 2 );
-	}
-
-	private function __clone() {
-	}
-
-	private function __wakeup() {
+		parent::construct( $this );
 	}
 
 	public function register_post_type() {
@@ -81,7 +61,7 @@ Class WP_Pizzeria_Bevarage {
 				'wp_pizzeria_beverage_price_custom_box',
 				esc_html__( 'Beverage price', 'wp_pizzeria' ),
 				array( $this, 'price_inner_custom_box' ),
-				$post_type,
+				$this->post_type,
 				'side',
 				'core'
 			);
@@ -89,7 +69,7 @@ Class WP_Pizzeria_Bevarage {
 				'wp_pizzeria_number_custom_box',
 				esc_html__( 'Beverage menu number', 'wp_pizzeria' ),
 				'wp_pizzeria_number_inner_custom_box',
-				$post_type,
+				$this->post_type,
 				'side',
 				'core'
 			);
@@ -141,101 +121,4 @@ Class WP_Pizzeria_Bevarage {
 		}
 	}
 
-	/* Show beverage counts in dashboard overview widget */
-
-	public function add_counts() {
-		if ( false === post_type_exists( $this->post_type ) ) {
-			return;
-		}
-
-		$num_posts = wp_count_posts( 'wp_pizzeria_beverage' );
-
-		$num  = number_format_i18n( $num_posts->publish );
-		$text = _n( 'Beverage', 'Beverages', intval( $num_posts->publish ) );
-		if ( current_user_can( 'edit_posts' ) ) {
-			$num  = sprintf( "<a href='edit.php?post_type=wp_pizzeria_beverage'>%d</a>", absint( $num ) );
-			$text = sprintf( "<a href='edit.php?post_type=wp_pizzeria_beverage'>%s</a>", esc_html( $text ) );
-		}
-		echo sprintf( '<td class="first b b-wp_pizzeria_beverage">%s</td>', $num ); //num is already a properly escaped HTML
-		echo sprintf( '<td class="t wp_pizzeria_beverage">%s</td>', $text ); //text is already a properly escaped HTML
-
-		echo '</tr>';
-
-		if ( $num_posts->pending > 0 ) {
-			$num  = number_format_i18n( $num_posts->pending );
-			$text = _n( 'Beverage awaiting moderation', 'Beverages awaiting moderation', absint( $num_posts->pending ) );
-			if ( true === current_user_can( 'edit_posts' ) ) {
-				$num  = sprintf( "<a href='edit.php?post_status=pending&post_type=wp_pizzeria_beverage'>%d</a>", absint( $num ) );
-				$text = sprintf( "<a href='edit.php?post_status=pending&post_type=wp_pizzeria_beverage'>%s</a>", esc_html( $text ) );
-			}
-			echo sprintf( '<td class="first b b-wp_pizzeria_beverage">%s</td>', $num ); //num is already properly escaped HTML
-			echo sprintf( '<td class="t wp_pizzeria_beverage">%s</td>', $text ); //text is already properly escaped HTML
-
-			echo '</tr>';
-		}
-	}
-
-	public function edit_columns( $columns ) {
-
-		$columns = array(
-			'cb'          => '<input type="checkbox" />',
-			'menu_number' => strip_tags( __( '#', 'wp_pizzeria' ) ),
-			'title'       => strip_tags( __( 'Title' ) ), //default WordPress Title translation
-			'category'    => strip_tags( __( 'Category', 'wp_pizzeria' ) ),
-			'price'       => strip_tags( __( 'Price', 'wp_pizzeria' ) ),
-			'date'        => strip_tags( __( 'Date' ) ) //default WordPpress Date translation
-		);
-
-		return $columns;
-	}
-
-	public function manage_columns( $column, $post_id ) {
-		global $post;
-		switch ( $column ) {
-			case 'menu_number' :
-				global $wpdb;
-				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d ", $post_id ) );
-				echo absint( $menu_id );
-				break;
-			case 'category' :
-				$terms = get_the_terms( $post_id, 'wp_pizzeria_beverage_category' );
-				if ( false === empty( $terms ) ) {
-					$out = array();
-					foreach ( $terms as $term ) {
-						$out[] = sprintf( '<a href="%s">%s</a>',
-							esc_url( add_query_arg( array(
-								'post_type'                     => $post->post_type,
-								'wp_pizzeria_beverage_category' => $term->slug
-							), 'edit.php' ) ),
-							esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, 'wp_pizzeria_beverage_category', 'display' ) )
-						);
-					}
-					echo join( ', ', $out );
-				} else {
-					esc_html_e( 'No Categories', 'wp_pizzeria' );
-				}
-				break;
-
-			case 'price' :
-				$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
-				if ( false !== get_post_meta( $post_id, '_wp_pizzeria_price', true ) ) {
-					if ( true === array_key_exists( 'currency', $pizzeria_settings )
-					     && true === array_key_exists( 'currency_pos', $pizzeria_settings ) && 'before' === $pizzeria_settings['currency_pos']
-					) {
-						echo esc_html( $pizzeria_settings['currency'] );
-					}
-					echo get_post_meta( $post_id, '_wp_pizzeria_price', true );
-					if ( true === array_key_exists( 'currency', $pizzeria_settings )
-					     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings ) || 'after' === $pizzeria_settings['currency_pos'] )
-					) {
-						echo esc_html( $pizzeria_settings['currency'] );
-					}
-				} else {
-					echo '';
-				}
-				break;
-			default :
-				break;
-		}
-	}
 }

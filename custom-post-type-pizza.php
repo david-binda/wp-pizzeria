@@ -2,35 +2,16 @@
 /*
 * Register custom taxonomy wp_pizzeria_pizza for pizzas
 */
-Class WP_Pizzeria_Pizza {
+Class WP_Pizzeria_Pizza extends CPT_Factory {
 
 	protected $post_type = 'wp_pizzeria_pizza';
 
-	public static function getInstance() {
-		static $instance = null;
-		if ( null === $instance ) {
-			$instance = new static();
-		}
-
-		return $instance;
-	}
-
 	protected function __construct() {
-		add_action( 'init', array( $this, 'register_post_type' ), 10, 0 );
 
-		add_action( 'save_post', array( $this, 'save_postdata' ), 10, 1 );
-		add_action( 'right_now_content_table_end', array( $this, 'add_counts' ), 10, 0 );
-		add_filter( "manage_edit-{$this->post_type}_columns", array( $this, 'edit_columns' ), 10, 1 );
-		add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'manage_columns' ), 10, 2 );
+		parent::construct( $this );
 
 		add_action( 'wp_ajax_wp_pizzeria_add_ingredient', array( $this, 'add_ingredient_callback' ), 10, 0 );
 		add_action( 'admin_head', array( $this, 'add_ingredient_javascript' ), 10, 0 );
-	}
-
-	private function __clone() {
-	}
-
-	private function __wakeup() {
 	}
 
 	public function register_post_type() {
@@ -62,7 +43,7 @@ Class WP_Pizzeria_Pizza {
 			'query_var'            => false,
 			'supports'             => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
 			'taxonomies'           => array( 'wp_pizzeria_ingredient', 'wp_pizzeria_category' ),
-			'register_meta_box_cb' => 'wp_pizzeria_add_custom_box_to_pizza'
+			'register_meta_box_cb' => array( $this, 'custom_box' )
 		) );
 	}
 
@@ -265,39 +246,6 @@ Class WP_Pizzeria_Pizza {
 		}
 	}
 
-	/* Show pizza counts in dashboard overview widget */
-
-	public function add_counts() {
-		if ( false === post_type_exists( $this->post_type ) ) {
-			return;
-		}
-
-		$num_posts = wp_count_posts( 'wp_pizzeria_pizza' );
-		$num       = number_format_i18n( $num_posts->publish );
-		$text      = _n( 'Pizza', 'Pizzas', intval( $num_posts->publish ) );
-		if ( current_user_can( 'edit_posts' ) ) {
-			$num  = "<a href='edit.php?post_type=wp_pizzeria_pizza'>$num</a>";
-			$text = "<a href='edit.php?post_type=wp_pizzeria_pizza'>$text</a>";
-		}
-		echo '<td class="first b b-wp_pizzeria_pizza">' . $num . '</td>';
-		echo '<td class="t wp_pizzeria_pizza">' . $text . '</td>';
-
-		echo '</tr>';
-
-		if ( $num_posts->pending > 0 ) {
-			$num  = number_format_i18n( $num_posts->pending );
-			$text = _n( 'Pizza awaiting moderation', 'Pizza awaiting moderation', intval( $num_posts->pending ) );
-			if ( current_user_can( 'edit_posts' ) ) {
-				$num  = "<a href='edit.php?post_status=pending&post_type=wp_pizzeria_pizza'>$num</a>";
-				$text = "<a href='edit.php?post_status=pending&post_type=wp_pizzeria_pizza'>$text</a>";
-			}
-			echo '<td class="first b b-wp_pizzeria_pizza">' . $num . '</td>';
-			echo '<td class="t wp_pizzeria_pizza">' . $text . '</td>';
-
-			echo '</tr>';
-		}
-	}
-
 	/*
 	* Add ajax for ability to add new ingredients on edit/add pizza page
 	*/
@@ -427,11 +375,11 @@ function wp_pizzeria_number_inner_custom_box($post) {
 	}else{
 		$post_type = $post->post_type;
 	}
-	if( $post_type == 'wp_pizzeria_pizza' ){
+	if ( $post_type == 'wp_pizzeria_pizza' ){
 		$label = __('Pizza menu number', 'wp_pizzeria');
-	}if( $post_type == 'wp_pizzeria_dessert' ){
+	} else if ( $post_type == 'wp_pizzeria_dessert' ){
 		$label = __('Dessert menu number', 'wp_pizzeria');
-	}else{
+	} else {
 		$label = __('Beverage menu number', 'wp_pizzeria');
 	}
 	?>
