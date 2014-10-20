@@ -79,6 +79,13 @@ class WP_Pizzeria {
 
 		require_once( 'cpt_factory.php' );
 
+		/*foreach( glob( dirname( __FILE__ ) . '/custom\-post\-type\-*.php' ) as $filename ) {
+			$post_type_name = ucfirst( str_replace( 'custom-post-type-', basename( $filename ) ) );
+			require_once( $filename );
+			WP_Pizzeria_${post_type_name}_Display::getInstance();
+
+		}/**/
+
 		include 'custom-post-type-beverage.php';
 		WP_Pizzeria_Beverage::getInstance();
 
