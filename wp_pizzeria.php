@@ -80,9 +80,10 @@ class WP_Pizzeria {
 		require_once( 'cpt_factory.php' );
 
 		include 'custom-post-type-beverage.php';
-		$bevarage = WP_Pizzeria_Bevarage::getInstance();
+		$bevarage = WP_Pizzeria_Beverage::getInstance();
+
 		include 'beverage-display.php';
-		$bevarage_display = WP_Pizzeria_Bevarage_Display::getInstance();
+		$beverage_display = WP_Pizzeria_Beverage_Display::getInstance();
 
 		/* Load custom post types */
 		include 'custom-post-type-pizza.php';

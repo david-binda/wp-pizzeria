@@ -3,7 +3,7 @@
 * Register custom taxonomy wp_pizzeria_pizza for pizzas
 */
 
-Class WP_Pizzeria_Bevarage extends CPT_Factory {
+Class WP_Pizzeria_Beverage extends CPT_Factory {
 
 	protected $post_type = 'wp_pizzeria_beverage';
 

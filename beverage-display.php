@@ -1,6 +1,6 @@
 <?php
 
-class WP_Pizzeria_Bevarage_Display {
+class WP_Pizzeria_Beverage_Display {
 
 	public static function getInstance() {
 		static $instance = null;
