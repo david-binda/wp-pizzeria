@@ -89,8 +89,14 @@ class WP_Pizzeria {
 		include 'custom-post-type-pizza.php';
 		WP_Pizzeria_Pizza::getInstance();
 
+		include 'pizza-display.php';
+		WP_Pizzeria_Pizza_Display::getInstance();
+
 		include 'custom-post-type-pasta.php';
 		WP_Pizzeria_Pasta::getInstance();
+
+		include 'pasta-display.php';
+		WP_Pizzeria_Pasta_Display::getInstance();
 
 		include 'custom-post-type-dessert.php';
 		WP_Pizzeria_Dessert::getInstance();
@@ -173,10 +179,6 @@ include 'taxonomy-dessert-categories.php';
 
 /* Load wp_pizzeria settings page */
 include 'pizza-settings-page.php';
-
-/* Load wp_pizzeria display functions */
-include 'pizza-display.php';
-include 'pasta-display.php';
 
 /* Nav menu modifications */
 include 'nav-menu-modifications.php';
