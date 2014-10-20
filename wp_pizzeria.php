@@ -63,6 +63,14 @@ class WP_Pizzeria {
 		//add_action( 'template_redirect', array( $this, 'template_redirect' ) );
 
 		$this->load_cpts();
+		$this->load_displays();
+		$this->load_taxonomies();
+
+		/* Load wp_pizzeria settings page */
+		include 'pizza-settings-page.php';
+
+		/* Nav menu modifications */
+		include 'nav-menu-modifications.php';
 	}
 
 	private function __clone() {
@@ -79,37 +87,32 @@ class WP_Pizzeria {
 
 		require_once( 'cpt_factory.php' );
 
-		/*foreach( glob( dirname( __FILE__ ) . '/custom\-post\-type\-*.php' ) as $filename ) {
-			$post_type_name = ucfirst( str_replace( 'custom-post-type-', basename( $filename ) ) );
+		foreach ( glob( dirname( __FILE__ ) . '/custom\-post\-type\-*.php' ) as $filename ) {
+			$post_type_name = ucfirst( str_replace( 'custom-post-type-', '', basename( $filename ) ) );
+			$post_type_name = str_replace( '.php', '', $post_type_name );
 			require_once( $filename );
-			WP_Pizzeria_${post_type_name}_Display::getInstance();
+			$class_name = "WP_Pizzeria_{$post_type_name}";
+			$class_name::getInstance();
+		}
+	}
 
-		}/**/
+	private function load_displays() {
+		foreach ( glob( dirname( __FILE__ ) . '/*\-display.php' ) as $filename ) {
+			$post_type_name = ucfirst( str_replace( '-display', '', basename( $filename ) ) );
+			$post_type_name = str_replace( '.php', '', $post_type_name );
+			require_once( $filename );
+			$class_name = "WP_Pizzeria_{$post_type_name}_Display";
+			$class_name::getInstance();
+		}
+	}
 
-		include 'custom-post-type-beverage.php';
-		WP_Pizzeria_Beverage::getInstance();
-
-		include 'beverage-display.php';
-		WP_Pizzeria_Beverage_Display::getInstance();
-
-		/* Load custom post types */
-		include 'custom-post-type-pizza.php';
-		WP_Pizzeria_Pizza::getInstance();
-
-		include 'pizza-display.php';
-		WP_Pizzeria_Pizza_Display::getInstance();
-
-		include 'custom-post-type-pasta.php';
-		WP_Pizzeria_Pasta::getInstance();
-
-		include 'pasta-display.php';
-		WP_Pizzeria_Pasta_Display::getInstance();
-
-		include 'custom-post-type-dessert.php';
-		WP_Pizzeria_Dessert::getInstance();
-
-		include 'dessert-display.php';
-		WP_Pizzeria_Dessert_Display::getInstance();
+	private function load_taxonomies() {
+		/* Load custom taxonomies */
+		include 'taxonomy-pizza-categories.php';
+		include 'taxonomy-pizza-ingredients.php';
+		include 'taxonomy-beverage-categories.php';
+		include 'taxonomy-pasta-categories.php';
+		include 'taxonomy-dessert-categories.php';
 	}
 
 	/* Rename save button */
@@ -176,18 +179,5 @@ EOT;
 		}
 	}
 }
-
-/* Load custom taxonomies */
-include 'taxonomy-pizza-categories.php';
-include 'taxonomy-pizza-ingredients.php';
-include 'taxonomy-beverage-categories.php';
-include 'taxonomy-pasta-categories.php';
-include 'taxonomy-dessert-categories.php';
-
-/* Load wp_pizzeria settings page */
-include 'pizza-settings-page.php';
-
-/* Nav menu modifications */
-include 'nav-menu-modifications.php';
 
 $wp_pizzeria = WP_Pizzeria::getInstance();
