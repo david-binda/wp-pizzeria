@@ -2,6 +2,7 @@
 
 abstract class CPT_Factory {
 	private static $_instances = array();
+
 	public static function getInstance() {
 		$class = get_called_class();
 		if (!isset(self::$_instances[$class])) {
@@ -9,6 +10,21 @@ abstract class CPT_Factory {
 		}
 		return self::$_instances[$class];
 	}
+
+	static private function throw_singleton_error() {
+		return new WP_Error( 'direct_access_prohibit', __( 'This class is a singleton. Use ::getInstance instead of trying to create new object.', 'wp_pizzeria' ) );
+	}
+
+	private function __clone() {
+		return self::throw_singleton_error();
+	}
+
+	private function __wakeup() {
+		return self::throw_singleton_error();
+
+	}
+
+	abstract public function save_postdata( $post_id );
 
 	protected static function construct( $obj ) {
 		add_action( 'init', array( $obj, 'register_post_type' ), 10, 0 );
@@ -18,11 +34,6 @@ abstract class CPT_Factory {
 		add_action( 'dashboard_glance_items', array( $obj, 'add_counts' ), 10, 0 );
 		add_filter( "manage_edit-{$obj->post_type}_columns", array( $obj, 'edit_columns' ), 10, 1 );
 		add_action( "manage_{$obj->post_type}_posts_custom_column", array( $obj, 'manage_columns' ), 10, 2 );
-	}
-	private function __clone() {
-	}
-
-	private function __wakeup() {
 	}
 
 	public function add_counts() {

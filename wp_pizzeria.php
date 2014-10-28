@@ -87,7 +87,7 @@ class WP_Pizzeria {
 
 		require_once( 'cpt_factory.php' );
 
-		foreach ( glob( dirname( __FILE__ ) . '/custom\-post\-type\-*.php' ) as $filename ) {
+		foreach ( glob( WP_PIZZERIA_PLUGIN_DIR . '/custom\-post\-type\-*.php' ) as $filename ) {
 			$post_type_name = ucfirst( str_replace( 'custom-post-type-', '', basename( $filename ) ) );
 			$post_type_name = str_replace( '.php', '', $post_type_name );
 			require_once( $filename );
@@ -107,12 +107,17 @@ class WP_Pizzeria {
 	}
 
 	private function load_taxonomies() {
+		require_once( WP_PIZZERIA_PLUGIN_DIR . '/tax-factory.php' );
 		/* Load custom taxonomies */
-		include 'taxonomy-pizza-categories.php';
-		include 'taxonomy-pizza-ingredients.php';
-		include 'taxonomy-beverage-categories.php';
-		include 'taxonomy-pasta-categories.php';
-		include 'taxonomy-dessert-categories.php';
+		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pizza-categories.php' );
+		WP_Pizzeria_Pizza_Categories::getInstance();
+
+		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pizza-ingredients.php';
+		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-beverage-categories.php';
+		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pasta-categories.php' );
+		WP_Pizzeira_Pasta_Categories::getInstance();
+
+		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-dessert-categories.php';
 	}
 
 	/* Rename save button */
