@@ -4,7 +4,7 @@
 * Register custom taxonomy wp_pizzeria_category for pizzas categorization
 */
 
-class WP_Pizzeira_Pasta_Categories extends Tax_Factory {
+class WP_Pizzeria_Pasta_Categories extends Tax_Factory {
 
 	protected $taxonomy = 'wp_pizzeria_pasta_category';
 	protected $cpt = array( 'wp_pizzeria_pasta' );

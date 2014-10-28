@@ -115,7 +115,7 @@ class WP_Pizzeria {
 		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pizza-ingredients.php';
 		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-beverage-categories.php';
 		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pasta-categories.php' );
-		WP_Pizzeira_Pasta_Categories::getInstance();
+		WP_Pizzeria_Pasta_Categories::getInstance();
 
 		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-dessert-categories.php';
 	}
