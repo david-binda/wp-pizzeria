@@ -17,7 +17,7 @@
  	- show image on edit page, allow to remove image
  - custom quick edit menu & custom columns
  	- menu number (unique!)
- 	- price (multiple sizes) 
+ 	- price (multiple sizes)
  - other
  	- user manual
  - views
@@ -107,17 +107,23 @@ class WP_Pizzeria {
 	}
 
 	private function load_taxonomies() {
-		require_once( WP_PIZZERIA_PLUGIN_DIR . '/tax-factory.php' );
 		/* Load custom taxonomies */
+		require_once( WP_PIZZERIA_PLUGIN_DIR . '/tax-factory.php' );
+
 		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pizza-categories.php' );
 		WP_Pizzeria_Pizza_Categories::getInstance();
 
-		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pizza-ingredients.php';
-		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-beverage-categories.php';
+		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pizza-ingredients.php' );
+		WP_Pizzeria_Pizza_Ingredients::getInstance();
+
+		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-beverage-categories.php' );
+		WP_Pizzeria_Beverage_Categories::getInstance();
+
 		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-pasta-categories.php' );
 		WP_Pizzeria_Pasta_Categories::getInstance();
 
-		include WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-dessert-categories.php';
+		require_once( WP_PIZZERIA_PLUGIN_DIR . '/taxonomy-dessert-categories.php' );
+		WP_Pizzeria_Dessert_Categories::getInstance();
 	}
 
 	/* Rename save button */

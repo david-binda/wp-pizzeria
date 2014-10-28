@@ -24,6 +24,8 @@ abstract class Tax_Factory {
 
 	protected static function construct( $obj ) {
 		add_action('init', array( $obj, 'register_taxonomy' ), 10, 0 );
+		add_action( $obj->get_taxonomy() . '_add_form_fields', array( $obj, 'image_add' ), 10, 0 );
+		add_action( $obj->get_taxonomy() . '_edit_form_fields', array( $obj, 'image_edit' ), 10, 1 );
 	}
 
 	protected function get_taxonomy() {
@@ -38,8 +40,12 @@ abstract class Tax_Factory {
 		return $this->rewrite;
 	}
 
+	protected function get_category_images_option_name() {
+		return $this->category_images;
+	}
+
 	protected function get_category_images() {
-		$category_images = maybe_unserialize( get_option( 'wp_pizzeria_pasta_category_images' ) );
+		$category_images = maybe_unserialize( get_option( $this->get_category_images_option_name() ) );
 		if ( false === is_array( $category_images ) || true === empty( $category_images ) ) {
 			$category_images = array();
 		}
@@ -47,7 +53,7 @@ abstract class Tax_Factory {
 	}
 
 	protected function set_category_images( $category_images ) {
-		update_option( 'wp_pizzeria_pasta_category_images', maybe_serialize( $category_images ) );
+		update_option( $this->get_category_images_option_name(), maybe_serialize( $category_images ) );
 	}
 
 	public function register_taxonomy() {
@@ -67,5 +73,9 @@ abstract class Tax_Factory {
 	}
 
 	abstract protected function get_labels();
+
+	abstract public function image_add();
+
+	abstract public function image_edit( $taxonomy );
 
 }
