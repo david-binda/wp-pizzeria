@@ -5,13 +5,14 @@ function wp_pizzeria_display_post_type_nav_box(){
     $post_types = array( 'wp_pizzeria_pizza', 'wp_pizzeria_beverage', 'wp_pizzeria_pasta', 'wp_pizzeria_dessert' );
     foreach ( $post_types as $post_type ){
     $post_type_nav_box = 'add-'.$post_type;
-	    if(in_array($post_type_nav_box, (array)$hidden_nav_boxes)):
-	        foreach ($hidden_nav_boxes as $i => $nav_box):
-	            if($nav_box == $post_type_nav_box)
-	                unset($hidden_nav_boxes[$i]);
-	        endforeach;
-	        update_user_option(get_current_user_id(), 'metaboxhidden_nav-menus', $hidden_nav_boxes);
-	    endif;
+	    if(in_array($post_type_nav_box, (array)$hidden_nav_boxes)) {
+		    foreach ( $hidden_nav_boxes as $i => $nav_box ) {
+			    if ( $nav_box === $post_type_nav_box ) {
+				    unset( $hidden_nav_boxes[ $i ] );
+			    }
+		    }
+		    update_user_option( get_current_user_id(), 'metaboxhidden_nav-menus', $hidden_nav_boxes );
+	    }
     }    
 }
 add_action('admin_init', 'wp_pizzeria_display_post_type_nav_box');
@@ -20,8 +21,9 @@ add_action('in_admin_header', 'wp_pizzeria_remove_post_type_nav_box');
 
 function wp_pizzeria_remove_post_type_nav_box(){
 	global $current_screen;
-	if ( $current_screen->base != 'nav-menus' )
+	if ( $current_screen->base != 'nav-menus' ) {
 		return;
+	}
 	$post_types = array( 'wp_pizzeria_pizza', 'wp_pizzeria_beverage', 'wp_pizzeria_pasta', 'wp_pizzeria_dessert' );
 	foreach ( $post_types as $post_type ) {
 		$post_type = get_post_type_object( $post_type );
@@ -55,18 +57,17 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 		'update_post_meta_cache' => false
 	);
 
-	if ( isset( $post_type['args']->_default_query ) )
-		$args = array_merge($args, (array) $post_type['args']->_default_query );
+	if ( isset( $post_type['args']->_default_query ) ) {
+		$args = array_merge( $args, (array) $post_type['args']->_default_query );
+	}
 
 	// @todo transient caching of these results with proper invalidation on updating of a post of this type
 	$get_posts = new WP_Query;
 	$posts = $get_posts->query( $args );
 	if ( ! $get_posts->post_count ) {
-		echo '<p>' . __( 'No items.' ) . '</p>';
+		echo '<p>' . esc_html__( 'No items.' ) . '</p>';
 		return;
 	}
-
-	$post_type_object = get_post_type_object($post_type_name);
 
 	$num_pages = $get_posts->max_num_pages;
 
@@ -80,14 +81,15 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 			)
 		),
 		'format' => '',
-		'prev_text' => __('&laquo;'),
-		'next_text' => __('&raquo;'),
+		'prev_text' => esc_html__('&laquo;'),
+		'next_text' => esc_html__('&raquo;'),
 		'total' => $num_pages,
 		'current' => $pagenum
 	));
 
-	if ( !$posts )
-		$error = '<li id="error">'. $post_type['args']->labels->not_found .'</li>';
+	if ( !$posts ) {
+		$error = '<li id="error">' . $post_type['args']->labels->not_found . '</li>';
+	}
 
 	$db_fields = false;
 	if ( is_post_type_hierarchical( $post_type_name ) ) {
@@ -260,11 +262,14 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 	<?php
 }
 
-add_filter( 'wp_get_nav_menu_items', 'wp_pizzeria_archive_menu_filter', 10, 3 );
+add_filter( 'wp_get_nav_menu_items', 'wp_pizzeria_archive_menu_filter', 10, 1 );
 
-function wp_pizzeria_archive_menu_filter( $items, $menu, $args ) {
+function wp_pizzeria_archive_menu_filter( $items ) {
+
  	foreach( $items as &$item ) {
-   		if( $item->object != 'cpt-archive' ) continue;
+   		if( $item->object != 'cpt-archive' ) {
+		    continue;
+	    }
    		$item->url = get_post_type_archive_link( $item->type );
    
    		if( get_query_var( 'post_type' ) == $item->type ) {
@@ -275,4 +280,3 @@ function wp_pizzeria_archive_menu_filter( $items, $menu, $args ) {
  	
  	return $items;
 }
-?>
