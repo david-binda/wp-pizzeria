@@ -90,14 +90,8 @@ function wp_pizzeria_settings(){
 									}
 						?>
 							<div class="size">
-								<?php 
-									$checked = '';
-									if ( $pizzeria_settings['sizes']['primary'] === $key ) {
-										$checked = ' checked="checked"';
-									}
-								?>
 								<label for="<?php echo $size; ?>">
-									<input type="radio" name="primary" value="<?php echo esc_attr( $size ); ?>"<?php echo $checked; ?>/>
+									<input type="radio" name="primary" value="<?php echo esc_attr( $size ); ?>"<?php checked( $pizzeria_settings['sizes']['primary'], $key ); ?>/>
 									<input type="text" name="size[]" id="<?php echo esc_attr( $size ); ?>" value="<?php echo esc_attr( $size ); ?>" />
 								</label>
 								<span><a href="#" title="<?php esc_attr_e('Remove', 'wp_pizzeria'); ?>" class="remove"><?php esc_html_e('Remove', 'wp_pizzeria'); ?></a></span>
