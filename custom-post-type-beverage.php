@@ -87,14 +87,17 @@ Class WP_Pizzeria_Beverage extends CPT_Factory {
 		<p>
 			<label for="beverage_price"><?php _e( 'Price', 'wp_pizzeria' ); ?></label>
 			<?php if ( true === array_key_exists( 'currency', $pizzeria_settings )
-			           && true === array_key_exists( 'currency_pos', $pizzeria_settings ) && 'before' === $pizzeria_settings['currency_pos']
+			           && true === array_key_exists( 'currency_pos', $pizzeria_settings )
+			           && 'before' === $pizzeria_settings['currency_pos']
 			) {
 				echo esc_html( $pizzeria_settings['currency'] );
 			} ?>
 			<input type="text" id="beverage_price" name="beverage_price" value="<?php echo esc_attr( $price ); ?>" />
 			<?php
 			if ( true === array_key_exists( 'currency', $pizzeria_settings )
-			     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings ) || 'after' === $pizzeria_settings['currency_pos'] )
+			     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
+			          || 'after' === $pizzeria_settings['currency_pos']
+			     )
 			) {
 				echo esc_html( $pizzeria_settings['currency'] );
 			}

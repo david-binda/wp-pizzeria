@@ -46,7 +46,8 @@ abstract class Tax_Factory {
 
 	protected function get_category_images() {
 		$category_images = maybe_unserialize( get_option( $this->get_category_images_option_name() ) );
-		if ( false === is_array( $category_images ) || true === empty( $category_images ) ) {
+		if ( false === is_array( $category_images )
+		     || true === empty( $category_images ) ) {
 			$category_images = array();
 		}
 		return $category_images;

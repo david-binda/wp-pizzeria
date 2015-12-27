@@ -17,23 +17,22 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 
 		add_action( 'edit_term', array( $this, 'image_save' ), 10, 1 );
 		add_action( 'create_term', array( $this, 'image_save' ), 10, 1 );
-		//add_action( 'pre_get_posts', array( $this, 'filter_by_ingredient' ), 1 );
 	}
 
 	protected function get_labels() {
 		//setup labels
 		return array(
-			'name'              => _x( 'Pizza ingredients', 'taxonomy general name' ),
-			'singular_name'     => _x( 'Pizza ingredient', 'taxonomy singular name' ),
-			'search_items'      => __( 'Search pizza ingredients' ),
-			'all_items'         => __( 'All pizza ingredients' ),
-			'parent_item'       => __( 'Parent pizza ingredient' ),
-			'parent_item_colon' => __( 'Parent pizza ingredient:' ),
-			'edit_item'         => __( 'Edit pizza ingredient' ),
-			'update_item'       => __( 'Update pizza ingredient' ),
-			'add_new_item'      => __( 'Add new pizza ingredient' ),
-			'new_item_name'     => __( 'New pizza ingredient name' ),
-			'menu_name'         => __( 'Pizza ingredients' ),
+			'name'              => esc_html_x( 'Pizza ingredients', 'taxonomy general name' ),
+			'singular_name'     => esc_html_x( 'Pizza ingredient', 'taxonomy singular name' ),
+			'search_items'      => esc_html__( 'Search pizza ingredients' ),
+			'all_items'         => esc_html__( 'All pizza ingredients' ),
+			'parent_item'       => esc_html__( 'Parent pizza ingredient' ),
+			'parent_item_colon' => esc_html__( 'Parent pizza ingredient:' ),
+			'edit_item'         => esc_html__( 'Edit pizza ingredient' ),
+			'update_item'       => esc_html__( 'Update pizza ingredient' ),
+			'add_new_item'      => esc_html__( 'Add new pizza ingredient' ),
+			'new_item_name'     => esc_html__( 'New pizza ingredient name' ),
+			'menu_name'         => esc_html__( 'Pizza ingredients' ),
 		);
 	}
 
@@ -86,7 +85,7 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 	function image_save( $term_id ) {
 		if ( isset( $_POST['ingredient-image'] ) ) {
 			$this->get_category_images();
-			$ingredient_images[ $term_id ] = $_POST['ingredient-image'];
+			$ingredient_images[ $term_id ] = absint( $_POST['ingredient-image'] );
 			$this->set_category_images( $ingredient_images );
 		}
 	}
@@ -125,9 +124,6 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 					return false;
 				}
 				$checked = "";
-				/*if ( has_term( $tag->term_id, 'wp_pizzeria_ingredient' )	) {
-					$checked = ' checked="checked"';
-				} /**/
 				?>
 				<label for="<?php echo esc_attr( $ingredient->name ); ?>">
 					<input type="checkbox" id="<?php echo esc_attr( $ingredient->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $ingredient->term_id ); ?>"<?php echo $checked; ?>/>

@@ -48,18 +48,18 @@ Class WP_Pizzeria_Pasta extends CPT_Factory {
 	public function custom_box() {
 
 		if ( true === isset( $_GET['post'] ) ) {
-			$post_id = $_GET['post'];
+			$post_id = absint( $_GET['post'] );
 		} elseif ( true === isset( $_POST['post_ID'] ) ) {
-			$post_id = $_POST['post_ID'];
+			$post_id = absint( $_POST['post_ID'] );
 		}
 		if (
-			( isset( $post_id ) && $this->post_type === get_post_type( $post_id ) ) ||
-    		( isset( $_GET['post_type'] ) && $this->post_type === $_GET['post_type'] )
+			( true === isset( $post_id ) && $this->post_type === get_post_type( $post_id ) )
+    		|| ( true === isset( $_GET['post_type'] ) && $this->post_type === $_GET['post_type'] )
     	) {
 			remove_meta_box( 'pageparentdiv', $this->post_type, 'side' );
 			add_meta_box(
 				'wp_pizzeria_pasta_price_custom_box',
-				__( 'Pasta price', 'wp_pizzeria' ),
+				esc_html__( 'Pasta price', 'wp_pizzeria' ),
 				array( $this, 'inner_custom_box' ),
 				$this->post_type,
 				'side',
@@ -67,7 +67,7 @@ Class WP_Pizzeria_Pasta extends CPT_Factory {
 			);
 			add_meta_box(
 				'wp_pizzeria_number_custom_box',
-				__( 'Pasta menu number', 'wp_pizzeria' ),
+				esc_html__( 'Pasta menu number', 'wp_pizzeria' ),
 				array( $this, 'number_inner_custom_box' ),
 				$this->post_type,
 				'side',
@@ -79,20 +79,26 @@ Class WP_Pizzeria_Pasta extends CPT_Factory {
 
 	public function inner_custom_box( $post ) {
 		$price = get_post_meta( $post->ID, '_wp_pizzeria_price', true );
-		if ( $price === false ) {
+		if ( false === $price ) {
 			$price = '';
 		}
 		$pizzeria_settings = $this::get_pizzeria_settings();
 		?>
 		<p>
 			<label for="pasta_price"><?php _e( 'Price', 'wp_pizzeria' ); ?></label>
-			<?php if ( array_key_exists( 'currency', $pizzeria_settings ) && array_key_exists( 'currency_pos', $pizzeria_settings ) && $pizzeria_settings['currency_pos'] == 'before' ) {
-				echo $pizzeria_settings['currency'];
+			<?php if ( true === array_key_exists( 'currency', $pizzeria_settings )
+			           && true === array_key_exists( 'currency_pos', $pizzeria_settings )
+			           && 'before' === $pizzeria_settings['currency_pos']
+			) {
+				echo esc_html( $pizzeria_settings['currency'] );
 			} ?>
 			<input type="text" id="pasta_price" name="pasta_price" value="<?php echo $price; ?>" />
 			<?php
-			if ( array_key_exists( 'currency', $pizzeria_settings ) && ( ! array_key_exists( 'currency_pos', $pizzeria_settings ) || $pizzeria_settings['currency_pos'] == 'after' ) ) {
-				echo $pizzeria_settings['currency'];
+			if ( true === array_key_exists( 'currency', $pizzeria_settings )
+			     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
+			          || 'after' === $pizzeria_settings['currency_pos'] )
+			) {
+				echo esc_html( $pizzeria_settings['currency'] );
 			}
 			?>
 		</p>
@@ -107,7 +113,7 @@ Class WP_Pizzeria_Pasta extends CPT_Factory {
 			return false;
 		}
 
-		if ( isset( $_POST['pasta_price'] ) ) {
+		if ( true === isset( $_POST['pasta_price'] ) ) {
 			update_post_meta( $post_id, '_wp_pizzeria_price', intval( $_POST['pasta_price'] ) );
 		}
 	}

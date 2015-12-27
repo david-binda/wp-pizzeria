@@ -19,7 +19,7 @@ function wp_pizzeria_settings(){
 	/* Save function */
 	if ( true === isset( $_POST['wp_pizzeria_settings_submit'] ) ) {
 		$pizzeria_settings = maybe_unserialize( get_option('wp_pizzeria_settings') );
-		if ( !is_array($pizzeria_settings) ) {
+		if ( false === is_array($pizzeria_settings) ) {
 			$pizzeria_settings = array();
 		}
 
@@ -46,18 +46,22 @@ function wp_pizzeria_settings(){
 			foreach ( $_POST['size'] as $size ) {
 				if ( false === empty( $size ) ) {
 					$pizzeria_settings['sizes'][sanitize_title( $size )] = $size;
-					if ( $size == $primary ) {
+					if ( $size === $primary ) {
 						$pizzeria_settings['sizes']['primary'] = sanitize_title( $size );
 					}
 				}	
 			}	
 		}
 		// Save currency
-		if ( isset( $_POST['wp_pizzeria_currency'] ) && trim($_POST['wp_pizzeria_currency']) != '' ) {
-			$pizzeria_settings['currency'] = htmlspecialchars( $_POST['wp_pizzeria_currency'] );
+		if ( true === isset( $_POST['wp_pizzeria_currency'] )
+		     && '' !== trim( $_POST['wp_pizzeria_currency'] )
+		) {
+			$pizzeria_settings['currency'] = sanitize_text_field( $_POST['wp_pizzeria_currency'] );
 		}
-		if ( isset( $_POST['wp_pizzeria_currency_position'] ) && ( $_POST['wp_pizzeria_currency_position'] == 'after' || $_POST['wp_pizzeria_currency_position'] == 'before' ) ) {
-			$pizzeria_settings['currency_pos'] = ( $_POST['wp_pizzeria_currency_position'] );
+		if ( true === isset( $_POST['wp_pizzeria_currency_position'] )
+		     && true === in_array( $_POST['wp_pizzeria_currency_position'], array( 'before', 'after' ), true )
+		) {
+			$pizzeria_settings['currency_pos'] = sanitize_text_field( $_POST['wp_pizzeria_currency_position'] );
 		}
 		update_option( 'wp_pizzeria_settings', maybe_serialize( $pizzeria_settings ) ); 	 	
 	}
@@ -69,7 +73,7 @@ function wp_pizzeria_settings(){
 		<br/><br/>
 		<?php
 			$pizzeria_settings = maybe_unserialize( get_option('wp_pizzeria_settings') );
-			if ( !is_array( $pizzeria_settings ) )
+			if ( false === is_array( $pizzeria_settings ) )
 				$pizzeria_settings = array();	
 		?>
 		<form action="<?php echo esc_url( add_query_arg( array() ) ); ?>" method="post">
@@ -88,7 +92,7 @@ function wp_pizzeria_settings(){
 							<div class="size">
 								<?php 
 									$checked = '';
-									if ( $pizzeria_settings['sizes']['primary'] == $key ) {
+									if ( $pizzeria_settings['sizes']['primary'] === $key ) {
 										$checked = ' checked="checked"';
 									}
 								?>

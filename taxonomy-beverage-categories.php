@@ -20,17 +20,17 @@ class WP_Pizzeria_Beverage_Categories extends Tax_Factory {
 
 	protected function get_labels() {
 		return array(
-			'name'              => _x( 'Beverage categories', 'taxonomy general name', 'wp_pizzeria' ),
-			'singular_name'     => _x( 'Beverage categories', 'taxonomy singular name', 'wp_pizzeria' ),
-			'search_items'      => __( 'Search Beverage categories', 'wp_pizzeria' ),
-			'all_items'         => __( 'All Beverage categories', 'wp_pizzeria' ),
-			'parent_item'       => __( 'Parent Beverage category', 'wp_pizzeria' ),
-			'parent_item_colon' => __( 'Parent Beverage category:', 'wp_pizzeria' ),
-			'edit_item'         => __( 'Edit Beverage category', 'wp_pizzeria' ),
-			'update_item'       => __( 'Update Beverage category', 'wp_pizzeria' ),
-			'add_new_item'      => __( 'Add New Beverage category', 'wp_pizzeria' ),
-			'new_item_name'     => __( 'New Beverage category name', 'wp_pizzeria' ),
-			'menu_name'         => __( 'Beverage categories', 'wp_pizzeria' ),
+			'name'              => esc_html_x( 'Beverage categories', 'taxonomy general name', 'wp_pizzeria' ),
+			'singular_name'     => esc_html_x( 'Beverage categories', 'taxonomy singular name', 'wp_pizzeria' ),
+			'search_items'      => esc_html__( 'Search Beverage categories', 'wp_pizzeria' ),
+			'all_items'         => esc_html__( 'All Beverage categories', 'wp_pizzeria' ),
+			'parent_item'       => esc_html__( 'Parent Beverage category', 'wp_pizzeria' ),
+			'parent_item_colon' => esc_html__( 'Parent Beverage category:', 'wp_pizzeria' ),
+			'edit_item'         => esc_html__( 'Edit Beverage category', 'wp_pizzeria' ),
+			'update_item'       => esc_html__( 'Update Beverage category', 'wp_pizzeria' ),
+			'add_new_item'      => esc_html__( 'Add New Beverage category', 'wp_pizzeria' ),
+			'new_item_name'     => esc_html__( 'New Beverage category name', 'wp_pizzeria' ),
+			'menu_name'         => esc_html__( 'Beverage categories', 'wp_pizzeria' ),
 		);
 	}
 
@@ -60,9 +60,9 @@ class WP_Pizzeria_Beverage_Categories extends Tax_Factory {
 	}
 
 	function image_save( $term_id ) {
-		if ( isset( $_POST['beverage_category-image'] ) ) {
+		if ( true === isset( $_POST['beverage_category-image'] ) ) {
 			$category_images = $category_images = $this->get_category_images();
-			$category_images[ $term_id ] = $_POST['beverage_category-image'];
+			$category_images[ $term_id ] = absint( $_POST['beverage_category-image'] );
 			$this->set_category_images( $category_images );
 		}
 	}

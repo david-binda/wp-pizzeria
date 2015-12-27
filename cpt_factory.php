@@ -46,11 +46,11 @@ abstract class CPT_Factory {
 		$num_posts = wp_count_posts( $this->post_type );
 		$num       = number_format_i18n( $num_posts->publish );
 		$text      = _n( $post_type_obj->labels->singular_name, $post_type_obj->labels->name, intval( $num_posts->publish ) );
-		if ( current_user_can( 'edit_posts' ) ) {
+		if ( true === current_user_can( 'edit_posts' ) ) {
 			$edit_url = add_query_arg( array( 'post_type' => $this->post_type ), admin_url( 'edit.php' ) );
 			$text = sprintf( '<a href="%s">%d %s</a>', $edit_url, $num, $text );
 		}
-		echo sprintf( '<li class="t %s">%s</li>', $this->post_type, $text );
+		echo sprintf( '<li class="t %s">%s</li>', esc_attr( $this->post_type ), esc_html( $text ) );
 
 	}
 
@@ -58,11 +58,11 @@ abstract class CPT_Factory {
 
 		$columns = array(
 			'cb'          => '<input type="checkbox" />',
-			'menu_number' => strip_tags( __( '#', 'wp_pizzeria' ) ),
-			'title'       => strip_tags( __( 'Title' ) ),
-			'category'    => strip_tags( __( 'Category', 'wp_pizzeria' ) ),
-			'price'       => strip_tags( __( 'Price', 'wp_pizzeria' ) ),
-			'date'        => strip_tags( __( 'Date' ) )
+			'menu_number' => strip_tags( esc_html__( '#', 'wp_pizzeria' ) ),
+			'title'       => strip_tags( esc_html__( 'Title' ) ),
+			'category'    => strip_tags( esc_html__( 'Category', 'wp_pizzeria' ) ),
+			'price'       => strip_tags( esc_html__( 'Price', 'wp_pizzeria' ) ),
+			'date'        => strip_tags( esc_html__( 'Date', 'wp_pizzeria' ) ),
 		);
 
 		return $columns;
@@ -73,8 +73,9 @@ abstract class CPT_Factory {
 		switch ( $column ) {
 			case 'menu_number' :
 				global $wpdb;
-				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d LIMIT 1", $post_id ) );
-				echo $menu_id;
+				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d LIMIT 1", intval( $post_id ) ) );
+				//TODO: check return value
+				echo intval( $menu_id );
 				break;
 			case 'category' :
 				$terms = get_the_terms( $post_id, $this->post_type . '_category' );
@@ -84,8 +85,8 @@ abstract class CPT_Factory {
 						$out[] = sprintf( '<a href="%s">%s</a>',
 							esc_url(
 								add_query_arg( array(
-									'post_type' => $post->post_type,
-									$this->post_type . '_category' => $term->slug
+									'post_type' => rawurlencode( $post->post_type ),
+									$this->post_type . '_category' => rawurlencode( $term->slug )
 								) , 'edit.php' )
 							),
 							esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, $this->post_type . '_category', 'display' ) )
@@ -93,7 +94,7 @@ abstract class CPT_Factory {
 					}
 					echo join( ', ', $out );
 				} else {
-					_e( 'No Categories', 'wp_pizzeria' );
+					esc_html_e( 'No Categories', 'wp_pizzeria' );
 				}
 				break;
 
@@ -104,15 +105,15 @@ abstract class CPT_Factory {
 					     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 					     && 'before' === $pizzeria_settings['currency_pos'] )
 					{
-						echo $pizzeria_settings['currency'];
+						echo esc_html( $pizzeria_settings['currency'] );
 					}
-					echo get_post_meta( $post_id, '_wp_pizzeria_price', true );
+					echo esc_html( get_post_meta( $post_id, '_wp_pizzeria_price', true ) );
 
 					if ( true === array_key_exists( 'currency', $pizzeria_settings )
 					     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 					          || 'after' === $pizzeria_settings['currency_pos'] )
 					) {
-						echo $pizzeria_settings['currency'];
+						echo esc_html( $pizzeria_settings['currency'] );
 					}
 				} else {
 					echo '';
