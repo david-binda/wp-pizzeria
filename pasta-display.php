@@ -77,7 +77,7 @@ class WP_Pizzeria_Pasta_Display {
 			$output .= '<a href="#" class="pizza-title">' . esc_html( get_the_title() ) . '</a>';
 			$output .= get_the_post_thumbnail( get_the_ID(), 'wp_pizzeria_thumbnail' );
 			$output .= '</td>';
-			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . wp_kses_post( get_the_content() ) . '</div></td>';
+			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . wp_kses_post( apply_filters( 'the_content', get_the_content() ) ) . '</div></td>';
 			if ( false !== get_post_meta( $post->ID, '_wp_pizzeria_price', true ) ) {
 				$output .= "\n\t\t\t" . '<td class="col5 price">';
 				if ( true === array_key_exists( 'currency', $pizzeria_settings )
@@ -167,7 +167,7 @@ class WP_Pizzeria_Pasta_Display {
 								) {
 									echo esc_html( $pizzeria_settings['currency'] );
 								}
-								echo get_post_meta( get_the_ID(), '_wp_pizzeria_price', true );
+								echo esc_html( get_post_meta( get_the_ID(), '_wp_pizzeria_price', true ) );
 								if ( true === array_key_exists( 'currency', $pizzeria_settings )
 								     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 								          || 'after' === $pizzeria_settings['currency_pos'] )

@@ -107,7 +107,7 @@ abstract class CPT_Factory {
 					{
 						echo esc_html( $pizzeria_settings['currency'] );
 					}
-					echo get_post_meta( $post_id, '_wp_pizzeria_price', true );
+					echo esc_html( get_post_meta( $post_id, '_wp_pizzeria_price', true ) );
 
 					if ( true === array_key_exists( 'currency', $pizzeria_settings )
 					     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )

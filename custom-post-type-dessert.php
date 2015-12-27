@@ -86,7 +86,7 @@ Class WP_Pizzeria_Dessert extends CPT_Factory {
 		<p>
 			<label for="dessert_price"><?php _e( 'Price', 'wp_pizzeria' ); ?></label>
 			<?php if ( true === array_key_exists( 'currency', $pizzeria_settings )
-			           && array_key_exists( 'currency_pos', $pizzeria_settings )
+			           && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 			           && 'before' === $pizzeria_settings['currency_pos']
 			) {
 				echo esc_html( $pizzeria_settings['currency'] );

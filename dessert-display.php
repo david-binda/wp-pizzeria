@@ -81,7 +81,7 @@ class WP_Pizzeria_Dessert_Display {
 			if ( false !== get_post_meta( $post->ID, '_wp_pizzeria_price', true ) ) {
 				$output .= "\n\t\t\t" . '<td class="col5 price">';
 				if ( true === array_key_exists( 'currency', $pizzeria_settings )
-				     && array_key_exists( 'currency_pos', $pizzeria_settings )
+				     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 				     && 'before' === $pizzeria_settings['currency_pos'] ) {
 					$output .= esc_html( $pizzeria_settings['currency'] );
 				}
@@ -166,7 +166,7 @@ class WP_Pizzeria_Dessert_Display {
 								) {
 									echo esc_html( $pizzeria_settings['currency'] );
 								}
-								echo get_post_meta( get_the_ID(), '_wp_pizzeria_price', true );
+								echo esc_html( get_post_meta( get_the_ID(), '_wp_pizzeria_price', true ) );
 								if ( true === array_key_exists( 'currency', $pizzeria_settings )
 								     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 								          || 'after' === $pizzeria_settings['currency_pos'] )
