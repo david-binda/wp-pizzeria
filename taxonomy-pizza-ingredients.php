@@ -17,7 +17,6 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 
 		add_action( 'edit_term', array( $this, 'image_save' ), 10, 1 );
 		add_action( 'create_term', array( $this, 'image_save' ), 10, 1 );
-		//add_action( 'pre_get_posts', array( $this, 'filter_by_ingredient' ), 1 );
 	}
 
 	protected function get_labels() {
@@ -125,9 +124,6 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 					return false;
 				}
 				$checked = "";
-				/*if ( has_term( $tag->term_id, 'wp_pizzeria_ingredient' )	) {
-					$checked = ' checked="checked"';
-				} /**/
 				?>
 				<label for="<?php echo esc_attr( $ingredient->name ); ?>">
 					<input type="checkbox" id="<?php echo esc_attr( $ingredient->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $ingredient->term_id ); ?>"<?php echo $checked; ?>/>

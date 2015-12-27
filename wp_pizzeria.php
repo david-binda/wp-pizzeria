@@ -60,8 +60,6 @@ class WP_Pizzeria {
 
 		add_image_size( 'wp_pizzeria_thumbnail', 100, 100, false );
 
-		//add_action( 'template_redirect', array( $this, 'template_redirect' ) );
-
 		$this->load_cpts();
 		$this->load_displays();
 		$this->load_taxonomies();

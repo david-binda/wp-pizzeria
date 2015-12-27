@@ -48,7 +48,6 @@ class WP_Pizzeria_Dessert_Display {
 		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">' . __( '#', 'wp_pizzeria' ) . '</th>';
 		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">' . __( 'Title', 'wp_pizzeria' ) . '</th>';
 		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">' . __( 'Description', 'wp_pizzeria' ) . '</th>';
-		//$table_footer_header .= "\n\t\t\t" . '<th class="col4 thumb">'.__('Image', 'wp_pizzeria').'</th>';
 		$table_footer_header .= "\n\t\t\t" . '<th class="col5 price">' . __( 'Price', 'wp_pizzeria' ) . '</th>';
 		$table_footer_header .= "\n\t\t</tr>";
 		$output .= $table_footer_header;

@@ -98,9 +98,6 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 						<?php
 						$tags = get_terms( 'wp_pizzeria_ingredient', array( 'hide_empty' => 0 ) );
 						foreach ( $tags as $key => $tag ) {
-							/*if ( 'edit' == 'view' )
-								$link = get_edit_tag_link( $tag->term_id, 'wp_pizzeria_ingredient' );
-							else*/
 							$link = get_term_link( intval( $tag->term_id ), 'wp_pizzeria_ingredient' );
 							if ( true === is_wp_error( $link ) ) {
 								return false;
@@ -116,9 +113,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 									<?php echo $tag->name; ?>
 								</label>
 								<a class="edit-ingredient hide-if-js" href="./edit-tags.php?action=edit&taxonomy=wp_pizzeria_ingredient&tag_ID=<?php echo esc_attr( $tag->term_id ); ?>&post_type=wp_pizzeria_pizza"><?php _e( 'Edit', 'wp_pizzeria' ); ?></a>
-								<?php /* if (!pizza_ingredient_has_picture($tag->term_id)) : */ ?>
 								<a class="add-ingredient-image hide-if-js" href="#"><?php _e( 'Add image', 'wp_pizzeria' ); ?></a>
-								<?php /* endif; */ ?>
 							</li>
 						<?php
 						}
@@ -129,11 +124,6 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 							$('.tag-ingredient').live('mouseover mouseout', function () {
 								$(this).children('a').toggle();
 							});
-							/*
-							 $('.add-ingredient-image').live('click', function(){
-							 //add input for image upload with ajax
-							 });
-							 */
 						});
 					</script>
 				</div>

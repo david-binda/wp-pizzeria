@@ -66,7 +66,6 @@ class WP_Pizzeria_Pizza_Display {
 		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">' . __( '#', 'wp_pizzeria' ) . '</th>';
 		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">' . __( 'Title', 'wp_pizzeria' ) . '</th>';
 		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">' . __( 'Description', 'wp_pizzeria' ) . '</th>';
-		//$table_footer_header .= "\n\t\t\t" . '<th class="col4 thumb">'.__('Image', 'wp_pizzeria').'</th>';
 		$table_footer_header .= "\n\t\t\t" . '<th class="col5 ingrediences">' . __( 'Ingrediences', 'wp_pizzeria' ) . '</th>';
 		if ( is_array( $pizzeria_settings['sizes'] ) ) {
 			$i = 6;
@@ -78,7 +77,6 @@ class WP_Pizzeria_Pizza_Display {
 				$i ++;
 			}
 		}
-		//$table_footer_header .= "\n\t\t\t" . '<th class="col'.$i.' add-to-cart">'.__('Add to cart', 'wp_pizzeria').'</th>';
 		$table_footer_header .= "\n\t\t</tr>";
 		$output .= $table_footer_header;
 		$output .= "\n\t</thead>\n\t<tfoot>";
@@ -111,7 +109,6 @@ class WP_Pizzeria_Pizza_Display {
 			$output .= get_the_post_thumbnail( get_the_ID(), 'wp_pizzeria_thumbnail' );
 			$output .= '</td>';
 			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . wp_kses_post( apply_filters( 'the_content', get_the_content() ) ) . '</div></td>';
-			//$output .= "\n\t\t\t" . '<td class="col4 thumb">' . get_the_post_thumbnail( get_the_ID(), 'wp_pizzeria_thumbnail' ) . '</td>';
 			$output .= "\n\t\t\t" . '<td class="col5 ingrediences">';
 
 			$ingrediences_array = array();
