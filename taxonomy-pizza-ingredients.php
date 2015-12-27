@@ -123,10 +123,9 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 				if ( true === is_wp_error( $link ) ) {
 					return false;
 				}
-				$checked = "";
 				?>
 				<label for="<?php echo esc_attr( $ingredient->name ); ?>">
-					<input type="checkbox" id="<?php echo esc_attr( $ingredient->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $ingredient->term_id ); ?>"<?php echo $checked; ?>/>
+					<input type="checkbox" id="<?php echo esc_attr( $ingredient->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $ingredient->term_id ); ?>"/>
 					<?php if ( true === array_key_exists( $ingredient->term_id, $ingredient_images ) ) : ?>
 						<img src="<?php echo esc_url( $ingredient_images[ $ingredient->term_id ] ); ?>" alt="<?php echo esc_attr( $ingredient->name ); ?>" />
 					<?php endif;

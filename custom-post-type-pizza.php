@@ -102,14 +102,10 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 							if ( true === is_wp_error( $link ) ) {
 								return false;
 							}
-							$checked = "";
-							if ( true === has_term( $tag->term_id, 'wp_pizzeria_ingredient' ) ) {
-								$checked = ' checked="checked"';
-							}
 							?>
 							<li class="popular-category tag-ingredient">
 								<label for="<?php echo $tag->name; ?>">
-									<input type="checkbox" id="<?php echo esc_attr( $tag->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $tag->term_id ); ?>"<?php echo $checked; ?>/>
+									<input type="checkbox" id="<?php echo esc_attr( $tag->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $tag->term_id ); ?>"<?php echo checked( has_term( $tag->term_id, 'wp_pizzeria_ingredient' ), true ); ?>/>
 									<?php echo $tag->name; ?>
 								</label>
 								<a class="edit-ingredient hide-if-js" href="./edit-tags.php?action=edit&taxonomy=wp_pizzeria_ingredient&tag_ID=<?php echo urlencode( $tag->term_id ); ?>&post_type=wp_pizzeria_pizza"><?php esc_html_e( 'Edit', 'wp_pizzeria' ); ?></a>
