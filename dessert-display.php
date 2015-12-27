@@ -29,10 +29,6 @@ class WP_Pizzeria_Dessert_Display {
 		), $atts ) );
 		$output = '';
 
-		/* Save original post*/
-		global $post;
-		$tmp_post = $post;
-
 		/* Loop all desserts */
 		$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
 		if ( ! array( $pizzeria_settings ) ) {
@@ -106,8 +102,7 @@ class WP_Pizzeria_Dessert_Display {
 		$output .= "\n\t</tbody>\n";
 		$output .= '</table>';
 
-		/* Restore original post */
-		$post = $tmp_post;
+		wp_reset_postdata();
 
 		return $output;
 	}
