@@ -75,27 +75,27 @@ class WP_Pizzeria_Pasta_Display {
 					$class .= ' ' . $category->slug;
 				}
 			}
-			$output .= "\n\t\t" . '<tr class="' . $class . '">';
+			$output .= "\n\t\t" . '<tr class="' . esc_attr( $class ) . '">';
 			global $post;
-			$output .= "\n\t\t\t" . '<td class="col1 menu-number">' . $post->menu_order . '</td>';
+			$output .= "\n\t\t\t" . '<td class="col1 menu-number">' . intval( $post->menu_order ) . '</td>';
 			$output .= "\n\t\t\t" . '<td class="col2 title">';
-			$output .= '<a href="#" class="pizza-title">' . get_the_title() . '</a>';
+			$output .= '<a href="#" class="pizza-title">' . esc_html( get_the_title() ) . '</a>';
 			$output .= get_the_post_thumbnail( get_the_ID(), 'wp_pizzeria_thumbnail' );
 			$output .= '</td>';
-			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . get_the_content() . '</div></td>';
+			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . wp_kses_post( get_the_content() ) . '</div></td>';
 			if ( false !== get_post_meta( $post->ID, '_wp_pizzeria_price', true ) ) {
 				$output .= "\n\t\t\t" . '<td class="col5 price">';
 				if ( true === array_key_exists( 'currency', $pizzeria_settings )
 				     && array_key_exists( 'currency_pos', $pizzeria_settings )
 				     && 'before' === $pizzeria_settings['currency_pos'] ) {
-					$output .= $pizzeria_settings['currency'];
+					$output .= esc_html( $pizzeria_settings['currency'] );
 				}
 				$output .= get_post_meta( $post->ID, '_wp_pizzeria_price', true );
 				if ( true === array_key_exists( 'currency', $pizzeria_settings )
 				     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 				          || 'after' === $pizzeria_settings['currency_pos'] )
 				) {
-					$output .= $pizzeria_settings['currency'];
+					$output .= esc_html( $pizzeria_settings['currency'] );
 				}
 				$output .= '</td>';
 			} else {
@@ -156,13 +156,13 @@ class WP_Pizzeria_Pasta_Display {
 						$odd = true;
 					}
 					foreach ( (array) $categories as $category ) {
-						echo ' ' . $category->slug;
+						echo ' ' . esc_attr( $category->slug );
 					} ?>">
 						<td class="col1 menu-number"><?php global $post;
-							echo $post->menu_order; ?></td>
-						<td class="col2 title"><a class="pizza-title" href="#"><?php the_title(); ?></a></td>
+							echo intval( $post->menu_order ); ?></td>
+						<td class="col2 title"><a class="pizza-title" href="#"><?php esc_html( get_the_title() ); ?></a></td>
 						<td class="col3 description hidden">
-							<div class="content"><?php the_content(); ?></div>
+							<div class="content"><?php wp_kses_post( apply_filters( 'the_content', get_the_content() ) ); ?></div>
 						</td>
 						<td class="col5 price">
 							<?php
@@ -171,14 +171,14 @@ class WP_Pizzeria_Pasta_Display {
 								     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 								     && 'after' === $pizzeria_settings['currency_pos']
 								) {
-									echo $pizzeria_settings['currency'];
+									echo esc_html( $pizzeria_settings['currency'] );
 								}
 								echo get_post_meta( get_the_ID(), '_wp_pizzeria_price', true );
 								if ( true === array_key_exists( 'currency', $pizzeria_settings )
 								     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 								          || 'after' === $pizzeria_settings['currency_pos'] )
 								) {
-									echo $pizzeria_settings['currency'];
+									echo esc_html( $pizzeria_settings['currency'] );
 								}
 							}
 							?>

@@ -90,7 +90,7 @@ Class WP_Pizzeria_Pasta extends CPT_Factory {
 			           && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 			           && 'before' === $pizzeria_settings['currency_pos']
 			) {
-				echo $pizzeria_settings['currency'];
+				echo esc_html( $pizzeria_settings['currency'] );
 			} ?>
 			<input type="text" id="pasta_price" name="pasta_price" value="<?php echo $price; ?>" />
 			<?php
@@ -98,7 +98,7 @@ Class WP_Pizzeria_Pasta extends CPT_Factory {
 			     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 			          || 'after' === $pizzeria_settings['currency_pos'] )
 			) {
-				echo $pizzeria_settings['currency'];
+				echo esc_html( $pizzeria_settings['currency'] );
 			}
 			?>
 		</p>

@@ -37,10 +37,10 @@ class WP_Pizzeria_Pizza_Display {
 			foreach ( $ingrediences as $ingredience ) {
 				$output .= '<li>';
 				if ( true === array_key_exists( $ingredience->term_id, (array) $ingredient_images ) ) {
-					$output .= '<span class="pizza-image-wrapper"><img src="' . $ingredient_images[ $ingredience->term_id ] . '" alt="' . $ingredience->name . '"/></span>';
+					$output .= '<span class="pizza-image-wrapper"><img src="' . esc_url( $ingredient_images[ $ingredience->term_id ] ) . '" alt="' . esc_attr( $ingredience->name ) . '"/></span>';
 				}
-				$output .= '<input type="checkbox" value="' . $ingredience->term_id . '" name="ingredienceFilter[' . $ingredience->slug . ']" id="ingredienceFilter[' . $ingredience->slug . ']" class="' . $ingredience->slug . '">';
-				$output .= '<label for="ingredienceFilter[' . $ingredience->slug . ']">' . $ingredience->name . '</label>';
+				$output .= '<input type="checkbox" value="' . intval( $ingredience->term_id ) . '" name="ingredienceFilter[' . esc_attr( $ingredience->slug ) . ']" id="ingredienceFilter[' . esc_attr( $ingredience->slug ) . ']" class="' . esc_attr( $ingredience->slug ) . '">';
+				$output .= '<label for="ingredienceFilter[' . esc_attr( $ingredience->slug ) . ']">' . esc_html( $ingredience->name ) . '</label>';
 				$output .= '</li>';
 			}
 			$output .= '</ul>';
@@ -78,7 +78,7 @@ class WP_Pizzeria_Pizza_Display {
 				if ( $key == 'primary' ) {
 					continue;
 				}
-				$table_footer_header .= "\n\t\t\t" . '<th class="col' . $i . ' ' . $key . '">' . $size . '</th>';
+				$table_footer_header .= "\n\t\t\t" . '<th class="col' . intval( $i ) . ' ' . esc_attr( $key ) . '">' . esc_html( $size ) . '</th>';
 				$i ++;
 			}
 		}
@@ -104,17 +104,17 @@ class WP_Pizzeria_Pizza_Display {
 					$class .= ' ' . $ingredience->slug;
 				}
 			}
-			$output .= "\n\t\t" . '<tr class="' . $class . '">';
+			$output .= "\n\t\t" . '<tr class="' . esc_attr( $class ) . '">';
 			global $post;
 			extract( shortcode_atts( array(
 				'cat' => 'wp_pizzeria_nocat',
 			), $atts ) );
-			$output .= "\n\t\t\t" . '<td class="col1 menu-number">' . $post->menu_order . '</td>';
+			$output .= "\n\t\t\t" . '<td class="col1 menu-number">' . intval( $post->menu_order ) . '</td>';
 			$output .= "\n\t\t\t" . '<td class="col2 title">';
-			$output .= '<a href="#" class="pizza-title">' . get_the_title() . '</a>';
+			$output .= '<a href="#" class="pizza-title">' . esc_html( get_the_title() ) . '</a>';
 			$output .= get_the_post_thumbnail( get_the_ID(), 'wp_pizzeria_thumbnail' );
 			$output .= '</td>';
-			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . apply_filters( 'the_content', get_the_content() ) . '</div></td>';
+			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . wp_kses_post( apply_filters( 'the_content', get_the_content() ) ) . '</div></td>';
 			//$output .= "\n\t\t\t" . '<td class="col4 thumb">' . get_the_post_thumbnail( get_the_ID(), 'wp_pizzeria_thumbnail' ) . '</td>';
 			$output .= "\n\t\t\t" . '<td class="col5 ingrediences">';
 
@@ -144,7 +144,7 @@ class WP_Pizzeria_Pizza_Display {
 							$output .= $pizzeria_settings['currency'];
 						}
 						$output .= $prices[ $key ];
-						if ( true ==== array_key_exists( 'currency', $pizzeria_settings )
+						if ( true === array_key_exists( 'currency', $pizzeria_settings )
 						               && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 						                    || 'after' === $pizzeria_settings['currency_pos'] )
 						) {

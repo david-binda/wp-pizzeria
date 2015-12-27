@@ -74,21 +74,21 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 	$page_links = paginate_links( array(
 		'base' => add_query_arg(
 			array(
-				$post_type_name . '-tab' => 'all',
+				rawurlencode( $post_type_name  ) . '-tab' => 'all',
 				'paged' => '%#%',
 				'item-type' => 'post_type',
-				'item-object' => $post_type_name,
+				'item-object' => rawurlencode( $post_type_name ),
 			)
 		),
 		'format' => '',
 		'prev_text' => esc_html__('&laquo;'),
 		'next_text' => esc_html__('&raquo;'),
-		'total' => $num_pages,
-		'current' => $pagenum
+		'total' => intval( $num_pages ),
+		'current' => intval( $pagenum )
 	));
 
 	if ( true === empty( $posts ) ) {
-		$error = '<li id="error">' . $post_type['args']->labels->not_found . '</li>';
+		$error = '<li id="error">' . esc_html( $post_type['args']->labels->not_found ) . '</li>';
 	}
 
 	$db_fields = false;
@@ -120,15 +120,15 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 	?>
 	<div id="posttype-<?php echo $post_type_name; ?>" class="posttypediv">
 		<ul id="posttype-<?php echo $post_type_name; ?>-tabs" class="posttype-tabs add-menu-item-tabs">
-			<li <?php echo ( 'most-recent' == $current_tab ? ' class="tabs"' : '' ); ?>><a class="nav-tab-link" href="<?php if ( $nav_menu_selected_id ) echo esc_url(add_query_arg($post_type_name . '-tab', 'most-recent', remove_query_arg($removed_args))); ?>#tabs-panel-posttype-<?php echo $post_type_name; ?>-most-recent"><?php _e('Most Recent'); ?></a></li>
-			<li <?php echo ( 'all' == $current_tab ? ' class="tabs"' : '' ); ?>><a class="nav-tab-link" href="<?php if ( $nav_menu_selected_id ) echo esc_url(add_query_arg($post_type_name . '-tab', 'all', remove_query_arg($removed_args))); ?>#<?php echo $post_type_name; ?>-all"><?php _e('View All'); ?></a></li>
-			<li <?php echo ( 'search' == $current_tab ? ' class="tabs"' : '' ); ?>><a class="nav-tab-link" href="<?php if ( $nav_menu_selected_id ) echo esc_url(add_query_arg($post_type_name . '-tab', 'search', remove_query_arg($removed_args))); ?>#tabs-panel-posttype-<?php echo $post_type_name; ?>-search"><?php _e('Search'); ?></a></li>
+			<li <?php echo ( 'most-recent' == $current_tab ? ' class="tabs"' : '' ); ?>><a class="nav-tab-link" href="<?php if ( $nav_menu_selected_id ) echo esc_url( add_query_arg($post_type_name . '-tab', 'most-recent', remove_query_arg($removed_args) ) ); ?>#tabs-panel-posttype-<?php echo esc_attr( $post_type_name ); ?>-most-recent"><?php _e('Most Recent'); ?></a></li>
+			<li <?php echo ( 'all' == $current_tab ? ' class="tabs"' : '' ); ?>><a class="nav-tab-link" href="<?php if ( $nav_menu_selected_id ) echo esc_url( add_query_arg($post_type_name . '-tab', 'all', remove_query_arg($removed_args) ) ); ?>#<?php echo $post_type_name; ?>-all"><?php _e('View All'); ?></a></li>
+			<li <?php echo ( 'search' == $current_tab ? ' class="tabs"' : '' ); ?>><a class="nav-tab-link" href="<?php if ( $nav_menu_selected_id ) echo esc_url( add_query_arg($post_type_name . '-tab', 'search', remove_query_arg($removed_args) ) ); ?>#tabs-panel-posttype-<?php echo esc_attr( $post_type_name ); ?>-search"><?php _e('Search'); ?></a></li>
 		</ul>
 
 		<div id="tabs-panel-posttype-<?php echo $post_type_name; ?>-most-recent" class="tabs-panel <?php
 			echo ( 'most-recent' == $current_tab ? 'tabs-panel-active' : 'tabs-panel-inactive' );
 		?>">
-			<ul id="<?php echo $post_type_name; ?>checklist-most-recent" class="categorychecklist form-no-clear">
+			<ul id="<?php echo esc_attr( $post_type_name ); ?>checklist-most-recent" class="categorychecklist form-no-clear">
 
 				<?php
 					$post_type = get_post_type_object( $post_type_name ); 
@@ -159,7 +159,7 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 		?>" id="tabs-panel-posttype-<?php echo $post_type_name; ?>-search">
 			<?php
 			if ( true === isset( $_REQUEST['quick-search-posttype-' . $post_type_name] ) ) {
-				$searched = esc_attr( $_REQUEST['quick-search-posttype-' . $post_type_name] );
+				$searched = sanitize_text_field( $_REQUEST['quick-search-posttype-' . $post_type_name] );
 				$search_results = get_posts( array( 's' => $searched, 'post_type' => $post_type_name, 'fields' => 'all', 'order' => 'DESC', ) );
 			} else {
 				$searched = '';
@@ -167,9 +167,9 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 			}
 			?>
 			<p class="quick-search-wrap">
-				<input type="search" class="quick-search input-with-default-title" title="<?php esc_attr_e('Search'); ?>" value="<?php echo $searched; ?>" name="quick-search-posttype-<?php echo $post_type_name; ?>" />
+				<input type="search" class="quick-search input-with-default-title" title="<?php esc_attr_e('Search'); ?>" value="<?php echo esc_attr( $searched ); ?>" name="quick-search-posttype-<?php echo esc_attr( $post_type_name ); ?>" />
 				<span class="spinner"></span>
-				<?php submit_button( __( 'Search' ), 'button-small quick-search-submit button-secondary hide-if-js', 'submit', false, array( 'id' => 'submit-quick-search-posttype-' . $post_type_name ) ); ?>
+				<?php submit_button( __( 'Search' ), 'button-small quick-search-submit button-secondary hide-if-js', 'submit', false, array( 'id' => 'submit-quick-search-posttype-' . esc_attr( $post_type_name ) ) ); ?>
 			</p>
 
 			<ul id="<?php echo $post_type_name; ?>-search-checklist" data-wp-lists="list:<?php echo $post_type_name?>" class="categorychecklist form-no-clear">
@@ -178,9 +178,9 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 				$args['walker'] = $walker;
 				echo walk_nav_menu_tree( array_map('wp_setup_nav_menu_item', $search_results), 0, (object) $args );
 				?>
-			<?php elseif ( true === is_wp_error( $search_results ) ) { ?>
-				<li><?php echo $search_results->get_error_message(); ?></li>
-			<?php elseif ( false === empty( $searched ) ) { ?>
+			<?php } elseif ( true === is_wp_error( $search_results ) ) { ?>
+				<li><?php echo esc_html( $search_results->get_error_message() ); ?></li>
+			<?php } elseif ( false === empty( $searched ) ) { ?>
 				<li><?php _e('No results found.'); ?></li>
 			<?php } ?>
 			</ul>
@@ -235,7 +235,7 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 			</ul>
 			<?php if ( false === empty( $page_links ) ) { ?>
 				<div class="add-menu-item-pagelinks">
-					<?php echo $page_links; ?>
+					<?php echo wp_kses_post( $page_links ); ?>
 				</div>
 			<?php } ?>
 		</div><!-- /.tabs-panel -->
@@ -245,16 +245,16 @@ function wp_pizzeria_nav_menu_item_post_type_meta_box( $object, $post_type ) {
 				<a href="<?php
 					echo esc_url(add_query_arg(
 						array(
-							$post_type_name . '-tab' => 'all',
+							rawurlencode( $post_type_name ) . '-tab' => 'all',
 							'selectall' => 1,
 						),
 						remove_query_arg($removed_args)
 					));
-				?>#posttype-<?php echo $post_type_name; ?>" class="select-all"><?php _e('Select All'); ?></a>
+				?>#posttype-<?php echo esc_attr( $post_type_name ); ?>" class="select-all"><?php _e('Select All'); ?></a>
 			</span>
 
 			<span class="add-to-menu">
-				<input type="submit"<?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e('Add to Menu'); ?>" name="add-post-type-menu-item" id="submit-posttype-<?php echo $post_type_name; ?>" />
+				<input type="submit"<?php disabled( $nav_menu_selected_id, 0 ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e('Add to Menu'); ?>" name="add-post-type-menu-item" id="submit-posttype-<?php echo esc_attr( $post_type_name ); ?>" />
 				<span class="spinner"></span>
 			</span>
 		</p>
@@ -268,7 +268,7 @@ add_filter( 'wp_get_nav_menu_items', 'wp_pizzeria_archive_menu_filter', 10, 1 );
 function wp_pizzeria_archive_menu_filter( $items ) {
 
  	foreach( $items as &$item ) {
-   		if ( 'cpt-archive' !=== $item->object ) {
+   		if ( 'cpt-archive' !== $item->object ) {
 		    continue;
 	    }
    		$item->url = get_post_type_archive_link( $item->type );

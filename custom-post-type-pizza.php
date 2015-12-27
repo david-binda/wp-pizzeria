@@ -112,10 +112,10 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 							?>
 							<li class="popular-category tag-ingredient">
 								<label for="<?php echo $tag->name; ?>">
-									<input type="checkbox" id="<?php echo $tag->name; ?>" name="wp_pizzeria_ingredients[]" value="<?php echo $tag->term_id; ?>"<?php echo $checked; ?>/>
+									<input type="checkbox" id="<?php echo esc_attr( $tag->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $tag->term_id ); ?>"<?php echo $checked; ?>/>
 									<?php echo $tag->name; ?>
 								</label>
-								<a class="edit-ingredient hide-if-js" href="./edit-tags.php?action=edit&taxonomy=wp_pizzeria_ingredient&tag_ID=<?php echo $tag->term_id; ?>&post_type=wp_pizzeria_pizza"><?php _e( 'Edit', 'wp_pizzeria' ); ?></a>
+								<a class="edit-ingredient hide-if-js" href="./edit-tags.php?action=edit&taxonomy=wp_pizzeria_ingredient&tag_ID=<?php echo esc_attr( $tag->term_id ); ?>&post_type=wp_pizzeria_pizza"><?php _e( 'Edit', 'wp_pizzeria' ); ?></a>
 								<?php /* if (!pizza_ingredient_has_picture($tag->term_id)) : */ ?>
 								<a class="add-ingredient-image hide-if-js" href="#"><?php _e( 'Add image', 'wp_pizzeria' ); ?></a>
 								<?php /* endif; */ ?>
@@ -178,7 +178,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					<?php if ( $pizzeria_settings['sizes']['primary'] === $key ) {
 						echo '<strong>';
 					} ?>
-					<label for="<?php echo $key; ?>_price"><?php _e( 'Price for', 'wp_pizzeria' ); ?> <?php echo $size; ?>:</label>
+					<label for="<?php echo $key; ?>_price"><?php _e( 'Price for', 'wp_pizzeria' ); ?> <?php echo esc_html( $size ); ?>:</label>
 					<?php if ( $pizzeria_settings['sizes']['primary'] === $key ) {
 						echo '</strong>';
 					} ?>
@@ -191,15 +191,15 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 						echo $pizzeria_settings['currency'];
 					}
 					?>
-					<input type="text" name="<?php echo $key; ?>_price" value="<?php if ( array_key_exists( $key, $prices ) ) {
-						echo $prices[ $key ];
+					<input type="text" name="<?php echo esc_attr( $key ); ?>_price" value="<?php if ( array_key_exists( $key, $prices ) ) {
+						echo esc_attr( $prices[ $key ] );
 					} ?>" />
 					<?php
 					if ( true === array_key_exists( 'currency', $pizzeria_settings )
 					     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 					          || 'after' === $pizzeria_settings['currency_pos'] )
 					) {
-						echo $pizzeria_settings['currency'];
+						echo esc_html( $pizzeria_settings['currency'] );
 					}
 					?>
 				</p>
@@ -315,7 +315,8 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			case 'menu_number' :
 				global $wpdb;
 				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d ", $post_id ) );
-				echo $menu_id;
+				//TODO: check return value
+				echo intval( $menu_id );
 				break;
 			case 'category' :
 				$terms = get_the_terms( $post_id, 'wp_pizzeria_category' );
@@ -323,8 +324,8 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					$out = array();
 					foreach ( $terms as $term ) {
 						$out[] = sprintf( '<a href="%s">%s</a>',
-							esc_url( add_query_arg( array( 'post_type'            => $post->post_type,
-							                               'wp_pizzeria_category' => $term->slug
+							esc_url( add_query_arg( array( 'post_type'            => rawurlencode( $post->post_type ),
+							                               'wp_pizzeria_category' => rawurlencode( $term->slug )
 									), 'edit.php' ) ),
 							esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, 'wp_pizzeria_category', 'display' ) )
 						);
@@ -341,8 +342,8 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					$out = array();
 					foreach ( $terms as $term ) {
 						$out[] = sprintf( '<a href="%s">%s</a>',
-							esc_url( add_query_arg( array( 'post_type'              => $post->post_type,
-							                               'wp_pizzeria_ingredient' => $term->slug
+							esc_url( add_query_arg( array( 'post_type'              => rawurlencode( $post->post_type ),
+							                               'wp_pizzeria_ingredient' => rawurlencode( $term->slug )
 									), 'edit.php' ) ),
 							esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, 'wp_pizzeria_ingredient', 'display' ) )
 						);
@@ -371,14 +372,14 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 				     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 				     && 'before' === $pizzeria_settings['currency_pos']
 				) {
-					echo $pizzeria_settings['currency'];
+					echo esc_html( $pizzeria_settings['currency'] );
 				}
 				echo $prices[ $column ];
 				if ( true === array_key_exists( 'currency', $pizzeria_settings )
 				     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 				          || 'after' === $pizzeria_settings['currency_pos'] )
 				) {
-					echo $pizzeria_settings['currency'];
+					echo esc_html( $pizzeria_settings['currency'] );
 				}
 			}
 		}

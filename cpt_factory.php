@@ -50,7 +50,7 @@ abstract class CPT_Factory {
 			$edit_url = add_query_arg( array( 'post_type' => $this->post_type ), admin_url( 'edit.php' ) );
 			$text = sprintf( '<a href="%s">%d %s</a>', $edit_url, $num, $text );
 		}
-		echo sprintf( '<li class="t %s">%s</li>', $this->post_type, $text );
+		echo sprintf( '<li class="t %s">%s</li>', esc_attr( $this->post_type ), esc_html( $text ) );
 
 	}
 
@@ -74,7 +74,8 @@ abstract class CPT_Factory {
 			case 'menu_number' :
 				global $wpdb;
 				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d LIMIT 1", $post_id ) );
-				echo $menu_id;
+				//TODO: check return value
+				echo intval( $menu_id );
 				break;
 			case 'category' :
 				$terms = get_the_terms( $post_id, $this->post_type . '_category' );
@@ -104,7 +105,7 @@ abstract class CPT_Factory {
 					     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 					     && 'before' === $pizzeria_settings['currency_pos'] )
 					{
-						echo $pizzeria_settings['currency'];
+						echo esc_html( $pizzeria_settings['currency'] );
 					}
 					echo get_post_meta( $post_id, '_wp_pizzeria_price', true );
 
@@ -112,7 +113,7 @@ abstract class CPT_Factory {
 					     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 					          || 'after' === $pizzeria_settings['currency_pos'] )
 					) {
-						echo $pizzeria_settings['currency'];
+						echo esc_html( $pizzeria_settings['currency'] );
 					}
 				} else {
 					echo '';
