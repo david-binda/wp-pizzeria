@@ -118,7 +118,7 @@ class WP_Pizzeria_Pizza_Display {
 			foreach ( $ingrediences as $ingredience ) {
 				$ingrediences_array[] = $ingredience->name;
 			}
-			$output .= implode( ', ', $ingrediences_array );
+			$output .= esc_html( implode( ', ', $ingrediences_array ) );
 			$output .= "\n\t\t\t" . '</td>';
 			/* manage prices */
 			unset( $prices );
@@ -266,15 +266,7 @@ class WP_Pizzeria_Pizza_Display {
 							foreach ( $ingrediences as $ingredience ) {
 								$ingrediences_array[] = $ingredience->name;
 							}
-							echo implode( ', ', $ingrediences_array ); /* ?>
-					<ul>
-						<?php foreach ($ingrediences as $ingredience): ?>
-						<li>
-							<?php //<label for="ingrediences[<?php echo $ingredience->slug; ?>]"><input type="checkbox" id="ingrediences[<?php echo $ingredience->slug; ?>]" name="ingrediences[<?php echo $ingredience->slug; ?>]" value="4" class="wp-pizzeria-ingredience <?php echo $ingredience->slug; ?>"><?php echo $ingredience->name; ?></label> ?>
-							<?php echo $ingredience->name; ?>
-						</li>
-						<?php endforeach; ?>
-					</ul> */
+							echo esc_html( implode( ', ', $ingrediences_array ) );
 							?>
 						</td>
 						<?php
