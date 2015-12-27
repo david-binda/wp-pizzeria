@@ -63,10 +63,10 @@ class WP_Pizzeria_Pizza_Display {
 		$pizzas = new WP_Query( $args );
 		$output .= '<table class="wp-pizzeria pizzas">' . "\n\t<thead>";
 		$table_footer_header = "\n\t\t<tr>";
-		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">' . __( '#', 'wp_pizzeria' ) . '</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">' . __( 'Title', 'wp_pizzeria' ) . '</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">' . __( 'Description', 'wp_pizzeria' ) . '</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col5 ingrediences">' . __( 'Ingrediences', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">' . esc_html__( '#', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">' . esc_html__( 'Title', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">' . esc_html__( 'Description', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col5 ingrediences">' . esc_html__( 'Ingrediences', 'wp_pizzeria' ) . '</th>';
 		if ( is_array( $pizzeria_settings['sizes'] ) ) {
 			$i = 6;
 			foreach ( $pizzeria_settings['sizes'] as $key => $size ) {
@@ -184,15 +184,15 @@ class WP_Pizzeria_Pizza_Display {
 								<?php
 								if ( true === array_key_exists( $ingredience->term_id, (array) $ingredient_images ) ) { ?>
 									<span class="pizza-image-wrapper"><img
-											src="<?php echo $ingredient_images[ $ingredience->term_id ]; ?>"
-											alt="<?php echo $ingredience->name; ?>"/></span>
+											src="<?php echo esc_attr( $ingredient_images[ $ingredience->term_id ] ); ?>"
+											alt="<?php echo esc_attr( $ingredience->name ); ?>"/></span>
 								<?php } ?>
-								<input type="checkbox" value="<?php echo $ingredience->term_id; ?>"
-								       name="ingredienceFilter[<?php echo $ingredience->slug; ?>]"
-								       id="ingredienceFilter[<?php echo $ingredience->slug; ?>]"
-								       class="<?php echo $ingredience->slug; ?>">
+								<input type="checkbox" value="<?php echo esc_attr( $ingredience->term_id ); ?>"
+								       name="ingredienceFilter[<?php echo esc_attr( $ingredience->slug ); ?>]"
+								       id="ingredienceFilter[<?php echo esc_attr( $ingredience->slug ); ?>]"
+								       class="<?php echo esc_attr( $ingredience->slug ); ?>">
 								<label
-									for="ingredienceFilter[<?php echo $ingredience->slug; ?>]"><?php echo $ingredience->name; ?></label>
+									for="ingredienceFilter[<?php echo esc_attr( $ingredience->slug ); ?>]"><?php echo esc_html( $ingredience->name ); ?></label>
 							</li>
 						<?php endforeach; ?>
 					</ul>
@@ -202,16 +202,16 @@ class WP_Pizzeria_Pizza_Display {
 				<thead>
 				<tr>
 					<th class="col1 menu-number">#</th>
-					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
-					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
-					<th class="col5 ingrediences"><?php _e( 'Ingrediences', 'wp_pizzeria' ); ?></th>
+					<th class="col2 title"><?php esc_html_e( 'Title', 'wp_pizzeria' ); ?></th>
+					<th class="col3 description hidden"><?php esc_html_e( 'Description', 'wp_pizzeria' ); ?></th>
+					<th class="col5 ingrediences"><?php esc_html_e( 'Ingrediences', 'wp_pizzeria' ); ?></th>
 					<?php if ( true === is_array( $pizzeria_settings['sizes'] ) ) {
 						$i = 6;
 						foreach ( $pizzeria_settings['sizes'] as $key => $size ) {
 							if ( 'primary' === $key ) {
 								continue;
 							} ?>
-							<th class="col<?php echo $i; ?> <?php echo $key; ?>"><?php echo $size; ?></th>
+							<th class="col<?php echo intval( $i ); ?> <?php echo esc_attr( $key ); ?>"><?php echo esc_html( $size ); ?></th>
 							<?php
 							$i ++;
 						}
@@ -221,16 +221,16 @@ class WP_Pizzeria_Pizza_Display {
 				<tfoot>
 				<tr>
 					<th class="col1 menu-number">#</th>
-					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
-					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
-					<th class="col5 ingrediences"><?php _e( 'Ingrediences', 'wp_pizzeria' ); ?></th>
+					<th class="col2 title"><?php esc_html_e( 'Title', 'wp_pizzeria' ); ?></th>
+					<th class="col3 description hidden"><?php esc_html_e( 'Description', 'wp_pizzeria' ); ?></th>
+					<th class="col5 ingrediences"><?php esc_html_e( 'Ingrediences', 'wp_pizzeria' ); ?></th>
 					<?php if ( is_array( $pizzeria_settings['sizes'] ) ) {
 						$i = 6;
 						foreach ( $pizzeria_settings['sizes'] as $key => $size ) {
 							if ( $key == 'primary' ) {
 								continue;
 							} ?>
-							<th class="col<?php echo $i; ?> <?php echo $key; ?>"><?php echo $size; ?></th>
+							<th class="col<?php echo intval( $i ); ?> <?php echo esc_attr( $key ); ?>"><?php echo esc_html( $size ); ?></th>
 							<?php
 							$i ++;
 						}
@@ -241,7 +241,7 @@ class WP_Pizzeria_Pizza_Display {
 				<?php $odd = true;
 				while ( true === have_posts() ) { the_post();
 					$ingrediences = wp_get_post_terms( get_the_ID(), 'wp_pizzeria_ingredient' ); ?>
-					<tr class="pizza<?php if ( $odd ) {
+					<tr class="pizza<?php if ( true === $odd ) {
 						echo ' odd ';
 						$odd = false;
 					} else {
@@ -249,13 +249,13 @@ class WP_Pizzeria_Pizza_Display {
 						$odd = true;
 					}
 					foreach ( $ingrediences as $ingredience ) {
-						echo ' ' . $ingredience->slug;
+						echo ' ' . esc_attr( $ingredience->slug );
 					} ?>">
 						<td class="col1 menu-number"><?php global $post;
 							echo $post->menu_order; ?></td>
-						<td class="col2 title"><a class="pizza-title" href="#"><?php the_title(); ?></a></td>
+						<td class="col2 title"><a class="pizza-title" href="#"><?php echo esc_html( get_the_title() ); ?></a></td>
 						<td class="col3 description hidden">
-							<div class="content"><?php the_content(); ?></div>
+							<div class="content"><?php echo wp_kses_post( apply_filters( 'the_content', get_the_content() ); ?></div>
 						</td>
 						<td class="col5 ingrediences">
 							<?php
@@ -278,21 +278,21 @@ class WP_Pizzeria_Pizza_Display {
 								if ( 'primary' === $key ) {
 									continue;
 								} ?>
-								<td class="col<?php echo $i; ?> price <?php echo $key; ?>">
+								<td class="col<?php echo intval( $i ); ?> price <?php echo esc_attr( $key ); ?>">
 									<?php
 									if ( array_key_exists( $key, $prices ) ) {
 										if ( true === array_key_exists( 'currency', $pizzeria_settings )
 										     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 										     && 'before' === $pizzeria_settings['currency_pos']
 										) {
-											echo $pizzeria_settings['currency'];
+											echo esc_html( $pizzeria_settings['currency'] );
 										}
 										echo $prices[ $key ];
 										if ( true === array_key_exists( 'currency', $pizzeria_settings )
 										     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
 										          || 'after' === $pizzeria_settings['currency_pos'] )
 										) {
-											echo $pizzeria_settings['currency'];
+											echo esc_html( $pizzeria_settings['currency'] );
 										}
 									} ?>
 								</td>

@@ -58,11 +58,11 @@ abstract class CPT_Factory {
 
 		$columns = array(
 			'cb'          => '<input type="checkbox" />',
-			'menu_number' => strip_tags( __( '#', 'wp_pizzeria' ) ),
-			'title'       => strip_tags( __( 'Title' ) ),
-			'category'    => strip_tags( __( 'Category', 'wp_pizzeria' ) ),
-			'price'       => strip_tags( __( 'Price', 'wp_pizzeria' ) ),
-			'date'        => strip_tags( __( 'Date' ) )
+			'menu_number' => strip_tags( esc_html__( '#', 'wp_pizzeria' ) ),
+			'title'       => strip_tags( esc_html__( 'Title' ) ),
+			'category'    => strip_tags( esc_html__( 'Category', 'wp_pizzeria' ) ),
+			'price'       => strip_tags( esc_html__( 'Price', 'wp_pizzeria' ) ),
+			'date'        => strip_tags( esc_html__( 'Date', 'wp_pizzeria' ) ),
 		);
 
 		return $columns;
@@ -73,7 +73,7 @@ abstract class CPT_Factory {
 		switch ( $column ) {
 			case 'menu_number' :
 				global $wpdb;
-				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d LIMIT 1", $post_id ) );
+				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d LIMIT 1", intval( $post_id ) ) );
 				//TODO: check return value
 				echo intval( $menu_id );
 				break;
@@ -85,8 +85,8 @@ abstract class CPT_Factory {
 						$out[] = sprintf( '<a href="%s">%s</a>',
 							esc_url(
 								add_query_arg( array(
-									'post_type' => $post->post_type,
-									$this->post_type . '_category' => $term->slug
+									'post_type' => rawurlencode( $post->post_type ),
+									$this->post_type . '_category' => rawurlencode( $term->slug )
 								) , 'edit.php' )
 							),
 							esc_html( sanitize_term_field( 'name', $term->name, $term->term_id, $this->post_type . '_category', 'display' ) )
@@ -94,7 +94,7 @@ abstract class CPT_Factory {
 					}
 					echo join( ', ', $out );
 				} else {
-					_e( 'No Categories', 'wp_pizzeria' );
+					esc_html_e( 'No Categories', 'wp_pizzeria' );
 				}
 				break;
 

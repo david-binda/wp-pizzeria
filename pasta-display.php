@@ -45,10 +45,10 @@ class WP_Pizzeria_Pasta_Display {
 		$pizzas = new WP_Query( $args );
 		$output .= '<table class="wp-pizzeria pasta">' . "\n\t<thead>";
 		$table_footer_header = "\n\t\t<tr>";
-		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">' . __( '#', 'wp_pizzeria' ) . '</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">' . __( 'Title', 'wp_pizzeria' ) . '</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">' . __( 'Description', 'wp_pizzeria' ) . '</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col5 price">' . __( 'Price', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">' . esc_html__( '#', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">' . esc_html__( 'Title', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">' . esc_html__( 'Description', 'wp_pizzeria' ) . '</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col5 price">' . esc_html__( 'Price', 'wp_pizzeria' ) . '</th>';
 		$table_footer_header .= "\n\t\t</tr>";
 		$output .= $table_footer_header;
 		$output .= "\n\t</thead>\n\t<tfoot>";
@@ -67,7 +67,7 @@ class WP_Pizzeria_Pasta_Display {
 			}
 			if ( false === empty( $categories ) ) {
 				foreach ( $categories as $category ) {
-					$class .= ' ' . $category->slug;
+					$class .= ' ' . esc_attr( $category->slug );
 				}
 			}
 			$output .= "\n\t\t" . '<tr class="' . esc_attr( $class ) . '">';
@@ -124,17 +124,17 @@ class WP_Pizzeria_Pasta_Display {
 				<thead>
 				<tr>
 					<th class="col1 menu-number">#</th>
-					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
-					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
-					<th class="col5 price"><?php _e( 'Price', 'wp_pizzeria' ); ?></th>
+					<th class="col2 title"><?php esc_html_e( 'Title', 'wp_pizzeria' ); ?></th>
+					<th class="col3 description hidden"><?php esc_html_e( 'Description', 'wp_pizzeria' ); ?></th>
+					<th class="col5 price"><?php esc_html_e( 'Price', 'wp_pizzeria' ); ?></th>
 				</tr>
 				</thead>
 				<tfoot>
 				<tr>
 					<th class="col1 menu-number">#</th>
-					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
-					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
-					<th class="col5 price"><?php _e( 'Price', 'wp_pizzeria' ); ?></th>
+					<th class="col2 title"><?php esc_html_e( 'Title', 'wp_pizzeria' ); ?></th>
+					<th class="col3 description hidden"><?php esc_html_e( 'Description', 'wp_pizzeria' ); ?></th>
+					<th class="col5 price"><?php esc_html_e( 'Price', 'wp_pizzeria' ); ?></th>
 				</tr>
 				</tfoot>
 				<tbody>

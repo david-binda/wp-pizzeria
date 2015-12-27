@@ -41,10 +41,10 @@ class WP_Pizzeria_Beverage_Display {
 		$pizzas = new WP_Query( $args );
 		$output .= '<table class="wp-pizzeria beverages">'."\n\t<thead>";
 		$table_footer_header = "\n\t\t<tr>";
-		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">'.__('#', 'wp_pizzeria').'</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">'.__('Title', 'wp_pizzeria').'</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">'.__('Description', 'wp_pizzeria').'</th>';
-		$table_footer_header .= "\n\t\t\t" . '<th class="col5 price">'.__('Price', 'wp_pizzeria').'</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col1 menu-number">'.esc_html__('#', 'wp_pizzeria').'</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col2 title">'.esc_html__('Title', 'wp_pizzeria').'</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col3 description">'.esc_html__('Description', 'wp_pizzeria').'</th>';
+		$table_footer_header .= "\n\t\t\t" . '<th class="col5 price">'.esc_html__('Price', 'wp_pizzeria').'</th>';
 		$table_footer_header .= "\n\t\t</tr>";
 		$output .= $table_footer_header;
 		$output .= "\n\t</thead>\n\t<tfoot>";
@@ -121,17 +121,17 @@ class WP_Pizzeria_Beverage_Display {
 				<thead>
 				<tr>
 					<th class="col1 menu-number">#</th>
-					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
+					<th class="col2 title"><?php esc_html_e( 'Title', 'wp_pizzeria' ); ?></th>
 					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
-					<th class="col5 price"><?php _e( 'Price', 'wp_pizzeria' ); ?></th>
+					<th class="col5 price"><?php esc_html_e( 'Price', 'wp_pizzeria' ); ?></th>
 				</tr>
 				</thead>
 				<tfoot>
 				<tr>
 					<th class="col1 menu-number">#</th>
-					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
-					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
-					<th class="col5 price"><?php _e( 'Price', 'wp_pizzeria' ); ?></th>
+					<th class="col2 title"><?php esc_html_e( 'Title', 'wp_pizzeria' ); ?></th>
+					<th class="col3 description hidden"><?php esc_html_e( 'Description', 'wp_pizzeria' ); ?></th>
+					<th class="col5 price"><?php esc_html_e( 'Price', 'wp_pizzeria' ); ?></th>
 				</tr>
 				</tfoot>
 				<tbody>
@@ -146,10 +146,10 @@ class WP_Pizzeria_Beverage_Display {
 						$odd = true;
 					}
 					foreach ( (array) $categories as $category ) {
-						echo ' ' . $category->slug;
+						echo ' ' . esc_attr( $category->slug );
 					} ?>">
 						<td class="col1 menu-number"><?php global $post;
-							echo $post->menu_order; ?></td>
+							echo intval( $post->menu_order ); ?></td>
 						<td class="col2 title"><a class="pizza-title" href="#"><?php esc_html( get_the_title() ); ?></a></td>
 						<td class="col3 description hidden">
 							<div class="content"><?php wp_kses_post( get_the_content() ); ?></div>
@@ -161,7 +161,7 @@ class WP_Pizzeria_Beverage_Display {
 								     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
 								     && 'before' === $pizzeria_settings['currency_pos']
 								) {
-									echo $pizzeria_settings['currency'];
+									echo esc_html( $pizzeria_settings['currency'] );
 								}
 								echo get_post_meta( get_the_ID(), '_wp_pizzeria_price', true );
 								if ( true === array_key_exists( 'currency', $pizzeria_settings )
@@ -169,7 +169,7 @@ class WP_Pizzeria_Beverage_Display {
 								          || 'after' === $pizzeria_settings['currency_pos']
 								     )
 								) {
-									echo $pizzeria_settings['currency'];
+									echo esc_html( $pizzeria_settings['currency'] );
 								}
 							}
 							?>

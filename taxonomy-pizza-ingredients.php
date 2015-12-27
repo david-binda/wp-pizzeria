@@ -22,17 +22,17 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 	protected function get_labels() {
 		//setup labels
 		return array(
-			'name'              => _x( 'Pizza ingredients', 'taxonomy general name' ),
-			'singular_name'     => _x( 'Pizza ingredient', 'taxonomy singular name' ),
-			'search_items'      => __( 'Search pizza ingredients' ),
-			'all_items'         => __( 'All pizza ingredients' ),
-			'parent_item'       => __( 'Parent pizza ingredient' ),
-			'parent_item_colon' => __( 'Parent pizza ingredient:' ),
-			'edit_item'         => __( 'Edit pizza ingredient' ),
-			'update_item'       => __( 'Update pizza ingredient' ),
-			'add_new_item'      => __( 'Add new pizza ingredient' ),
-			'new_item_name'     => __( 'New pizza ingredient name' ),
-			'menu_name'         => __( 'Pizza ingredients' ),
+			'name'              => esc_html_x( 'Pizza ingredients', 'taxonomy general name' ),
+			'singular_name'     => esc_html_x( 'Pizza ingredient', 'taxonomy singular name' ),
+			'search_items'      => esc_html__( 'Search pizza ingredients' ),
+			'all_items'         => esc_html__( 'All pizza ingredients' ),
+			'parent_item'       => esc_html__( 'Parent pizza ingredient' ),
+			'parent_item_colon' => esc_html__( 'Parent pizza ingredient:' ),
+			'edit_item'         => esc_html__( 'Edit pizza ingredient' ),
+			'update_item'       => esc_html__( 'Update pizza ingredient' ),
+			'add_new_item'      => esc_html__( 'Add new pizza ingredient' ),
+			'new_item_name'     => esc_html__( 'New pizza ingredient name' ),
+			'menu_name'         => esc_html__( 'Pizza ingredients' ),
 		);
 	}
 

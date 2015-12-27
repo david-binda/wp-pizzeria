@@ -18,17 +18,17 @@ class WP_Pizzeria_Pizza_Categories extends Tax_Factory {
 	protected function get_labels() {
 		//setup labels
 		return array(
-			'name' => _x( 'Pizza categories', 'taxonomy general name', 'wp_pizzeria' ),
-			'singular_name' => _x( 'Pizza categories', 'taxonomy singular name', 'wp_pizzeria' ),
-			'search_items' =>  __( 'Search pizza categories', 'wp_pizzeria' ),
-			'all_items' => __( 'All pizza categories', 'wp_pizzeria' ),
-			'parent_item' => __( 'Parent pizza category', 'wp_pizzeria' ),
-			'parent_item_colon' => __( 'Parent pizza category:', 'wp_pizzeria' ),
-			'edit_item' => __( 'Edit pizza category', 'wp_pizzeria' ),
-			'update_item' => __( 'Update pizza category', 'wp_pizzeria' ),
-			'add_new_item' => __( 'Add new pizza category', 'wp_pizzeria' ),
-			'new_item_name' => __( 'New pizza category name', 'wp_pizzeria' ),
-			'menu_name' => __( 'Pizza categories', 'wp_pizzeria' ),
+			'name' => esc_html_x( 'Pizza categories', 'taxonomy general name', 'wp_pizzeria' ),
+			'singular_name' => esc_html_x( 'Pizza categories', 'taxonomy singular name', 'wp_pizzeria' ),
+			'search_items' =>  esc_html__( 'Search pizza categories', 'wp_pizzeria' ),
+			'all_items' => esc_html__( 'All pizza categories', 'wp_pizzeria' ),
+			'parent_item' => esc_html__( 'Parent pizza category', 'wp_pizzeria' ),
+			'parent_item_colon' => esc_html__( 'Parent pizza category:', 'wp_pizzeria' ),
+			'edit_item' => esc_html__( 'Edit pizza category', 'wp_pizzeria' ),
+			'update_item' => esc_html__( 'Update pizza category', 'wp_pizzeria' ),
+			'add_new_item' => esc_html__( 'Add new pizza category', 'wp_pizzeria' ),
+			'new_item_name' => esc_html__( 'New pizza category name', 'wp_pizzeria' ),
+			'menu_name' => esc_html__( 'Pizza categories', 'wp_pizzeria' ),
 		);
 	}
 

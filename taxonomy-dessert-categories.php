@@ -22,17 +22,17 @@ class WP_Pizzeria_Dessert_Categories extends Tax_Factory {
 	protected function get_labels() {
 		//setup labels
 		return array(
-			'name'              => _x( 'Dessert categories', 'taxonomy general name', 'wp_pizzeria' ),
-			'singular_name'     => _x( 'Dessert categories', 'taxonomy singular name', 'wp_pizzeria' ),
-			'search_items'      => __( 'Search Dessert categories', 'wp_pizzeria' ),
-			'all_items'         => __( 'All Dessert categories', 'wp_pizzeria' ),
-			'parent_item'       => __( 'Parent Dessert category', 'wp_pizzeria' ),
-			'parent_item_colon' => __( 'Parent Dessert category:', 'wp_pizzeria' ),
-			'edit_item'         => __( 'Edit Dessert category', 'wp_pizzeria' ),
-			'update_item'       => __( 'Update Dessert category', 'wp_pizzeria' ),
-			'add_new_item'      => __( 'Add New Dessert category', 'wp_pizzeria' ),
-			'new_item_name'     => __( 'New Dessert category name', 'wp_pizzeria' ),
-			'menu_name'         => __( 'Dessert categories', 'wp_pizzeria' ),
+			'name'              => esc_html_x( 'Dessert categories', 'taxonomy general name', 'wp_pizzeria' ),
+			'singular_name'     => esc_html_x( 'Dessert categories', 'taxonomy singular name', 'wp_pizzeria' ),
+			'search_items'      => esc_html__( 'Search Dessert categories', 'wp_pizzeria' ),
+			'all_items'         => esc_html__( 'All Dessert categories', 'wp_pizzeria' ),
+			'parent_item'       => esc_html__( 'Parent Dessert category', 'wp_pizzeria' ),
+			'parent_item_colon' => esc_html__( 'Parent Dessert category:', 'wp_pizzeria' ),
+			'edit_item'         => esc_html__( 'Edit Dessert category', 'wp_pizzeria' ),
+			'update_item'       => esc_html__( 'Update Dessert category', 'wp_pizzeria' ),
+			'add_new_item'      => esc_html__( 'Add New Dessert category', 'wp_pizzeria' ),
+			'new_item_name'     => esc_html__( 'New Dessert category name', 'wp_pizzeria' ),
+			'menu_name'         => esc_html__( 'Dessert categories', 'wp_pizzeria' ),
 		);
 	}
 

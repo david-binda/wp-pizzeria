@@ -58,7 +58,7 @@ Class WP_Pizzeria_Dessert extends CPT_Factory {
 			remove_meta_box( 'pageparentdiv', $this->post_type, 'side' );
 			add_meta_box(
 				'wp_pizzeria_dessert_price_custom_box',
-				__( 'Dessert price', 'wp_pizzeria' ),
+				esc_html__( 'Dessert price', 'wp_pizzeria' ),
 				array( $this, 'inner_custom_box' ),
 				$this->post_type,
 				'side',
@@ -66,7 +66,7 @@ Class WP_Pizzeria_Dessert extends CPT_Factory {
 			);
 			add_meta_box(
 				'wp_pizzeria_number_custom_box',
-				__( 'Dessert menu number', 'wp_pizzeria' ),
+				esc_html__( 'Dessert menu number', 'wp_pizzeria' ),
 				array( $this, 'number_inner_custom_box' ),
 				$this->post_type,
 				'side',

@@ -64,7 +64,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			remove_meta_box( 'pageparentdiv', $this->post_type, 'side' );
 			add_meta_box(
 				'wp_pizzeria_tags_custom_box',
-				__( 'Pizza ingredients', 'wp_pizzeria' ),
+				esc_html__( 'Pizza ingredients', 'wp_pizzeria' ),
 				array( $this, 'tags_inner_custom_box' ),
 				$this->post_type,
 				'side',
@@ -72,7 +72,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			);
 			add_meta_box(
 				'wp_pizzeria_pizza_price_custom_box',
-				__( 'Pizza price', 'wp_pizzeria' ),
+				esc_html__( 'Pizza price', 'wp_pizzeria' ),
 				array( $this, 'price_inner_custom_box' ),
 				$this->post_type,
 				'side',
@@ -80,7 +80,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			);
 			add_meta_box(
 				'wp_pizzeria_number_custom_box',
-				__( 'Pizza menu number', 'wp_pizzeria' ),
+				esc_html__( 'Pizza menu number', 'wp_pizzeria' ),
 				array( $this, 'number_inner_custom_box' ),
 				$this->post_type,
 				'side',
@@ -112,8 +112,8 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 									<input type="checkbox" id="<?php echo esc_attr( $tag->name ); ?>" name="wp_pizzeria_ingredients[]" value="<?php echo esc_attr( $tag->term_id ); ?>"<?php echo $checked; ?>/>
 									<?php echo $tag->name; ?>
 								</label>
-								<a class="edit-ingredient hide-if-js" href="./edit-tags.php?action=edit&taxonomy=wp_pizzeria_ingredient&tag_ID=<?php echo esc_attr( $tag->term_id ); ?>&post_type=wp_pizzeria_pizza"><?php _e( 'Edit', 'wp_pizzeria' ); ?></a>
-								<a class="add-ingredient-image hide-if-js" href="#"><?php _e( 'Add image', 'wp_pizzeria' ); ?></a>
+								<a class="edit-ingredient hide-if-js" href="./edit-tags.php?action=edit&taxonomy=wp_pizzeria_ingredient&tag_ID=<?php echo esc_attr( $tag->term_id ); ?>&post_type=wp_pizzeria_pizza"><?php esc_html_e( 'Edit', 'wp_pizzeria' ); ?></a>
+								<a class="add-ingredient-image hide-if-js" href="#"><?php esc_html_e( 'Add image', 'wp_pizzeria' ); ?></a>
 							</li>
 						<?php
 						}
@@ -134,15 +134,15 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					<textarea name="tax_input[wp_pizzeria_ingredient]" rows="3" cols="20" class="the-tags" id="tax-input-wp_pizzeria_ingredient"></textarea>
 				</div>
 				<div class="ajaxtag hide-if-no-js">
-					<label class="screen-reader-text" for="new-tag-wp_pizzeria_ingredient"><?php _e( 'Pizza ingredients', 'wp_pizzeria' ); ?></label>
+					<label class="screen-reader-text" for="new-tag-wp_pizzeria_ingredient"><?php esc_html_e( 'Pizza ingredients', 'wp_pizzeria' ); ?></label>
 
-					<div class="taghint" style=""><?php _e( 'Add new pizza ingredient', 'wp_pizzeria' ); ?></div>
+					<div class="taghint" style=""><?php esc_html_e( 'Add new pizza ingredient', 'wp_pizzeria' ); ?></div>
 					<p>
 						<input type="text" id="new-tag-wp_pizzeria_ingredient" name="newtag[wp_pizzeria_ingredient]" class="newtag form-input-tip" size="16" autocomplete="off" value="">
-						<input type="button" class="button tagadd" value="<?php _e( 'Add', 'wp_pizzeria' ); ?>" tabindex="3">
+						<input type="button" class="button tagadd" value="<?php esc_html_e( 'Add', 'wp_pizzeria' ); ?>" tabindex="3">
 					</p>
 				</div>
-				<p class="howto"><?php _e( 'Separate ingredients with commas', 'wp_pizzeria' ); ?></p>
+				<p class="howto"><?php esc_html_e( 'Separate ingredients with commas', 'wp_pizzeria' ); ?></p>
 			</div>
 			<div class="tagchecklist"></div>
 		</div>
@@ -168,7 +168,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					<?php if ( $pizzeria_settings['sizes']['primary'] === $key ) {
 						echo '<strong>';
 					} ?>
-					<label for="<?php echo $key; ?>_price"><?php _e( 'Price for', 'wp_pizzeria' ); ?> <?php echo esc_html( $size ); ?>:</label>
+					<label for="<?php echo $key; ?>_price"><?php esc_html_e( 'Price for', 'wp_pizzeria' ); ?> <?php echo esc_html( $size ); ?>:</label>
 					<?php if ( $pizzeria_settings['sizes']['primary'] === $key ) {
 						echo '</strong>';
 					} ?>
@@ -181,7 +181,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 						echo $pizzeria_settings['currency'];
 					}
 					?>
-					<input type="text" name="<?php echo esc_attr( $key ); ?>_price" value="<?php if ( array_key_exists( $key, $prices ) ) {
+					<input type="text" name="<?php echo esc_attr( $key ); ?>_price" value="<?php if ( true === array_key_exists( $key, $prices ) ) {
 						echo esc_attr( $prices[ $key ] );
 					} ?>" />
 					<?php
@@ -231,6 +231,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 		if ( true === isset( $_POST['wp_pizzeria_number'] ) ) {
 			global $wpdb;
 			$wpdb->update( $wpdb->posts, array( 'menu_order' => absint( $_POST['wp_pizzeria_number'] ) ), array( 'ID' => $post_id ), array( '%d' ), array( '%d' ) );
+			//todo: invalidate cache
 		}
 		if ( true === isset( $_POST['wp_pizzeria_ingredients'] ) ) {
 			$term_ids = array_map( 'intval', $_POST['wp_pizzeria_ingredients'] );
@@ -276,10 +277,10 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 
 		$columns           = array(
 			'cb'          => '<input type="checkbox" />',
-			'menu_number' => __( '#', 'wp_pizzeria' ),
-			'title'       => __( 'Title' ),
-			'category'    => __( 'Category', 'wp_pizzeria' ),
-			'ingredients' => __( 'Ingredients', 'wp_pizzeria' ),
+			'menu_number' => esc_html__( '#', 'wp_pizzeria' ),
+			'title'       => esc_html__( 'Title' ),
+			'category'    => esc_html__( 'Category', 'wp_pizzeria' ),
+			'ingredients' => esc_html__( 'Ingredients', 'wp_pizzeria' ),
 		);
 		$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
 		if ( false === is_array( $pizzeria_settings ) ) {
@@ -294,7 +295,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			}
 
 		}
-		$columns['date'] = __( 'Date' );
+		$columns['date'] = esc_html__( 'Date', 'wp_pizzeria' );
 
 		return $columns;
 	}
@@ -304,7 +305,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 		switch ( $column ) {
 			case 'menu_number' :
 				global $wpdb;
-				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d ", $post_id ) );
+				$menu_id = $wpdb->get_var( $wpdb->prepare( "SELECT menu_order FROM $wpdb->posts WHERE ID = %d ", intval( $post_id ) ) );
 				//TODO: check return value
 				echo intval( $menu_id );
 				break;
@@ -322,7 +323,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					}
 					echo join( ', ', $out );
 				} else {
-					_e( 'No Categories', 'wp_pizzeria' );
+					esc_html_e( 'No Categories', 'wp_pizzeria' );
 				}
 				break;
 
@@ -340,7 +341,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					}
 					echo join( ', ', $out );
 				} else {
-					_e( 'No Ingredients', 'wp_pizzeria' );
+					esc_html_e( 'No Ingredients', 'wp_pizzeria' );
 				}
 				break;
 			default :
