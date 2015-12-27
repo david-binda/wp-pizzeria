@@ -90,7 +90,7 @@ class WP_Pizzeria_Pizza_Display {
 		$output .= "\n\t</tfoot>\n\t<tbody>";
 		unset( $table_footer_header );
 		$even = true;
-		while ( $pizzas->have_posts() ) :
+		while ( $pizzas->have_posts() ) {
 			$pizzas->the_post();
 			$ingrediences = wp_get_post_terms( get_the_ID(), 'wp_pizzeria_ingredient' );
 			if ( $even == true ) {
@@ -151,7 +151,7 @@ class WP_Pizzeria_Pizza_Display {
 				}
 			}
 			$output .= "\n\t\t" . '</tr>';
-		endwhile;
+		}
 		$output .= "\n\t</tbody>\n";
 		$output .= '</table>';
 
@@ -169,7 +169,7 @@ class WP_Pizzeria_Pizza_Display {
 		global $wp_query;
 		$args = array_merge( $wp_query->query_vars, array( 'orderby' => 'menu_order', 'order' => 'ASC' ) );
 		query_posts( $args );
-		if ( have_posts() ) :
+		if ( have_posts() ) {
 			$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
 			if ( ! array( $pizzeria_settings ) ) {
 				$pizzeria_settings = array();
@@ -186,10 +186,16 @@ class WP_Pizzeria_Pizza_Display {
 							<li>
 								<?php
 								if ( array_key_exists( $ingredience->term_id, (array) $ingredient_images ) ) : ?>
-									<span class="pizza-image-wrapper"><img src="<?php echo $ingredient_images[ $ingredience->term_id ]; ?>" alt="<?php echo $ingredience->name; ?>" /></span>
+									<span class="pizza-image-wrapper"><img
+											src="<?php echo $ingredient_images[ $ingredience->term_id ]; ?>"
+											alt="<?php echo $ingredience->name; ?>"/></span>
 								<?php endif; ?>
-								<input type="checkbox" value="<?php echo $ingredience->term_id; ?>" name="ingredienceFilter[<?php echo $ingredience->slug; ?>]" id="ingredienceFilter[<?php echo $ingredience->slug; ?>]" class="<?php echo $ingredience->slug; ?>">
-								<label for="ingredienceFilter[<?php echo $ingredience->slug; ?>]"><?php echo $ingredience->name; ?></label>
+								<input type="checkbox" value="<?php echo $ingredience->term_id; ?>"
+								       name="ingredienceFilter[<?php echo $ingredience->slug; ?>]"
+								       id="ingredienceFilter[<?php echo $ingredience->slug; ?>]"
+								       class="<?php echo $ingredience->slug; ?>">
+								<label
+									for="ingredienceFilter[<?php echo $ingredience->slug; ?>]"><?php echo $ingredience->name; ?></label>
 							</li>
 						<?php endforeach; ?>
 					</ul>
@@ -202,7 +208,7 @@ class WP_Pizzeria_Pizza_Display {
 					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
 					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
 					<th class="col5 ingrediences"><?php _e( 'Ingrediences', 'wp_pizzeria' ); ?></th>
-					<?php    if ( is_array( $pizzeria_settings['sizes'] ) ) {
+					<?php if ( is_array( $pizzeria_settings['sizes'] ) ) {
 						$i = 6;
 						foreach ( $pizzeria_settings['sizes'] as $key => $size ) {
 							if ( $key == 'primary' ) {
@@ -212,7 +218,7 @@ class WP_Pizzeria_Pizza_Display {
 							<?php
 							$i ++;
 						}
-					}    ?>
+					} ?>
 				</tr>
 				</thead>
 				<tfoot>
@@ -221,7 +227,7 @@ class WP_Pizzeria_Pizza_Display {
 					<th class="col2 title"><?php _e( 'Title', 'wp_pizzeria' ); ?></th>
 					<th class="col3 description hidden"><?php _e( 'Description', 'wp_pizzeria' ); ?></th>
 					<th class="col5 ingrediences"><?php _e( 'Ingrediences', 'wp_pizzeria' ); ?></th>
-					<?php    if ( is_array( $pizzeria_settings['sizes'] ) ) {
+					<?php if ( is_array( $pizzeria_settings['sizes'] ) ) {
 						$i = 6;
 						foreach ( $pizzeria_settings['sizes'] as $key => $size ) {
 							if ( $key == 'primary' ) {
@@ -231,7 +237,7 @@ class WP_Pizzeria_Pizza_Display {
 							<?php
 							$i ++;
 						}
-					}    ?>
+					} ?>
 				</tr>
 				</tfoot>
 				<tbody>
@@ -304,8 +310,8 @@ class WP_Pizzeria_Pizza_Display {
 				<?php endwhile; ?>
 				</tbody>
 			</table>
-		<?php
-		endif;
+			<?php
+		}
 	}
 }
 

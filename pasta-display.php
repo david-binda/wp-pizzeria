@@ -61,7 +61,7 @@ class WP_Pizzeria_Pasta_Display {
 		$output .= "\n\t</tfoot>\n\t<tbody>";
 		unset( $table_footer_header );
 		$even = true;
-		while ( $pizzas->have_posts() ) :
+		while ( $pizzas->have_posts() ) {
 			$pizzas->the_post();
 			$categories = wp_get_post_terms( get_the_ID(), 'wp_pizzeria_beverage_category' );
 			if ( $even == true ) {
@@ -97,7 +97,7 @@ class WP_Pizzeria_Pasta_Display {
 				$output .= "\n\t\t\t" . '<td class="col5 price"></td>';
 			}
 			$output .= "\n\t\t" . '</tr>';
-		endwhile;
+		}
 		$output .= "\n\t</tbody>\n";
 		$output .= '</table>';
 

@@ -3,9 +3,9 @@ function wp_pizzeria_display_post_type_nav_box(){
 	 $hidden_nav_boxes = get_user_option( 'metaboxhidden_nav-menus' );
 
     $post_types = array( 'wp_pizzeria_pizza', 'wp_pizzeria_beverage', 'wp_pizzeria_pasta', 'wp_pizzeria_dessert' );
-    foreach ( $post_types as $post_type ){
+    foreach ( $post_types as $post_type ) {
     $post_type_nav_box = 'add-'.$post_type;
-	    if(in_array($post_type_nav_box, (array)$hidden_nav_boxes)) {
+	    if( in_array($post_type_nav_box, (array)$hidden_nav_boxes) ) {
 		    foreach ( $hidden_nav_boxes as $i => $nav_box ) {
 			    if ( $nav_box === $post_type_nav_box ) {
 				    unset( $hidden_nav_boxes[ $i ] );

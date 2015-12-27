@@ -61,7 +61,7 @@ class WP_Pizzeria_Dessert_Display {
 		$output .= "\n\t</tfoot>\n\t<tbody>";
 		unset( $table_footer_header );
 		$even = true;
-		while ( $pizzas->have_posts() ) :
+		while ( $pizzas->have_posts() ) {
 			$pizzas->the_post();
 			$categories = wp_get_post_terms( get_the_ID(), 'wp_pizzeria_dessert_category' );
 			if ( $even == true ) {
@@ -97,7 +97,7 @@ class WP_Pizzeria_Dessert_Display {
 				$output .= "\n\t\t\t" . '<td class="col5 price"></td>';
 			}
 			$output .= "\n\t\t" . '</tr>';
-		endwhile;
+		} //endwhile
 		$output .= "\n\t</tbody>\n";
 		$output .= '</table>';
 
@@ -115,7 +115,7 @@ class WP_Pizzeria_Dessert_Display {
 		global $wp_query;
 		$args = array_merge( $wp_query->query_vars, array( 'orderby' => 'menu_order', 'order' => 'ASC' ) );
 		query_posts( $args );
-		if ( have_posts() ) :
+		if ( have_posts() ) {
 			$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
 			if ( ! array( $pizzeria_settings ) ) {
 				$pizzeria_settings = array();
@@ -163,13 +163,15 @@ class WP_Pizzeria_Dessert_Display {
 							if ( false !== get_post_meta( get_the_ID(), '_wp_pizzeria_price', true ) ) {
 								if ( true === array_key_exists( 'currency', $pizzeria_settings )
 								     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
-								     && 'before' === $pizzeria_settings['currency_pos'] ) {
+								     && 'before' === $pizzeria_settings['currency_pos']
+								) {
 									echo $pizzeria_settings['currency'];
 								}
 								echo get_post_meta( get_the_ID(), '_wp_pizzeria_price', true );
 								if ( true === array_key_exists( 'currency', $pizzeria_settings )
 								     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
-								          || 'after' === $pizzeria_settings['currency_pos'] ) ) {
+								          || 'after' === $pizzeria_settings['currency_pos'] )
+								) {
 									echo $pizzeria_settings['currency'];
 								}
 							}
@@ -179,8 +181,8 @@ class WP_Pizzeria_Dessert_Display {
 				<?php endwhile; ?>
 				</tbody>
 			</table>
-		<?php
-		endif;
+			<?php
+		}
 	}
 }
 
