@@ -57,7 +57,7 @@ class WP_Pizzeria_Pizza_Display {
 		               'orderby'        => 'menu_order',
 		               'order'          => 'ASC'
 		);
-		if ( $cat != 'wp_pizzeria_nocat' ) {
+		if ( 'wp_pizzeria_nocat' !== $cat ) {
 			$args['wp_pizzeria_category'] = $cat;
 		}
 		$pizzas = new WP_Query( $args );
@@ -255,7 +255,7 @@ class WP_Pizzeria_Pizza_Display {
 							echo $post->menu_order; ?></td>
 						<td class="col2 title"><a class="pizza-title" href="#"><?php echo esc_html( get_the_title() ); ?></a></td>
 						<td class="col3 description hidden">
-							<div class="content"><?php echo wp_kses_post( apply_filters( 'the_content', get_the_content() ); ?></div>
+							<div class="content"><?php echo wp_kses_post( apply_filters( 'the_content', get_the_content() ) ); ?></div>
 						</td>
 						<td class="col5 ingrediences">
 							<?php
