@@ -102,11 +102,11 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 								$link = get_edit_tag_link( $tag->term_id, 'wp_pizzeria_ingredient' );
 							else*/
 							$link = get_term_link( intval( $tag->term_id ), 'wp_pizzeria_ingredient' );
-							if ( is_wp_error( $link ) ) {
+							if ( true === is_wp_error( $link ) ) {
 								return false;
 							}
 							$checked = "";
-							if ( has_term( $tag->term_id, 'wp_pizzeria_ingredient' ) ) {
+							if ( true === has_term( $tag->term_id, 'wp_pizzeria_ingredient' ) ) {
 								$checked = ' checked="checked"';
 							}
 							?>
@@ -161,31 +161,33 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 
 	public function price_inner_custom_box( $post ) {
 		$prices = maybe_unserialize( get_post_meta( $post->ID, '_wp_pizzeria_prices', true ) );
-		if ( ! is_array( $prices ) ) {
+		if ( false === is_array( $prices ) ) {
 			$prices = array();
 		}
 		$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
-		if ( ! is_array( $pizzeria_settings ) ) {
+		if ( false === is_array( $pizzeria_settings ) ) {
 			$pizzeria_settings = array();
 		}
 		if ( is_array( $pizzeria_settings['sizes'] ) ) :
 			foreach ( $pizzeria_settings['sizes'] as $key => $size ) :
-				if ( $key == 'primary' ) {
+				if ( 'primary' === $key ) {
 					continue;
 				}
 				?>
 				<p>
-					<?php if ( $pizzeria_settings['sizes']['primary'] == $key ) {
+					<?php if ( $pizzeria_settings['sizes']['primary'] === $key ) {
 						echo '<strong>';
 					} ?>
 					<label for="<?php echo $key; ?>_price"><?php _e( 'Price for', 'wp_pizzeria' ); ?> <?php echo $size; ?>:</label>
-					<?php if ( $pizzeria_settings['sizes']['primary'] == $key ) {
+					<?php if ( $pizzeria_settings['sizes']['primary'] === $key ) {
 						echo '</strong>';
 					} ?>
 				</p>
 				<p>
 					<?php
-					if ( array_key_exists( 'currency', $pizzeria_settings ) && array_key_exists( 'currency_pos', $pizzeria_settings ) && $pizzeria_settings['currency_pos'] == 'before' ) {
+					if ( true === array_key_exists( 'currency', $pizzeria_settings )
+					     && array_key_exists( 'currency_pos', $pizzeria_settings )
+					     && 'before' === $pizzeria_settings['currency_pos'] ) {
 						echo $pizzeria_settings['currency'];
 					}
 					?>
@@ -193,7 +195,10 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 						echo $prices[ $key ];
 					} ?>" />
 					<?php
-					if ( array_key_exists( 'currency', $pizzeria_settings ) && ( ! array_key_exists( 'currency_pos', $pizzeria_settings ) || $pizzeria_settings['currency_pos'] == 'after' ) ) {
+					if ( true === array_key_exists( 'currency', $pizzeria_settings )
+					     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
+					          || 'after' === $pizzeria_settings['currency_pos'] )
+					) {
 						echo $pizzeria_settings['currency'];
 					}
 					?>
@@ -227,14 +232,17 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			endforeach;
 		}
 		update_post_meta( $post_id, '_wp_pizzeria_prices', maybe_serialize( $prices ) );
-		if ( true === array_key_exists( 'sizes', $pizzeria_settings ) && true === array_key_exists( 'primary', $pizzeria_settings['sizes'] ) && isset( $_POST[ $pizzeria_settings['sizes']['primary'] . '_price' ] ) ) {
+		if ( true === array_key_exists( 'sizes', $pizzeria_settings )
+		     && true === array_key_exists( 'primary', $pizzeria_settings['sizes'] )
+		     && true === isset( $_POST[ $pizzeria_settings['sizes']['primary'] . '_price' ] )
+		) {
 			update_post_meta( $post_id, '_wp_pizzeria_price', $_POST[ $pizzeria_settings['sizes']['primary'] . '_price' ] );
 		}
 		if ( true === isset( $_POST['wp_pizzeria_number'] ) ) {
 			global $wpdb;
 			$wpdb->update( $wpdb->posts, array( 'menu_order' => absint( $_POST['wp_pizzeria_number'] ) ), array( 'ID' => $post_id ), array( '%d' ), array( '%d' ) );
 		}
-		if ( isset( $_POST['wp_pizzeria_ingredients'] ) ) {
+		if ( true === isset( $_POST['wp_pizzeria_ingredients'] ) ) {
 			$term_ids = array_map( 'intval', $_POST['wp_pizzeria_ingredients'] );
 			$term_ids = array_unique( $term_ids );
 			wp_set_object_terms( $post_id, $term_ids, 'wp_pizzeria_ingredient' );
@@ -247,7 +255,12 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 
 	function add_ingredient_javascript() {
 		global $typenow, $pagenow;
-		if ( is_admin() && ( $pagenow == 'post-new.php' or $pagenow == 'post.php' ) && ( $typenow == 'wp_pizzeria_pizza' or ( isset( $_GET['post_type'] ) && $_GET['post_type'] == 'wp_pizzeria_pizza' ) ) ) {
+		if ( true === is_admin()
+		     && true === in_array( $pagenow, array( 'post-new.php', 'post.php' ), true )
+		     && ( 'wp_pizzeria_pizza' === $typenow
+		          || ( true === isset( $_GET['post_type'] ) && 'wp_pizzeria_pizza' === $_GET['post_type'] )
+		     )
+		) {
 			global $post;
 			wp_enqueue_script( 'wp_pizzeria_addIngredient', plugin_dir_url( __FILE__ ) . 'js/ajax-add-ingredient.js', array( 'jquery' ) );
 			wp_localize_script( 'wp_pizzeria_addIngredient', 'wp_pizzeria_addIngredient', array(
@@ -278,10 +291,10 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 			'ingredients' => __( 'Ingredients', 'wp_pizzeria' ),
 		);
 		$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
-		if ( ! is_array( $pizzeria_settings ) ) {
+		if ( false === is_array( $pizzeria_settings ) ) {
 			$pizzeria_settings = array();
 		}
-		if ( is_array( $pizzeria_settings['sizes'] ) ) {
+		if ( true === is_array( $pizzeria_settings['sizes'] ) ) {
 			foreach ( $pizzeria_settings['sizes'] as $key => $size ) {
 				if ( $key == 'primary' ) {
 					continue;
@@ -305,7 +318,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 				break;
 			case 'category' :
 				$terms = get_the_terms( $post_id, 'wp_pizzeria_category' );
-				if ( ! empty( $terms ) ) {
+				if ( false === empty( $terms ) ) {
 					$out = array();
 					foreach ( $terms as $term ) {
 						$out[] = sprintf( '<a href="%s">%s</a>',
@@ -323,7 +336,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 
 			case 'ingredients' :
 				$terms = get_the_terms( $post_id, 'wp_pizzeria_ingredient' );
-				if ( ! empty( $terms ) ) {
+				if ( false === empty( $terms ) ) {
 					$out = array();
 					foreach ( $terms as $term ) {
 						$out[] = sprintf( '<a href="%s">%s</a>',
@@ -342,20 +355,28 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 				break;
 		}
 		$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
-		if ( ! is_array( $pizzeria_settings ) ) {
+		if ( false === is_array( $pizzeria_settings ) ) {
 			$pizzeria_settings = array();
 		}
-		if ( is_array( $pizzeria_settings['sizes'] ) && array_key_exists( $column, $pizzeria_settings['sizes'] ) ) {
+		if ( true === is_array( $pizzeria_settings['sizes'] )
+		     && true === array_key_exists( $column, $pizzeria_settings['sizes'] )
+		) {
 			$prices = maybe_unserialize( get_post_meta( $post->ID, '_wp_pizzeria_prices', true ) );
-			if ( ! is_array( $prices ) ) {
+			if ( false === is_array( $prices ) ) {
 				$prices = array();
 			}
-			if ( array_key_exists( $column, $prices ) ) {
-				if ( array_key_exists( 'currency', $pizzeria_settings ) && array_key_exists( 'currency_pos', $pizzeria_settings ) && $pizzeria_settings['currency_pos'] == 'before' ) {
+			if ( true === array_key_exists( $column, $prices ) ) {
+				if ( true === array_key_exists( 'currency', $pizzeria_settings )
+				     && true === array_key_exists( 'currency_pos', $pizzeria_settings )
+				     && 'before' === $pizzeria_settings['currency_pos']
+				) {
 					echo $pizzeria_settings['currency'];
 				}
 				echo $prices[ $column ];
-				if ( array_key_exists( 'currency', $pizzeria_settings ) && ( ! array_key_exists( 'currency_pos', $pizzeria_settings ) || $pizzeria_settings['currency_pos'] == 'after' ) ) {
+				if ( true === array_key_exists( 'currency', $pizzeria_settings )
+				     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
+				          || 'after' === $pizzeria_settings['currency_pos'] )
+				) {
 					echo $pizzeria_settings['currency'];
 				}
 			}

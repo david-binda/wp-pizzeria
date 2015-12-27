@@ -130,8 +130,8 @@ class WP_Pizzeria {
 	public function change_publish_button( $translation, $text ) {
 		//check if this is pizza add or edit page in administration
 		global $pagenow, $typenow;
-		if ( true === is_admin() &&
-		     ( 'post-new.php' === $pagenow || 'post.php' === $pagenow )
+		if ( true === is_admin()
+		     && true === in_array( $pagenow, array( 'post-new.php', 'post.php' ), true )
 		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset( $_GET['post_type'] ) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
 		) {
 			if ( 'Publish' === $text ) {
@@ -146,7 +146,7 @@ class WP_Pizzeria {
 		//check if this is pizza add or edit page in administration
 		global $pagenow, $typenow;
 		if ( true === is_admin()
-		     && ( 'post-new.php' === $pagenow || 'post.php' === $pagenow )
+		     && true === in_array( $pagenow, array( 'post-new.php', 'post.php' ), true )
 		     && ( 'wp_pizzeria_pizza' === $typenow || ( true === isset( $_GET['post_type'] ) && 'wp_pizzeria_pizza' === $_GET['post_type'] ) )
 		) {
 			$update_val  = esc_attr__( 'Update pizza', 'wp_pizzeria' );

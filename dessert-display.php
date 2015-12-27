@@ -43,7 +43,7 @@ class WP_Pizzeria_Dessert_Display {
 		               'orderby'        => 'menu_order',
 		               'order'          => 'ASC'
 		);
-		if ( $cat != 'wp_pizzeria_nocat' ) {
+		if ( 'wp_pizzeria_nocat' !== $cat ) {
 			$args['wp_pizzeria_dessert_category'] = $cat;
 		}
 		$pizzas = new WP_Query( $args );
@@ -64,13 +64,13 @@ class WP_Pizzeria_Dessert_Display {
 		while ( $pizzas->have_posts() ) {
 			$pizzas->the_post();
 			$categories = wp_get_post_terms( get_the_ID(), 'wp_pizzeria_dessert_category' );
-			if ( $even == true ) {
+			if ( true === $even ) {
 				$class = 'pizza even';
 			} else {
 				$class = '$pizza odd';
 				$even  = true;
 			}
-			if ( ! empty( $categories ) ) {
+			if ( false === empty( $categories ) ) {
 				foreach ( $categories as $category ) {
 					$class .= ' ' . $category->slug;
 				}
@@ -83,13 +83,18 @@ class WP_Pizzeria_Dessert_Display {
 			$output .= get_the_post_thumbnail( get_the_ID(), 'wp_pizzeria_thumbnail' );
 			$output .= '</td>';
 			$output .= "\n\t\t\t" . '<td class="col3 description"><div class="content">' . get_the_content() . '</div></td>';
-			if ( get_post_meta( $post->ID, '_wp_pizzeria_price', true ) !== false ) {
+			if ( false !=== get_post_meta( $post->ID, '_wp_pizzeria_price', true ) ) {
 				$output .= "\n\t\t\t" . '<td class="col5 price">';
-				if ( array_key_exists( 'currency', $pizzeria_settings ) && array_key_exists( 'currency_pos', $pizzeria_settings ) && $pizzeria_settings['currency_pos'] == 'before' ) {
+				if ( true === array_key_exists( 'currency', $pizzeria_settings )
+				     && array_key_exists( 'currency_pos', $pizzeria_settings )
+				     && 'before' === $pizzeria_settings['currency_pos'] ) {
 					$output .= $pizzeria_settings['currency'];
 				}
 				$output .= get_post_meta( $post->ID, '_wp_pizzeria_price', true );
-				if ( array_key_exists( 'currency', $pizzeria_settings ) && ( ! array_key_exists( 'currency_pos', $pizzeria_settings ) || $pizzeria_settings['currency_pos'] == 'after' ) ) {
+				if ( true === array_key_exists( 'currency', $pizzeria_settings )
+				     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
+				          || 'after' === $pizzeria_settings['currency_pos'] )
+				) {
 					$output .= $pizzeria_settings['currency'];
 				}
 				$output .= '</td>';
@@ -115,9 +120,9 @@ class WP_Pizzeria_Dessert_Display {
 		global $wp_query;
 		$args = array_merge( $wp_query->query_vars, array( 'orderby' => 'menu_order', 'order' => 'ASC' ) );
 		query_posts( $args );
-		if ( have_posts() ) {
+		if ( true === have_posts() ) {
 			$pizzeria_settings = maybe_unserialize( get_option( 'wp_pizzeria_settings' ) );
-			if ( ! array( $pizzeria_settings ) ) {
+			if ( false === is_array( $pizzeria_settings ) ) {
 				$pizzeria_settings = array();
 			}
 			?>
@@ -142,7 +147,7 @@ class WP_Pizzeria_Dessert_Display {
 				<?php $odd = true;
 				while ( have_posts() ) : the_post();
 					$categories = wp_get_post_terms( get_the_ID(), 'wp_pizzeria_ingredient' ); ?>
-					<tr class="pizza<?php if ( $odd ) {
+					<tr class="pizza<?php if ( true === $odd ) {
 						echo ' odd ';
 						$odd = false;
 					} else {

@@ -46,14 +46,14 @@ Class WP_Pizzeria_Dessert extends CPT_Factory {
 	/* Custom Meta boxes */
 
 	public function custom_box() {
-		if ( isset( $_GET['post'] ) ) {
+		if ( true === isset( $_GET['post'] ) ) {
 			$post_id = $_GET['post'];
-		} elseif ( isset( $_POST['post_ID'] ) ) {
+		} elseif ( true === isset( $_POST['post_ID'] ) ) {
 			$post_id = $_POST['post_ID'];
 		}
 		if (
-			( true === isset( $post_id ) && $this->post_type === get_post_type( $post_id ) ) ||
-			( true === isset( $_GET['post_type'] ) && $this->post_type === $_GET['post_type'] )
+			( true === isset( $post_id ) && $this->post_type === get_post_type( $post_id ) )
+			|| ( true === isset( $_GET['post_type'] ) && $this->post_type === $_GET['post_type'] )
 		) {
 			remove_meta_box( 'pageparentdiv', $this->post_type, 'side' );
 			add_meta_box(
@@ -78,19 +78,26 @@ Class WP_Pizzeria_Dessert extends CPT_Factory {
 
 	public function inner_custom_box( $post ) {
 		$price = get_post_meta( $post->ID, '_wp_pizzeria_price', true );
-		if ( $price === false ) {
+		if ( false === $price ) {
 			$price = '';
 		}
 		$pizzeria_settings = $this::get_pizzeria_settings();
 		?>
 		<p>
 			<label for="dessert_price"><?php _e( 'Price', 'wp_pizzeria' ); ?></label>
-			<?php if ( array_key_exists( 'currency', $pizzeria_settings ) && array_key_exists( 'currency_pos', $pizzeria_settings ) && $pizzeria_settings['currency_pos'] == 'before' ) {
+			<?php if ( true === array_key_exists( 'currency', $pizzeria_settings )
+			           && array_key_exists( 'currency_pos', $pizzeria_settings )
+			           && 'before' === $pizzeria_settings['currency_pos']
+			) {
 				echo $pizzeria_settings['currency'];
 			} ?>
 			<input type="text" id="dessert_price" name="dessert_price" value="<?php echo $price; ?>" />
 			<?php
-			if ( array_key_exists( 'currency', $pizzeria_settings ) && ( ! array_key_exists( 'currency_pos', $pizzeria_settings ) || $pizzeria_settings['currency_pos'] == 'after' ) ) {
+			if ( true === array_key_exists( 'currency', $pizzeria_settings )
+			     && ( false === array_key_exists( 'currency_pos', $pizzeria_settings )
+			          || 'after' === $pizzeria_settings['currency_pos']
+			     )
+			) {
 				echo $pizzeria_settings['currency'];
 			}
 			?>

@@ -46,7 +46,7 @@ abstract class CPT_Factory {
 		$num_posts = wp_count_posts( $this->post_type );
 		$num       = number_format_i18n( $num_posts->publish );
 		$text      = _n( $post_type_obj->labels->singular_name, $post_type_obj->labels->name, intval( $num_posts->publish ) );
-		if ( current_user_can( 'edit_posts' ) ) {
+		if ( true === current_user_can( 'edit_posts' ) ) {
 			$edit_url = add_query_arg( array( 'post_type' => $this->post_type ), admin_url( 'edit.php' ) );
 			$text = sprintf( '<a href="%s">%d %s</a>', $edit_url, $num, $text );
 		}
