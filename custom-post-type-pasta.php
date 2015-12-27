@@ -48,9 +48,9 @@ Class WP_Pizzeria_Pasta extends CPT_Factory {
 	public function custom_box() {
 
 		if ( true === isset( $_GET['post'] ) ) {
-			$post_id = $_GET['post'];
+			$post_id = absint( $_GET['post'] );
 		} elseif ( true === isset( $_POST['post_ID'] ) ) {
-			$post_id = $_POST['post_ID'];
+			$post_id = absint( $_POST['post_ID'] );
 		}
 		if (
 			( true === isset( $post_id ) && $this->post_type === get_post_type( $post_id ) )

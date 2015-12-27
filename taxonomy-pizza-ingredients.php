@@ -86,7 +86,7 @@ class WP_Pizzeria_Pizza_Ingredients extends Tax_Factory {
 	function image_save( $term_id ) {
 		if ( isset( $_POST['ingredient-image'] ) ) {
 			$this->get_category_images();
-			$ingredient_images[ $term_id ] = $_POST['ingredient-image'];
+			$ingredient_images[ $term_id ] = absint( $_POST['ingredient-image'] );
 			$this->set_category_images( $ingredient_images );
 		}
 	}

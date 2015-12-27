@@ -57,7 +57,7 @@ class WP_Pizzeria_Pizza_Categories extends Tax_Factory {
 	function image_save($term_id){
 		if( true === isset( $_POST['pizza_category-image'] ) ) {
 			$category_images = $this->get_category_images();
-			$category_images[$term_id] = $_POST['pizza_category-image'];
+			$category_images[$term_id] = absint( $_POST['pizza_category-image'] );
 			$this->set_category_images( $category_images );
 		}
 	}

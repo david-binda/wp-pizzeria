@@ -227,7 +227,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 					continue;
 				}
 				if ( isset( $_POST[ $key . '_price' ] ) ) {
-					$prices[ $key ] = $_POST[ $key . '_price' ];
+					$prices[ $key ] = sanitize_text_field( $_POST[ $key . '_price' ] );
 				}
 			endforeach;
 		}
@@ -236,7 +236,7 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 		     && true === array_key_exists( 'primary', $pizzeria_settings['sizes'] )
 		     && true === isset( $_POST[ $pizzeria_settings['sizes']['primary'] . '_price' ] )
 		) {
-			update_post_meta( $post_id, '_wp_pizzeria_price', $_POST[ $pizzeria_settings['sizes']['primary'] . '_price' ] );
+			update_post_meta( $post_id, '_wp_pizzeria_price', sanitize_text_field( $_POST[ $pizzeria_settings['sizes']['primary'] . '_price' ] ) );
 		}
 		if ( true === isset( $_POST['wp_pizzeria_number'] ) ) {
 			global $wpdb;
@@ -277,7 +277,8 @@ Class WP_Pizzeria_Pizza extends CPT_Factory {
 		}
 		$tags = explode( ',', $_POST['tag'] );
 		$tags = array_map( "trim", $tags );
-		wp_set_object_terms( $_POST['postID'], $tags, 'wp_pizzeria_ingredient', true );
+		$tags = array_map( 'sanitize_text_field', $tags );
+		wp_set_object_terms( absint( $_POST['postID'] ), $tags, 'wp_pizzeria_ingredient', true );
 		die();
 	}
 

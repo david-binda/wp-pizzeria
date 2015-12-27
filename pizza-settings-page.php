@@ -56,12 +56,12 @@ function wp_pizzeria_settings(){
 		if ( true === isset( $_POST['wp_pizzeria_currency'] )
 		     && '' !== trim( $_POST['wp_pizzeria_currency'] )
 		) {
-			$pizzeria_settings['currency'] = htmlspecialchars( $_POST['wp_pizzeria_currency'] );
+			$pizzeria_settings['currency'] = sanitize_text_field( $_POST['wp_pizzeria_currency'] );
 		}
 		if ( true === isset( $_POST['wp_pizzeria_currency_position'] )
 		     && true === in_array( $_POST['wp_pizzeria_currency_position'], array( 'before', 'after' ), true )
 		) {
-			$pizzeria_settings['currency_pos'] = ( $_POST['wp_pizzeria_currency_position'] );
+			$pizzeria_settings['currency_pos'] = sanitize_text_field( $_POST['wp_pizzeria_currency_position'] );
 		}
 		update_option( 'wp_pizzeria_settings', maybe_serialize( $pizzeria_settings ) ); 	 	
 	}

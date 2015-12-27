@@ -62,7 +62,7 @@ class WP_Pizzeria_Beverage_Categories extends Tax_Factory {
 	function image_save( $term_id ) {
 		if ( true === isset( $_POST['beverage_category-image'] ) ) {
 			$category_images = $category_images = $this->get_category_images();
-			$category_images[ $term_id ] = $_POST['beverage_category-image'];
+			$category_images[ $term_id ] = absint( $_POST['beverage_category-image'] );
 			$this->set_category_images( $category_images );
 		}
 	}
